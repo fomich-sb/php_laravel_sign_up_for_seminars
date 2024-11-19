@@ -1,0 +1,35 @@
+html, body{
+    margin: 0;
+    padding: 0;
+}
+.projectsMenuRoot{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1em;
+}
+.projectsMenuItem{
+    cursor: pointer;
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+.projectsMenuItemActive{
+    background-color: #CCC;
+}
+
+
+.button{
+    padding: 0.3em;
+    cursor: pointer;
+    border:1px solid #000;
+    width: fit-content;
+}
+.button:hover{
+    opacity: 0.8;
+}
+.buttonDisabled {
+    opacity: 0.2 !important;
+    cursor: default;
+}
