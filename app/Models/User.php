@@ -43,4 +43,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    
+    
+    public function save(array $options = [])
+    {
+        if($this->isDirty('phone'))
+            $this->telegram_id=null;
+            
+        return parent::save($options);
+    }
 }

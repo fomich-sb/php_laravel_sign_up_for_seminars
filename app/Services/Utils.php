@@ -2,9 +2,7 @@
 
 namespace App\Services;
 
-use App\Facades\L;
-use Illuminate\Support\Facades\Storage;
-use Image;
+use Intervention\Image\ImageManager;
 
 class Utils
 {
@@ -179,5 +177,91 @@ class Utils
 
         }
         return $res;
+    }
+
+    function loadImage($type, $maxThumbSize = 300, $maxSize = 2048) {
+        $targetFolder = public_path(config('app.uploadImageFolder')) . '/' . $type;
+        $allowFileExtension = array('jpg', 'png', 'jpeg', 'gif', 'bmp');
+
+        if (!file_exists($targetFolder)) {
+            mkdir($targetFolder, 0777, true);
+        }
+        if (!file_exists($targetFolder.'/thumbs')) {
+            mkdir($targetFolder.'/thumbs', 0777, true);
+        }
+
+        $files = request()->files;
+
+        $res = ['files' => [], 'errors' => []];
+        foreach ($files as $file)
+        {
+            // Загружаем по одному файлу
+            $fileName = $file->getClientOriginalName();
+            $fileSize = $file->getSize();
+            $errorCode = $file->getError();
+            if ($errorCode !== UPLOAD_ERR_OK || !$file->isValid()) {
+                // Массив с названиями ошибок
+                $errorMessages = [
+                    UPLOAD_ERR_INI_SIZE   => 'Размер файла слишком большой', //'Размер файла превысил значение upload_max_filesize в конфигурации PHP.',
+                    UPLOAD_ERR_FORM_SIZE  => 'Размер файла слишком большой', //'Размер загружаемого файла превысил значение MAX_FILE_SIZE в HTML-форме.',
+            /*      UPLOAD_ERR_PARTIAL    => 'Загружаемый файл был получен только частично.',
+                    UPLOAD_ERR_NO_FILE    => 'Файл не был загружен.',
+                    UPLOAD_ERR_NO_TMP_DIR => 'Отсутствует временная папка.',
+                    UPLOAD_ERR_CANT_WRITE => 'Не удалось записать файл на диск.',
+                    UPLOAD_ERR_EXTENSION  => 'PHP-расширение остановило загрузку файла.',*/
+                ];
+                // Зададим неизвестную ошибку
+                $message = 'При загрузке файла произошла ошибка' . '. ';
+                // Если в массиве нет кода ошибки, скажем, что ошибка неизвестна
+                $message .= isset($errorMessages[$errorCode]) ? $errorMessages[$errorCode] : $errorCode;
+                // Выведем название ошибки
+                
+                $res['errors'][] = $fileName.': '.$message;
+                continue;
+            } 
+
+            // Проверим нужные параметры
+       /*     if ($fileSize > config('uploadMaxFileSize')) {
+                return ['error' => 'Размер файла слишком большой.'];
+            }*/
+            if($allowFileExtension)
+            {
+                $fileExtension = mb_strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                if(!in_array($fileExtension, $allowFileExtension)) {
+                    $res['errors'][] = $fileName.': '.'Не допускаются файлы с расширением' .' ' .$fileExtension;
+                    continue;
+                }
+            }
+            $manager = new ImageManager(
+                new \Intervention\Image\Drivers\Gd\Driver()
+            );
+
+            $newFileName = \Illuminate\Support\Str::uuid().'.jpg';
+            // open an image file
+            $img = $manager->read($file);
+          //  $img = \Intervention\Image::make($file);
+            $img->scaleDown($maxSize, $maxSize, function($constraint) {
+                $constraint->aspectRatio();
+            })->save($targetFolder.'/'.$newFileName);
+
+            $img->scaleDown($maxThumbSize, $maxThumbSize, function($constraint) {
+                $constraint->aspectRatio();
+            })->save($targetFolder.'/thumbs/'.$newFileName);
+
+            $res['files'][] = ['originFileName' => $fileName, 'fileName' => $newFileName];
+        }
+        return $res;
+    }
+    function deleteImage($type, $fileName) {
+        $targetFolder = public_path(config('app.uploadImageFolder')) . '/' . $type;
+        if (file_exists($targetFolder.'/'.$fileName)) 
+            unlink($targetFolder.'/'.$fileName);
+        if (file_exists($targetFolder.'/thumbs/'.$fileName)) 
+            unlink($targetFolder.'/thumbs/'.$fileName);
+         
+    }
+
+    function sendMessage(&$user, $message) {
+        return App(TelegramClient::class)->sendMessage($user, $message);
     }
 }

@@ -9,6 +9,7 @@
 
     <title><?= isset($title) ? $title : "Семинары по психологии" ?></title>
     <script type="text/javascript" src="/_libs/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/_libs/scripts.js"></script>
 
     <script>
         let _token = '<?= csrf_token() ?>';
@@ -17,6 +18,19 @@
 
 <body class='<?= (isset($bodyClass) ? $bodyClass : '') ?>'>
     <?= $blockContent ?>
+    
+    <div style='display:none;' id='modalWinTemplate' onclick='closeModalWindow(this);' class='pop_up_win'>
+        <div class='pop_up_top'>
+
+        </div>
+        <div class='pop_up_middle' onclick='event.stopPropagation();'>
+            <div class='pop_up_content_root'>
+                <div class='pop_up_win_close_button' onclick='closeModalWindow(this);'></div>
+                <div class='pop_up_content'></div>
+            </div>
+        </div>
+        <div class='pop_up_bottom'></div>
+    </div>
 </body>
 
 </html>

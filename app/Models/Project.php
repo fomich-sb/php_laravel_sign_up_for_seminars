@@ -17,11 +17,11 @@ class Project extends BaseGameModel
     public function getStatuses()
     {
         return [
-            "created" => ['id' => 0],
-            "opened" => ['id' => 10],
-            "registration" => ['id' => 20],
-            "fixed" => ['id' => 30],
-            "closed" => ['id' => 100],
+            "created" => ['id' => 0, 'caption' => 'Не открыт'],
+            "opened" => ['id' => 10, 'caption' => 'До регистрации'],
+            "registration" => ['id' => 20, 'caption' => 'Регистрация'],
+            "fixed" => ['id' => 30, 'caption' => 'После регистрации'],
+            "closed" => ['id' => 100, 'caption' => 'Закрыт'],
         ];
     }
 

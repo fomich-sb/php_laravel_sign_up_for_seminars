@@ -1,30 +1,59 @@
-html, body{
+:root {
+    --dark-color: #222;
+    --light-color: #f5f5f5;
+    --caption-color: #ebc445;
+}
+@font-face {
+    font-family: 'mainRegular';
+    src: url('circe.ttf');
+}
+html{
+    min-height: 100%;
     margin: 0;
     padding: 0;
-}
-.projectsMenuRoot{
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 1em;
-}
-.projectsMenuItem{
-    cursor: pointer;
-    flex: 1 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 0.5em;
-}
-.projectsMenuItemActive{
     background-color: #CCC;
+}
+body {
+    margin: 0 auto;
+    padding: 0;
+    flex: 1 1 auto;
+    display: flex;
+    background-color: var(--light-color);
+    font-family: 'mainRegular';
+    width: 100%;
+    max-width: 80em;
+    font-size: 18px;
+}
+input, select{
+    font-size: 1em;
+    background: transparent;
+    border: solid var(--caption-color);
+    border-width: 0 0 2px 0;
+    outline-width: 0;
+    font-family: 'mainRegular';    
+    min-width: 10em;
+}
+input:disabled {
+    color: #777;
+}
+input[type="checkbox"], .formFieldInput input[type="checkbox"] {
+    width: auto;
+    min-width: 0;
+    margin-right: 1em;
 }
 
 
 .button{
     padding: 0.3em;
     cursor: pointer;
-    border:1px solid #000;
     width: fit-content;
+    background: var(--caption-color);
+    background-size: cover;
+    min-width: 15em;
+    text-align: center;
+    margin: 1em auto;
 }
 .button:hover{
     opacity: 0.8;
@@ -32,4 +61,416 @@ html, body{
 .buttonDisabled {
     opacity: 0.2 !important;
     cursor: default;
+}
+.buttonSmall{
+    min-width: 0;
+    margin: 0em;
+    padding: 0.1em 0.2em;
+    display: inline-block;
+}
+.clickableDiv{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.projectContentRegisterButtonCheckLoginCodeError{
+    color: red;
+    font-size: 0.8em;
+}
+
+.projectsMenuRoot{   
+    flex: 1 1;
+    max-width: 25em;
+    min-width: 20em;
+    background-color: var(--dark-color);
+}
+.projectsMenu{
+    position: sticky;
+    top: 0;
+}
+.projectsMenuLogo{
+    background-image: url('logo.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 1em ;
+    height: 9em;
+}
+.projectsMenuItemsRoot{
+    position: sticky;
+    top: 1em;
+}
+.projectsMenuItem{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
+    background-color: var(--caption-color);
+    background-image: url('bg-gold.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 1em -1em 2em -1em;
+    text-align: center;
+    filter: brightness(0.8);
+}
+.projectsMenuItem:hover{
+    filter: brightness(0.9);
+}
+.projectsMenuItemFooter{
+    height: 0;
+    width: 0;
+    border: 0.5em solid;
+    border-color: var(--caption-color) transparent transparent var(--caption-color);
+    filter: brightness(0.6);
+    margin: 0.5em -0.5em -1.5em auto;
+}
+.projectsMenuItemHeader{
+    height: 0;
+    width: 0;
+    border: 0.5em solid;
+    border-color: transparent var(--caption-color) var(--caption-color) transparent;
+    filter: brightness(0.6);
+    margin: -1.5em auto 0.5em -0.5em;
+}
+
+.projectsMenuItem a{
+    color: var(--dark-color);
+    text-decoration: none!important;
+}
+.projectsMenuItemActive, .projectsMenuItemActive a{
+    filter: brightness(1)!important;
+    cursor: default;
+}
+
+.projectsMenuItemDate{
+    font-size: 1.5em;
+    padding: 0.2em 0;
+}
+
+.projectContentRoot{
+    flex: 3 1;
+}
+.projectContentSector{
+    padding: 1.5em 1em 1.5em 2em;
+}
+.projectContentSector:nth-child(even){
+    background-color: #0001;
+}
+
+.projectCaption{
+    font-size: 2em;
+    line-height: 1em;
+    margin-bottom: 0.5em;
+}
+.projectDate{
+    margin-bottom: 1em;
+}
+.projectSectionCaption{
+    margin-top: 0.5em;
+    font-size: 1.5em;
+}
+
+.projectContentRegisterRoot{
+    font-size: 1.2em;
+}
+.projectContentRegisterCaption, .projectContentMaterialsCaption, .projectContentPhotosCaption, .projectContentCertificateCaption{
+    font-size: 1.5em;
+    line-height: 1em;
+    margin-bottom: 1em;
+}
+.projectContentRegisterUserExist{
+    font-size: 0.8em;
+}
+.projectContentRegisterStatus{
+    margin-bottom: 2em;
+}
+.projectContentRegisterStatus0{
+    color: #b80;
+}
+.projectContentRegisterStatus-1{
+    color: #900;
+}
+.projectContentRegisterStatus1{
+    color: #090;
+}
+.projectPlaceAddress{
+    color:#0009;
+}
+
+
+.projectContentCertificateImg{
+    max-width: 100%;
+    max-height: 10em;
+    cursor: pointer;
+}
+
+.projectRegisterForm{
+    width: 100%;
+    max-width: 25em;
+}
+.formFieldRoot{
+    display: flex;
+    flex-wrap: wrap;    
+    margin: 0.5em 0;
+}
+.formFieldCaption{
+    flex: 1 1;
+    max-width: 15em;
+}
+.formFieldInput{
+    flex: 1 1;
+}
+.formFieldInput input{
+    width: 100%;
+}
+.formFieldInput input[type='date'] {
+    width:max-content;
+}
+.cardContent{
+    padding: 1em;
+    overflow: auto;
+}
+.cardFooter{
+    display: flex;
+    justify-content: center;
+}
+
+.tag{
+    display: inline-block;
+    border: 1px solid #0002;
+    padding: 0 0.2em;
+    font-size: 0.8em;
+}
+
+.pop_up_win {
+	color: white;
+	background-color: RGBA(0, 0, 0, 0.9);
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 40;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.pop_up_win .pop_up_top {
+	flex: 1 1 auto;
+}
+
+.pop_up_win .pop_up_bottom {
+	flex: 2 1 auto;
+}
+.pop_up_middle {
+	flex: 0 0 auto;
+	max-height: 100%;
+	display: flex;
+    flex-direction: column;
+}
+.pop_up_content_root {
+    max-width: 90%;
+    min-width: 40%;
+    width: max-content;
+    margin: 0.5em auto;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    display: flex;
+    justify-content: center;
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+}
+.pop_up_content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  /*  overflow: auto;*/
+}
+
+.pop_up_win_content {
+	width: 90%;
+	max-width: 500px;
+	margin: 0 auto;
+	min-height: 200px;
+	box-sizing: border-box;
+}
+
+.pop_up_win_close_button{
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+
+    -webkit-mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
+    mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
+
+}
+
+.projectsMenuButton{
+    display: none;
+    width: 2em;
+    height: 2em;
+    background-image: url(menu.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: fixed;
+    top:1em;
+    left:1em;
+    z-index: 20;
+}
+.cardRoot {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.cardHeader{
+    background-color: var(--caption-color);
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+}
+
+
+.userCardImageImg, .projectTamadaPhoto, .certificateBgImg{
+    width: 7em;
+    height: 7em;
+    cursor: pointer;
+    background-image: url(no_photo.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.userCardImageImg, .projectTamadaPhoto{
+    border-radius: 10em;
+}
+.projectTamadaPhoto{
+    margin: 0 auto;
+    margin-bottom: 0.5em;
+}
+.userCardContent .projectTamadaPhoto{
+    float: left;
+    margin: 0 0.5em 0.5em 0;
+}
+
+.projectTamadas{
+    display: flex;
+}
+.projectTamada{
+    margin: 0 1em 1em 0;
+}
+.projectTamadaCaption{
+    text-align: center;
+}
+.photoViewerContent{
+    display: flex;
+    flex-wrap: wrap;
+}
+.photoViewerContent .photoDiv{
+    height: 8em;
+    margin: 0.3em;
+    position: relative;
+}
+.photoViewerContent .photoDiv img{
+    max-height: 100%;
+}
+.photoDeleteButton{
+    position: absolute;
+    top:0;
+    right: 0%;
+    cursor: pointer;
+}
+.certificateHtml{
+    width: 100%;
+    min-height:15em;
+}
+
+
+@media screen and (max-width: 1200px) {
+    body {
+        font-size: 17px;
+    }
+}
+@media screen and (max-width: 1000px) {
+    body {
+        font-size: 16px;
+    }
+    .projectsMenuRoot{
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 10;
+    }
+    .projectsMenuRoot.projectsMenuRootVisible{
+        display: block;
+    }
+    
+    .projectsMenuButton{
+        display: block;
+    }
+    .projectContentSector {
+        padding: 1.5em 1em 1.5em 1em;
+    }
+    .projectContentRoot{
+        padding-top: 2.5em;
+    }
+}
+
+
+
+
+.toggleControlRoot{
+    display: flex; 
+    justify-content: space-between;
+    text-align:center;
+}
+.toggleControlRoot div{
+    flex: 1 1;
+}
+.toggleControl input[type="checkbox"] {
+    display: none;
+}
+.toggleControl .control{
+    display: block;
+    width: 3em;
+    height: 1.5em;
+    background-color: var(--caption-color);
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    margin: -0.125em 0.25em;
+}
+
+.toggleControl .control::after {
+    content: "";
+    width: 1.1em;
+    height: 1.1em;
+    background-color: var(--caption-color);
+    filter:brightness(0.8);
+    position: absolute;
+    border-radius: 1.5em;
+    top: 0.2em;
+    left: 0.2em;
+    transition: 0.5s;
+}
+.toggleControl input:checked +  .control::after {
+    left: calc(100% - 0.2em);
+    transform: translateX(-100%);
 }

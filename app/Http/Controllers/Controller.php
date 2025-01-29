@@ -26,6 +26,13 @@ class Controller extends BaseController
         }
     }
 
+    public function renderAdmin($dataRender) {
+        if(!isset($dataRender['bodyClass']))
+            $dataRender['bodyClass'] = 'body_admin';
+
+        return view('/layouts/admin', $dataRender);
+    }
+
     public function errorResponseJSON(string $error, &$response = []) {
         $response['success']=0;
         $response['error']=$error;

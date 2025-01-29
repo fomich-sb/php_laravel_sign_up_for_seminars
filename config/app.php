@@ -5,6 +5,9 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
+    'uploadImageFolder' => env('APP_UPLOAD_IMAGE_FOLDER', '/uploads/images'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
