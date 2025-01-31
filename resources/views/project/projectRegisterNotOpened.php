@@ -1,4 +1,7 @@
 <div class='projectRegisterRoot projectContentSector'>
-    Регистрация участников пока не доступна.
+    <div class='projectContentRegisterCaption'>Регистрация</div>
+    <div class='projectContentRegisterRoot'>
+        Регистрация участников пока не доступна.
+    </div>
 </div>
 

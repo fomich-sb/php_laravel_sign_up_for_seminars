@@ -62,6 +62,21 @@ class ProjectController extends Controller
         ];
         return $this->successResponseJSON($response);
     }
+    
+    public function actionGetProjectRegisterSectorContent()
+    {
+        $response['content']='';
+        $user = Auth::user();
+        $projectId = intval(request()->get('projectId'));
+        $project = App(Project::class)->find($projectId);
+        $projectUser = null;
+        if($project && $user){
+            $projectUser = App(ProjectUser::class)->where('user_id', $user->id)->where('project_id', $projectId)->first();
+        }
+        $response['content'] = $this->getContentRegister($project, $user, $projectUser);
+
+        return $this->successResponseJSON($response);
+    }
 
     public function getContent($projectId)
     {
@@ -79,34 +94,13 @@ class ProjectController extends Controller
             'tamadaItems' => App(User::class)->whereIn('id', App(ProjectTamada::class)->where('project_id', $project->id)->get()->pluck('user_id'))->get(),
         ])->render();
 
-        if($project->status == App(Project::class)->getStatusId('created') || $project->status == App(Project::class)->getStatusId('opened'))
-            $res .= view('/project/projectRegisterNotOpened', [
+        if($user && $projectUser && $projectUser->status == 1){
+            $res .= view('/project/projectMaterials', [
                 'project' => $project,
             ])->render();
-        
-        if($project->status >= App(Project::class)->getStatusId('registration')){
-            if($user && $projectUser && $projectUser->status == 1){
-                $res .= view('/project/projectMaterials', [
-                    'project' => $project,
-                ])->render();
-            }
         }
-        if($project->status == App(Project::class)->getStatusId('registration')){
-            if($user)
-                $res .= view('/project/projectRegisterAuth', [
-                    'project' => $project,
-                    'user' => $user,
-                    'projectUser' => $projectUser,
-                ])->render();
-            else
-                $res .= view('/project/projectRegisterNoAuth', [
-                    'project' => $project,
-                ])->render();
-        }
-        else
-            $res .= view('/project/projectRegisterClosed', [
-                'project' => $project,
-            ])->render();
+
+        $res .= $this->getContentRegister($project, $user, $projectUser);
 
         if($user && $projectUser && $projectUser->status == 1){
             if($projectUser->certificate_active && $projectUser->certificate_id){
@@ -114,6 +108,7 @@ class ProjectController extends Controller
                 if($cert){
                     $res .= view('/project/projectCertificate', [
                         'cert' => $cert,
+                        'project' => $project,
                     ])->render();
                 }
             }
@@ -129,4 +124,46 @@ class ProjectController extends Controller
         return $res;
     }
     
+    public function getContentRegister(&$project, &$user, &$projectUser)
+    {
+        if(isset($projectUser) && $projectUser){
+            if($project->status < App(Project::class)->getStatusId('closed'))
+                return view('/project/projectRegisterMyRequest', [
+                    'project' => $project,
+                    'user' => $user,
+                    'projectUser' => $projectUser,
+                ])->render();
+        }
+        else
+        {
+
+            if($project->status == App(Project::class)->getStatusId('created') || $project->status == App(Project::class)->getStatusId('opened')){
+                return view('/project/projectRegisterNotOpened', [
+                    'project' => $project,
+                ])->render();
+            }
+            if($project->status == App(Project::class)->getStatusId('registration')){
+                if($user)
+                    return view('/project/projectRegisterFormAuth', [
+                        'project' => $project,
+                        'user' => $user,
+                    ])->render();
+                else
+                    return view('/project/projectRegisterFormNoAuth', [
+                        'project' => $project,
+                    ])->render();
+            }
+            if($project->status == App(Project::class)->getStatusId('fixed') || $project->status == App(Project::class)->getStatusId('closed')){
+                if($user)
+                    return view('/project/projectRegisterClosedAuth', [
+                        'project' => $project,
+                    ])->render();
+                else
+                    return view('/project/projectRegisterClosedNoAuth', [
+                        'project' => $project,
+                    ])->render();
+            }
+        }
+        return '';
+    }
 }

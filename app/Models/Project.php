@@ -2,12 +2,14 @@
 namespace App\Models;
 
 use App\Models\BaseGameModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends BaseGameModel
 {
     protected  $table='projects';
     public $timestamps = false;
     protected $guarded = [];
+    use SoftDeletes;
 
     public function getActual()
     {

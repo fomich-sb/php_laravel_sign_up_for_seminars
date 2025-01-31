@@ -88,6 +88,8 @@ class ProjectController extends AdminController
         $project->certificate_enabled = intval(request()->get('certificate_enabled'));
         $project->certificate_bg = request()->get('certificate_bg');
         $project->certificate_html = request()->get('certificate_html');
+        $project->certificate_orientation = intval(request()->get('certificate_orientation'));
+        
         
 
         $project->save();

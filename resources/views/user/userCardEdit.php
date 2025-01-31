@@ -45,6 +45,17 @@ use Illuminate\Support\Facades\Auth;
                 <div>муж</div>
             </div>
         </div>
+
+        <div style='margin-top:1em;'>На английском:</div>
+        <div class='formFieldRoot'>
+            <div class='formFieldCaption'>Фамилия</div>
+            <div class='formFieldInput'><input name="lastnameEn" class="userCardNameEn1" value="<?=$user->nameEn1?>" /></div>
+        </div>
+        <div class='formFieldRoot'>
+            <div class='formFieldCaption'>Имя</div>
+            <div class='formFieldInput'><input name="firstnameEn" class="userCardNameEn2"  value="<?=$user->nameEn2?>"/></div>
+        </div>
+        <br>
         <?php if($projectUser): ?>
             <div class='formFieldRoot'>
                 <div class='formFieldCaption'>Участие в семинаре</div>
@@ -59,16 +70,8 @@ use Illuminate\Support\Facades\Auth;
             </div>
         <?php endif; ?>
 
-        <div style='margin-top:1em;'>На английском:</div>
-        <div class='formFieldRoot'>
-            <div class='formFieldCaption'>Фамилия</div>
-            <div class='formFieldInput'><input name="lastnameEn" class="userCardNameEn1" value="<?=$user->nameEn1?>" /></div>
-        </div>
-        <div class='formFieldRoot'>
-            <div class='formFieldCaption'>Имя</div>
-            <div class='formFieldInput'><input name="firstnameEn" class="userCardNameEn2"  value="<?=$user->nameEn2?>"/></div>
-        </div>
         <?php if($curUser->admin): ?>
+            <div class='hr'></div>
             <div class='formFieldRoot'>
                 <div class='formFieldCaption'>Автоматически одобрять</div>
                 <div class='formFieldInput toggleControlRoot'>
@@ -83,9 +86,7 @@ use Illuminate\Support\Facades\Auth;
 
             <div class='formFieldCaption'>Теги</div>
             <div class='formFieldInput'> <input name="firstnameEn" class="userCardTags tags_field" value="<?= implode(', ', $tags->pluck('tag')->toArray()) ?>"/>  </div>
-            
-        <?php endif; ?>
-        <?php if($curUser->admin): ?>
+
             <div class='formFieldRoot'>
                 <div class='formFieldCaption'>Описание</div>
             </div>
@@ -101,62 +102,69 @@ use Illuminate\Support\Facades\Auth;
 </div>
 
 <script>
-    tagifyWhitelistUserTags=['<?= implode("', '", $allTags->pluck('tag')->toArray()) ?>'];
-    //РЕДАКТОР ТЕГОВ
-    inputElm = document.querySelectorAll('.userCardTags')[0];
-    tagify = new Tagify(inputElm, {
-        enforceWhitelist: false, //только из белого списка
-        whitelist: tagifyWhitelistUserTags
-    });
+    <?php if($curUser->admin): ?>
+        tagifyWhitelistUserTags=['<?= implode("', '", $allTags->pluck('tag')->toArray()) ?>'];
+        //РЕДАКТОР ТЕГОВ
+        inputElm = document.querySelectorAll('.userCardTags')[0];
+        tagify = new Tagify(inputElm, {
+            enforceWhitelist: false, //только из белого списка
+            whitelist: tagifyWhitelistUserTags
+        });
 
-    // Chainable event listeners
-    /* tagify.on('add', function onAddTag(e) {
-        tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
-    });*/
-  /*  tagify.on('change', function onTagChange(e) {
-        filterTasks();
-    });*/
-    tagify.on('input', function onInput(e) {
-        tagify.settings.whitelist.length = 0; // reset current whitelist
-        tagify.loading(true).dropdown.hide.call(tagify) // show the loader animation
+        // Chainable event listeners
+        /* tagify.on('add', function onAddTag(e) {
+            tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
+        });*/
+    /*  tagify.on('change', function onTagChange(e) {
+            filterTasks();
+        });*/
+        tagify.on('input', function onInput(e) {
+            tagify.settings.whitelist.length = 0; // reset current whitelist
+            tagify.loading(true).dropdown.hide.call(tagify) // show the loader animation
 
-        // get new whitelist from a delayed mocked request (Promise)
-        mockAjax()
-            .then(function(result) {
-                // replace tagify "whitelist" array values with new values
-                // and add back the ones already choses as Tags
-                tagify.settings.whitelist.push(...result, ...tagify.value)
+            // get new whitelist from a delayed mocked request (Promise)
+            mockAjax()
+                .then(function(result) {
+                    // replace tagify "whitelist" array values with new values
+                    // and add back the ones already choses as Tags
+                    tagify.settings.whitelist.push(...result, ...tagify.value)
 
-                // render the suggestions dropdown.
-                tagify.loading(false).dropdown.show.call(tagify, e.detail.value);
-            })
-    });
-    tagify.on('focus', function onTagifyFocusBlur(e) {
-        tagify.settings.whitelist.length = 0; // reset current whitelist
-        tagify.loading(true).dropdown.hide.call(tagify) // show the loader animation
+                    // render the suggestions dropdown.
+                    tagify.loading(false).dropdown.show.call(tagify, e.detail.value);
+                })
+        });
+        tagify.on('focus', function onTagifyFocusBlur(e) {
+            tagify.settings.whitelist.length = 0; // reset current whitelist
+            tagify.loading(true).dropdown.hide.call(tagify) // show the loader animation
 
-        // get new whitelist from a delayed mocked request (Promise)
-        mockAjax()
-            .then(function(result) {
-                // replace tagify "whitelist" array values with new values
-                // and add back the ones already choses as Tags
-                tagify.settings.whitelist.push(...result, ...tagify.value)
+            // get new whitelist from a delayed mocked request (Promise)
+            mockAjax()
+                .then(function(result) {
+                    // replace tagify "whitelist" array values with new values
+                    // and add back the ones already choses as Tags
+                    tagify.settings.whitelist.push(...result, ...tagify.value)
 
-                // render the suggestions dropdown.
-                tagify.loading(false).dropdown.show.call(tagify, e.detail.value);
-            })
-    });
+                    // render the suggestions dropdown.
+                    tagify.loading(false).dropdown.show.call(tagify, e.detail.value);
+                })
+        });
 
-    var mockAjax = (function mockAjax() {
-        var timeout;
-        return function(duration) {
-            clearTimeout(timeout); // abort last request
-            return new Promise(function(resolve, reject) {
-                timeout = setTimeout(resolve, duration || 0, tagifyWhitelistUserTags) 
-            })
+        var mockAjax = (function mockAjax() {
+            var timeout;
+            return function(duration) {
+                clearTimeout(timeout); // abort last request
+                return new Promise(function(resolve, reject) {
+                    timeout = setTimeout(resolve, duration || 0, tagifyWhitelistUserTags) 
+                })
+            }
+        })();
+        //КОНЕЦ РЕДАКТОР ТЕГОВ
+    
+        function afterCardTabContentLoad()
+        {
+            nicEditorInit();
         }
-    })();
-    //КОНЕЦ РЕДАКТОР ТЕГОВ
+    <?php endif; ?>
 
     function uploadUserImage(userId) {
         $('.userCardImageForm' + userId).fileupload({
@@ -184,10 +192,5 @@ use Illuminate\Support\Facades\Auth;
             },
         });
         $('.userCardImageForm' + userId).find("input[name='file']").click();
-    }
-    
-    function afterCardTabContentLoad()
-    {
-	    nicEditorInit();
     }
 </script>

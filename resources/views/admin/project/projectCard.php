@@ -124,6 +124,14 @@
         </div>
     </div>
     <div class='formFieldRoot'>
+        <div class='formFieldCaption' style='max-width: 18em;'>Портретная ориентация</div>
+        <div class='formFieldInput'>
+            <label>
+                <input name='certificate_orientation' type="checkbox" onchange="onChangeFieldForm(); updateCertificatePreview();" <?=$project->certificate_orientation ? "checked='checked'" : "" ?>  >
+            </label>
+        </div>
+    </div>
+    <div class='formFieldRoot'>
         <div class='formFieldCaption' style='max-width: 18em;'>Картинка фона</div>
         <div class='formFieldInput'>
             <form class="certificateBgForm certificateBgForm<?=$project->id?>" action="/admin/project/setImage" method="post" enctype="multipart/form-data">
@@ -141,9 +149,11 @@
     <div class='formFieldInput'>
         <textarea name="certificate_html" class='certificateHtml' onchange="onChangeFieldForm(); updateCertificatePreview();"><?=$project->certificate_html?></textarea>
     </div>
-    
-    <div class='formFieldCaption clickableDiv' onclick='$(".certificatePreviewRoot").toggle();'>Предпросмотр</div>
-    <section class='certificatePreviewRoot' style='display:none; position:relative;'>
+    <div style='display:flex; justify-content: center;'>
+        <div class='button ' onclick='$(".certificatePreviewRoot").toggle();' style='margin: 0.5em;'>Предпросмотр</div>
+        <div class='button ' onclick='recreateProjectCertificates();' style='margin: 0.5em;'>Обновить сертификаты участников</div>
+    </div>
+    <section class='certificatePreviewRoot' style='display:none; position:relative; margin: 0 auto;width: fit-content;'>
 
     </section>
 
@@ -182,6 +192,7 @@
             'certificate_enabled': $('input[name="certificate_enabled"]').prop('checked') ? 1 : 0,
             'certificate_bg': $('input[name="certificate_bg"]').val(),
             'certificate_html': $('textarea[name="certificate_html"]').val(),
+            'certificate_orientation': $('input[name="certificate_orientation"]').prop('checked') ? 1 : 0,
             'tamada_items': tamadaIds,
 
             '_token': _token,
@@ -232,12 +243,36 @@
         });
         $('.certificateBgForm' + projectId).find("input[name='file']").click();
     }
+
+    function recreateProjectCertificates() {
+        let data = {
+            'projectId': <?=$project->id?>,
+            '_token': _token,
+        };
+        fetch('/admin/certificate/recreate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success !== 1){
+                alert(data.error);
+            }
+            else {
+                alert('Сертификаты пользователей очищены. Сохраните изменения проекта.');
+            }
+        });
+    }
+
     function updateCertificatePreview() {
         let data = {
             'projectId': <?=$project->id?>,
             'certificate_bg': $('input[name="certificate_bg"]').val(),
             'certificate_html': $('textarea[name="certificate_html"]').val(),
-
+            'certificate_orientation': $('input[name="certificate_orientation"]').prop('checked') ? 1 : 0,
             '_token': _token,
         };
         fetch('/admin/certificate/getPreviewContent', {

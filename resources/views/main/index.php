@@ -1,4 +1,21 @@
 <div class='projectsMenuRoot'>
+    <div class='projectsMenuLogin'>
+        <?php if($user): ?>
+            <div class='button' onclick="openUserCard()">
+                +<?=$user->phone?>
+            </div>
+            <div class='button buttonLogout' onclick="logout()">
+                <div class='buttonLogoutInner' title='Выйти из учетной записи'>
+                    Выйти
+                </div>
+            </div>
+        <?php else: ?>
+            <div class='button' onclick="openLoginForm()">
+                Авторизоваться
+            </div>
+        <?php endif; ?>
+    </div>
+
     <div class='projectsMenuLogo'></div>
     <?php if($user && $user->admin): ?>
         <div class='projectsMenuItem'>
@@ -40,7 +57,7 @@
         }, $(el).find('.projectsMenuItemCaption').text(), $(el).find('a').prop('href'));
         loadProject(projectId);
     }
-    function loadProject(projectId)
+    function loadProject(projectId, anchor = null)
     {
         if(currentProjectId != projectId)
             window.scrollTo({top: 0, behavior: 'smooth'});
@@ -69,11 +86,15 @@
                 return;
             }
             $('.projectContentRoot').html(data.content);
-
+            if(anchor){
+                let el = $("." + anchor);
+                if(el.length>0)
+                    $('html, body').scrollTop(el.offset().top);
+            }
         });
         $(".projectsMenuRoot").removeClass("projectsMenuRootVisible");
     }
-    var prevPhone = null;
+  /*  var prevPhone = null;
     function onPhoneChange(phoneEl){
         var phone = getPhone(phoneEl);
         if(prevPhone != phone)
@@ -141,91 +162,10 @@
             }
             $('.projectContentRegisterButtonCheckPhone').hide();
         });
-    }
+    }*/
 
-    function onRegisterFormChange()
-    {
-        if(
-            $('.projectContentRegisterStep2 .projectContentRegisterName1').val().trim().length == 0 || 
-            $('.projectContentRegisterStep2 .projectContentRegisterName2').val().trim().length == 0 || 
-            $('.projectContentRegisterStep2 .projectContentRegisterName3').val().trim().length == 0 || 
-            $('.projectContentRegisterStep2 .projectContentRegisterNameEn1').val().trim().length == 0 || 
-            $('.projectContentRegisterStep2 .projectContentRegisterNameEn2').val().trim().length == 0
-        )
-            $('.projectContentRegisterButtonRegister').addClass('buttonDisabled');
-        else
-            $('.projectContentRegisterButtonRegister').removeClass('buttonDisabled');
 
-    }
-
-    function register()
-    {
-        if($('.projectContentRegisterButtonRegister').hasClass('buttonDisabled'))
-            return;
-
-        let data = {
-            'projectId': currentProjectId,
-            'phone': getPhone($(".projectContentRegisterPhone")),
-            'name1': $('.projectContentRegisterStep2 .projectContentRegisterName1').val(),
-            'name2': $('.projectContentRegisterStep2 .projectContentRegisterName2').val(),
-            'name3': $('.projectContentRegisterStep2 .projectContentRegisterName3').val(),
-            'nameEn1': $('.projectContentRegisterStep2 .projectContentRegisterNameEn1').val(),
-            'nameEn2': $('.projectContentRegisterStep2 .projectContentRegisterNameEn2').val(),
-            'gender': $('.projectContentRegisterStep2 input[name="gender"]').prop('checked') ? 1 : 0,
-            'participationType': $('.projectContentRegisterStep2 input[name="participationType"]').prop('checked') ? 1 : 0,
-            '_token': _token,
-        };
-        fetch('/projectUser/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success !== 1){
-                $('.projectContentRegisterError').text(data.error).show();
-                return;
-            }
-            <?php if(!$user): ?>
-                $('.projectRegisterForm').hide();
-                $('.projectContentRegisterDoneRoot').show();
-            <?php else: ?>
-                $('.projectContentRegisterButtonDelete, .projectContentRegisterStatus0').show();
-                $('.projectContentRegisterButtonRegister').text('Откорректировать заявку');
-            <?php endif; ?>
-        });
-    }
-
-    function deleteRegistration()
-    {
-        if($('.projectContentRegisterButtonDelete').hasClass('buttonDisabled') || !confirm('Вы действительно хотите удалить заявку?'))
-            return;
-
-        let data = {
-            'projectId': currentProjectId,
-            'phone': getPhone($(".projectContentRegisterPhone")),
-            '_token': _token,
-        };
-        fetch('/projectUser/delete', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success !== 1){
-                $('.projectContentRegisterError').text(data.error).show();
-                return;
-            }
-            loadProject(currentProjectId);
-        });
-    }
-
-    function sendLoginCode(elButton, phoneEl)
+  /*  function sendLoginCode(elButton, phoneEl)
     {
         if($(elButton).hasClass('buttonDisabled'))
             return;
@@ -250,9 +190,9 @@
                 return;
             }
         });
-    }
+    }*/
 
-    function checkLoginCode(elButton, phoneEl, codeEl)
+    /*function checkLoginCode(elButton, phoneEl, codeEl)
     {
         if($(elButton).hasClass('buttonDisabled'))
             return;
@@ -277,23 +217,6 @@
             }
             document.location.reload();
         });
-    }
+    }*/
     
-    function logout()
-    {
-        let data = {
-            '_token': _token,
-        };
-        fetch('/user/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.location.reload();
-        });
-    }
 </script>

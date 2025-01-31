@@ -149,7 +149,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class='button' onclick='openModalWindowAndLoadContent("/admin/projectUser/getAddCardContent", {"projectId": <?=$projectUser->project_id?>});'>Добавить участника</div>
+    <div class='button' onclick='openModalWindowAndLoadContent("/admin/projectUser/getAddCardContent", {"projectId": <?=$project->id?>});'>Добавить участника</div>
 </div>
 
 <script>

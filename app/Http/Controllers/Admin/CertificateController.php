@@ -40,11 +40,14 @@ class CertificateController extends AdminController
         $project = App(Project::class)->findOrFail($projectId);
         $certificateBg = request()->get('certificate_bg');
         $certificateHtml = request()->get('certificate_html');
+        $certificateOrientation = request()->get('certificate_orientation');
+        
         
 
         $response['content'] = App(Certificate::class)->generateContent($project, Auth::user(), [
             'certificateBg' => $certificateBg,
             'certificateHtml' => $certificateHtml,
+            'certificateOrientation' => $certificateOrientation,
         ]);
         return $this->successResponseJSON($response);
     }
@@ -55,18 +58,33 @@ class CertificateController extends AdminController
         $projectUser = App(ProjectUser::class)->findOrFail($projectUserId);
         $active = intval(request()->get('active'));
         $projectUser->certificate_active = $active;
-        if($active && !$projectUser->certificate_id){
-            $cert = App(Certificate::class)->create($projectUser);
-            $response['num'] = $cert->num;
+        if($active)
+        {
+            $cert = null;
+            if($projectUser->certificate_id)
+                $cert = App(Certificate::class)->find($projectUser->certificate_id);
+
+            if(!$cert)
+            {
+                $cert = App(Certificate::class)->create($projectUser);
+                $response['num'] = $cert->num;
+            } 
+            $cert->generate();
         }
         $projectUser->save();   
         $response['active'] = $active;
         return $this->successResponseJSON($response);
     }
 
-    public function get()
+    public function actionRecreate()
     {
-
+        $projectId = intval(request()->get('projectId'));
+        $projectUserItems = App(ProjectUser::class)->where('project_id', $projectId)->get();
+        $certificateItems = App(Certificate::class)->whereIn('id', $projectUserItems->pluck('certificate_id'))->get();
+        foreach($certificateItems as $cert)
+            $cert->recreate();
+            
+        return $this->successResponseJSON();
     }
     
 

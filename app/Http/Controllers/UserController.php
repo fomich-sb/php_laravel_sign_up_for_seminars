@@ -18,22 +18,8 @@ class UserController extends Controller
         if(!$phone)
             return $this->errorResponseJSON("Проверьте номер телефона");
 
-        $userItems = App(User::class)->where('phone', $phone)->get();
-        if(count($userItems) == 0)
-            return $this->errorResponseJSON("Проверьте номер телефона");
+        $response = App(User::class)->sendLoginCode($phone);
 
-        $user = $userItems[0];
-        if(!$user->login_code){
-            $user->login_code = random_int(10000,99999);
-            $user->save();
-        }
-
-     /*   if (!file_exists(public_path('madeline/madeline.php'))) {
-            copy('https://phar.madelineproto.xyz/madeline.php', public_path('madeline/madeline.php'));
-        }*/
-    //    include public_path('madeline/madeline.php');
-
-        $response = Utils::sendMessage($user, "Код для авторизации: ".$user->login_code);
         if(!$response)
             return $this->successResponseJSON($response);
         else
@@ -51,10 +37,7 @@ class UserController extends Controller
                 if($user->login_code === $code){
                     $user->login_code = null;
                     $user->save();
-                    request()->session()->invalidate();
-                    Auth::login($user, true);
-                    request()->session()->regenerate();
-                   /* request()->session()->regenerateToken();*/
+                    App(User::class)->login($user);
                     return $this->successResponseJSON($response);
                 }
                 else 
@@ -81,9 +64,14 @@ class UserController extends Controller
         $curUser = Auth::user();
         $userId = intval(request()->get('userId'));
 
-        if($curUser->id != $userId && !$curUser->admin)
-            return $this->errorResponseJSON("Не хватает прав");
-        $user = App(User::class)->findOrFail($userId);
+        if($userId){
+            if($curUser->id != $userId && !$curUser->admin)
+                return $this->errorResponseJSON("Не хватает прав");
+            $user = App(User::class)->findOrFail($userId);
+        }
+        else {
+            $user = $curUser;
+        }
         $projectUser = null;
         if(request()->get('projectId'))
             $projectUser = App(ProjectUser::class)->where('user_id', $user->id)->where('project_id', intval(request()->get('projectId')))->first();
@@ -169,6 +157,18 @@ class UserController extends Controller
         $user->save();*/
         if(count($res['files'])>0)
             $response = ['image' => $res['files'][0]['fileName']];
+        return $this->successResponseJSON($response);
+    }
+    
+    public function actionGetLoginForm()
+    {
+      //  $phone = request()->get('phone');
+       // $user = App(User::class)->findOrFail($userId);
+
+        $dataRender = [
+     //       'user' => $user,
+        ];
+        $response['blockContent'] = view('user/loginForm', $dataRender)->render();
         return $this->successResponseJSON($response);
     }
     

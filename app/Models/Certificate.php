@@ -17,6 +17,8 @@ class Certificate extends BaseGameModel
         $res = '';
         $certificateBg = isset($params['certificateBg']) ? $params['certificateBg'] : $project->certificate_bg;
         $certificateHtml = isset($params['certificateHtml']) ? $params['certificateHtml'] : $project->certificate_html;
+        $certificateOrientation = isset($params['certificateOrientation']) ? $params['certificateOrientation'] : $project->certificate_orientation;
+        
 
         $pattern = '/{{[^}]*}}/';
         preg_match_all($pattern, $certificateHtml, $matches);
@@ -48,6 +50,7 @@ class Certificate extends BaseGameModel
             'user' => $user, 
             'certificateBg' => $certificateBg, 
             'certificateHtml' => $certificateHtml,
+            'certificateOrientation' => $certificateOrientation,
         ])->render();
     }
 
@@ -116,7 +119,7 @@ class Certificate extends BaseGameModel
              $imagick->writeImage($imagePath);
              $imagick->clear();*/
      
-             $imagick = new Imagick();
+             $imagick = new \Imagick();
              $imagick->readImage(public_path("certificates") . '/' . $this->url . ".pdf");
              $imagick->writeImages(public_path("certificates") . '/thumbs/' . $this->url . ".png", false);
         }
@@ -124,5 +127,14 @@ class Certificate extends BaseGameModel
         {}
 
         return;
+    }
+    
+    public function recreate()
+    {
+        if(file_exists(public_path('certificates') . '/' . $this->url . ".pdf"))
+            unlink(public_path('certificates') . '/' . $this->url . ".pdf");
+        if(file_exists(public_path('certificates') . '/thumbs/' . $this->url . ".png"))
+            unlink(public_path('certificates') . '/thumbs/' . $this->url . ".png");
+
     }
 }

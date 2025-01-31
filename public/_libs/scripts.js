@@ -172,6 +172,7 @@ function saveUserCard(userId, projectId=null)
 	})
 	.then(response => response.json())
 	.then(data => {
+		updateProjectRegisterSector();
 		if (data.success !== 1){
 			alert(data.error);
 			return;
@@ -287,4 +288,280 @@ function deletePhoto(photoId)
 function getCertificate(url)
 {
 	window.open("/certificate?uuid="+url);
+}
+
+
+
+function openLoginForm()
+{
+	openModalWindowAndLoadContent("/user/getLoginForm", {}, {'class': 'loginFormWin'});
+}
+
+var prevPhone = [null, null];
+function onPhoneChange(phoneEl, type = 0){
+	var phone = getPhone(phoneEl);
+	if(prevPhone != phone)
+	{
+		if(type==0){
+			$('.loginFormCorrectPhoneRoot').hide();
+			$('.loginFormButtonCheckPhone').text('Отправить код');
+			$('.loginFormButtonCheckPhone').show();
+		}
+		if(type==1)
+			$('.projectContentRegisterButtonCheckPhone').show();
+	}
+	prevPhone = phone;
+	if(!phone || phone.substr(0, 1)=="7" && phone.length != 11 || phone.length < 8)
+	{
+		if(type==0)
+			$('.loginFormButtonCheckPhone').addClass('buttonDisabled');
+		if(type==1)
+			$('.projectContentRegisterButtonCheckPhone').addClass('buttonDisabled');
+	}
+	else
+	{
+		if(type==0)
+			$('.loginFormButtonCheckPhone').removeClass('buttonDisabled');
+		if(type==1)
+			$('.projectContentRegisterButtonCheckPhone').removeClass('buttonDisabled');
+	}
+}
+function getPhone(phoneEl)
+{
+	var numberPattern = /\d+/g;
+	return phoneEl.val().match( numberPattern ).join('');
+}
+
+function sendLoginCode(elButton, phoneEl, type=0)
+{
+	if($(elButton).hasClass('buttonDisabled'))
+		return;
+
+	$(elButton).addClass('buttonDisabled').text('Отправить код повторно');
+	setTimeout(function() { $(elButton).removeClass('buttonDisabled'); }, 10000);
+
+	let data = {
+		'phone': getPhone(phoneEl),
+		'_token': _token,
+	};
+	fetch('/user/sendLoginCode', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success !== 1){
+			console.log(data.error);
+			return;
+		}
+	});
+	if(type==0){
+		$('.loginFormCorrectPhoneRoot').show();
+		$('.loginFormLoginCode').focus()
+	}
+	if(type==1){
+		$('.projectContentRegisterCorrectPhoneRoot').show();
+		$('.projectContentRegisterLoginCode').focus()
+	}
+}
+
+function checkLoginCode(elButton, phoneEl, codeEl, type=0)
+{
+	if($(elButton).hasClass('buttonDisabled'))
+		return;
+
+	let data = {
+		'phone': getPhone(phoneEl),
+		'code': codeEl.val(),
+		'_token': _token,
+	};
+	fetch('/user/checkLoginCode', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success !== 1){
+			if(type==0)
+				$('.loginFormButtonCheckLoginCodeError').text(data.error);
+			if(type==1)
+				$('.projectContentRegisterButtonCheckLoginCodeError').text(data.error);
+			return;
+		}
+		document.location.reload();
+	});
+}
+
+
+function openUserCard(projectId = null)
+{
+	openModalWindowAndLoadContent("/user/getCardEditContent", {'projectId': projectId}, {'class': 'userCardmWin'});
+}
+
+
+function logout()
+{
+	let data = {
+		'_token': _token,
+	};
+	fetch('/user/logout', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		document.location.reload();
+	});
+}
+
+/*function findPhoneForRegister(phoneEl, projectId)
+{
+	if($('.projectContentRegisterButtonCheckPhone').hasClass('buttonDisabled'))
+		return;
+
+	let data = {
+		'projectId': projectId,
+		'phone': getPhone(phoneEl),
+		'_token': _token,
+	};
+	fetch('/projectUser/findPhoneForRegister', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success !== 1){
+			alert(data.error);
+			return;
+		}
+
+		  if(data.user){
+			$('.projectContentRegisterNeedAuth').show();
+			if(data.projectUser){
+				$('.projectContentRegisterAllreadyRegistered').show();
+				$('.projectContentRegisterUserExist').hide();
+			}
+			else {
+				$('.projectContentRegisterAllreadyRegistered').hide();
+				$('.projectContentRegisterUserExist').show();
+			}
+		} 
+		else 
+		{
+			$('.projectContentRegisterStep2').show();
+			onRegisterFormChange();
+		}
+		$('.projectContentRegisterButtonCheckPhone').hide();
+	});
+}*/
+
+
+function onRegisterFormChange()
+{
+	if(
+		$('.projectContentRegisterStep2 .projectContentRegisterName1').val().trim().length == 0 || 
+		$('.projectContentRegisterStep2 .projectContentRegisterName2').val().trim().length == 0 || 
+		$('.projectContentRegisterStep2 .projectContentRegisterName3').val().trim().length == 0 || 
+		$('.projectContentRegisterStep2 .projectContentRegisterNameEn1').val().trim().length == 0 || 
+		$('.projectContentRegisterStep2 .projectContentRegisterNameEn2').val().trim().length == 0
+	)
+		$('.projectContentRegisterButtonRegister').addClass('buttonDisabled');
+	else
+		$('.projectContentRegisterButtonRegister').removeClass('buttonDisabled');
+
+}
+
+function register()
+{
+	if($('.projectContentRegisterButtonRegister').hasClass('buttonDisabled'))
+		return;
+
+	let data = {
+		'projectId': currentProjectId,
+		'phone': getPhone($(".projectContentRegisterPhone")),
+		'name1': $('.projectContentRegisterStep2 .projectContentRegisterName1').val(),
+		'name2': $('.projectContentRegisterStep2 .projectContentRegisterName2').val(),
+		'name3': $('.projectContentRegisterStep2 .projectContentRegisterName3').val(),
+		'nameEn1': $('.projectContentRegisterStep2 .projectContentRegisterNameEn1').val(),
+		'nameEn2': $('.projectContentRegisterStep2 .projectContentRegisterNameEn2').val(),
+		'gender': $('.projectContentRegisterStep2 input[name="gender"]').prop('checked') ? 1 : 0,
+		'participationType': $('.projectContentRegisterStep2 input[name="participationType"]').prop('checked') ? 1 : 0,
+		'_token': _token,
+	};
+	fetch('/projectUser/register', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success !== 1){
+			$('.projectContentRegisterError').text(data.error).show();
+			return;
+		}
+		loadProject(currentProjectId, 'projectRegisterRoot');
+	});
+}
+
+function deleteRegistration()
+{
+	if(!confirm('Вы действительно хотите удалить заявку?'))
+		return;
+
+	let data = {
+		'projectId': currentProjectId,
+		'_token': _token,
+	};
+	fetch('/projectUser/delete', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success !== 1){
+			alert(data.error);
+			return;
+		}
+		loadProject(currentProjectId, 'projectRegisterRoot');
+	});
+}
+
+function updateProjectRegisterSector()
+{
+	let data = {
+		'projectId': currentProjectId,
+		'_token': _token,
+	};
+	fetch('/project/getProjectRegisterSectorContent', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if (data.success !== 1){
+			alert(data.error);
+			return;
+		}
+		$('.projectRegisterRoot')[0].outerHTML=data.content;
+	});
 }

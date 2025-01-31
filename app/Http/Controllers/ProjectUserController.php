@@ -11,28 +11,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectUserController extends Controller
 {
-    public function actionFindPhone()
+  /*  public function actionFindPhoneForRegister()
     {
         $projectId = intval(request()->get('projectId'));
         $phone = Utils::isPhone(request()->get('phone', ''));
         if(!$phone)
             $this->errorResponseJSON("Проверьте номер телефона");
 
-        $userItems = App(User::class)->where('phone', $phone)->get();
-        $response = [];
-        if(count($userItems) > 0) {
-            $user = $userItems[0];
-            $response['user'] = true;
+        $response = App(User::class)->sendLoginCode($phone);
 
-            $projectUserItems = App(ProjectUser::class)->where('user_id', $user->id)->where('project_id', $projectId)->get();
-            
-            if(count($projectUserItems) > 0) {
-                $response['projectUser'] = true;
-            }
-        }
-
-        return $this->successResponseJSON($response);
-    }
+        if(!$response)
+            return $this->successResponseJSON($response);
+        else
+            return $this->errorResponseJSON($response);
+    }*/
 
     public function actionRegister()
     {
@@ -74,21 +66,11 @@ class ProjectUserController extends Controller
             $this->errorResponseJSON("Вы не авторизованы");
 
         $projectId = intval(request()->get('projectId'));
-        $phone = Utils::isPhone(request()->get('phone', ''));
-        if(!$phone)
-            $this->errorResponseJSON("Проверьте номер телефона");
-
         $project = App(Project::class)->find($projectId);
-        if(!$project || $project->status != $project->getStatusId('registration'))
-            $this->errorResponseJSON("Действие невозможно");
-            
+        if(!$project || $project->status >= $project->getStatusId('fixed'))
+            $this->errorResponseJSON("Действие запрещено");
 
-        $user = App(User::class)->where('phone', $phone)->first();
-
-        if(!$user || Auth::user() && Auth::user()->id != $user->id)
-            $this->errorResponseJSON("Проверьте номер телефона");
-
-        App(ProjectUser::class)->where('user_id', $user->id)->where('project_id', $project->id)->delete();
+        App(ProjectUser::class)->where('user_id', Auth::user()->id)->where('project_id', $project->id)->delete();
         return $this->successResponseJSON();
     }
     

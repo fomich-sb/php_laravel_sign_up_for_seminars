@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/themes/default/style.css?v=<?=date("dmyH")?>">
+    <link rel="stylesheet" type="text/css" href="/_libs/tagify.css">
 
     <title><?= isset($title) ? $title : "Семинары по психологии" ?></title>
     <script type="text/javascript" src="/_libs/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/_libs/nicEdit.js"></script>
+    <script type="text/javascript" src="/_libs/jquery-ui.js"></script>
+    <script type="text/javascript" src="/_libs/tagify.min.js"></script>
+    <script type="text/javascript" src="/_libs/jquery.fileupload.js"></script>
     <script type="text/javascript" src="/_libs/scripts.js"></script>
 
     <script>

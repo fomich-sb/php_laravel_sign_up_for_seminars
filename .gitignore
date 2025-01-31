@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/uploads
+/public/certificates
 /storage/*.key
 /vendor
 .env
@@ -18,3 +19,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/public/madeline/session.madeline*
+/public/madeline/MadelineProto.log

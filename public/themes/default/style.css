@@ -43,7 +43,10 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     min-width: 0;
     margin-right: 1em;
 }
-
+.hr{
+    border: 1px dashed var(--caption-color);
+    margin: 2em;
+}
 
 .button{
     padding: 0.3em;
@@ -73,7 +76,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     text-decoration: underline;
 }
 
-.projectContentRegisterButtonCheckLoginCodeError{
+.projectContentRegisterButtonCheckLoginCodeError, .loginFormButtonCheckLoginCodeError{
     color: red;
     font-size: 0.8em;
 }
@@ -183,7 +186,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     font-size: 0.8em;
 }
 .projectContentRegisterStatus{
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 .projectContentRegisterStatus0{
     color: #b80;
@@ -234,6 +237,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 .cardFooter{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .tag{
@@ -282,6 +286,10 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     flex: 1 1 auto;
     position: relative;
     overflow: hidden;
+}
+.loginFormWin .pop_up_content_root, .userCardmWin .pop_up_content_root {
+    width: 35em;
+    min-width: auto;
 }
 .pop_up_content {
     display: flex;
@@ -332,7 +340,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     left:1em;
     z-index: 20;
 }
-.cardRoot {
+.cardRoot, .loginFormRoot {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -473,4 +481,36 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 .toggleControl input:checked +  .control::after {
     left: calc(100% - 0.2em);
     transform: translateX(-100%);
+}
+
+.textareaHtml{
+    width: 100%;
+    min-height: 10em;
+}
+.projectsMenuLogin{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+}
+.projectsMenuLogin .button{
+    margin: 0.5em 0.2em;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+.projectsMenuLogin .buttonLogout{
+    flex: 0 0 auto;
+    width: 1.5em;
+}
+.buttonLogoutInner{
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+
+    -webkit-mask-image: url(logout.svg);
+    mask-image: url(logout.svg);
+
 }
