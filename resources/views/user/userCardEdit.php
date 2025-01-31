@@ -87,11 +87,39 @@ use Illuminate\Support\Facades\Auth;
             <div class='formFieldCaption'>Теги</div>
             <div class='formFieldInput'> <input name="firstnameEn" class="userCardTags tags_field" value="<?= implode(', ', $tags->pluck('tag')->toArray()) ?>"/>  </div>
 
+            <div class='hr'></div>
+            
+            <div class='formFieldRoot'>
+                <div class='formFieldCaption'>Ведущий</div>
+                <div class='formFieldInput toggleControlRoot'>
+                    <div>нет</div>
+                    <div style='flex:0 0 auto;'><label class="toggleControl">
+                        <input type="checkbox" name="tamada" class='userCardTamada' <?= $user && $user->tamada ? " checked='checked' " : "" ?>>
+                        <span class="control"></span>
+                    </label></div>
+                    <div>да</div>
+                </div>
+            </div>
+            
             <div class='formFieldRoot'>
                 <div class='formFieldCaption'>Описание</div>
             </div>
             <div>
                 <textarea class='textareaHtml' name="descr" id='descr'><?=$user->descr?></textarea>
+            </div>
+            
+            <div class='hr'></div>
+
+            <div class='formFieldRoot'>
+                <div class='formFieldCaption'>Администратор</div>
+                <div class='formFieldInput toggleControlRoot'>
+                    <div>нет</div>
+                    <div style='flex:0 0 auto;'><label class="toggleControl">
+                        <input type="checkbox" name="admin" class='userCardAdmin' <?= $user && $user->admin ? " checked='checked' " : "" ?>>
+                        <span class="control"></span>
+                    </label></div>
+                    <div>да</div>
+                </div>
             </div>
         <?php endif; ?>
     </div>

@@ -50,7 +50,8 @@ class ProjectController extends AdminController
     {
         $photoItems = App(Photo::class)->where('project_id', $project->id)->orderBy('num')->orderBy('id')->get();
         $projectTamadaItems = App(ProjectTamada::class)->where('project_id', $project->id)->get()->pluck('user_id');
-        $tamadaItems = App(User::class)->whereIn('id', App(UserTag::class)->where('tag', 'Ведущий')->get()->pluck('user_id'))->orWhereIn('id', $projectTamadaItems)->get();
+
+        $tamadaItems = App(User::class)->where('tamada', 1)->orWhereIn('id', $projectTamadaItems)->get();
         $dataRender['blockContent'] = view(
             config('projectCode') . '/admin/project/projectCard',
             [

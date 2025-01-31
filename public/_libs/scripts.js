@@ -154,6 +154,10 @@ function saveUserCard(userId, projectId=null)
 		data['autoApprove'] = $('.userCardRoot'+userId+' input[name="autoApprove"]').prop('checked') ? 1 : 0;
 	if($('.userCardRoot'+userId+' textarea[name="descr"]').length>0)
 		data['descr'] = $('.userCardRoot'+userId+' textarea[name="descr"]').val();
+	if($('.userCardRoot'+userId+' input[name="admin"]').length>0)
+		data['admin'] = $('.userCardRoot'+userId+' input[name="admin"]').prop('checked') ? 1 : 0;
+	if($('.userCardRoot'+userId+' input[name="tamada"]').length>0)
+		data['tamada'] = $('.userCardRoot'+userId+' input[name="tamada"]').prop('checked') ? 1 : 0;
 
 	if($('.userCardRoot'+userId+' .userCardTags').length>0){
 		var tags = [];
@@ -545,6 +549,8 @@ function deleteRegistration()
 
 function updateProjectRegisterSector()
 {
+	if(!currentProjectId) 
+		return;
 	let data = {
 		'projectId': currentProjectId,
 		'_token': _token,

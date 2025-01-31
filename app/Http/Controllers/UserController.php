@@ -115,6 +115,10 @@ class UserController extends Controller
             $user->auto_approve = intval(request()->get('autoApprove'));
         if($curUser->admin && request()->get('descr'))
             $user->descr = request()->get('descr');
+        if($curUser->admin && request()->get('admin') && $curUser->id != $user->id)
+            $user->admin = intval(request()->get('admin'));
+        if($curUser->admin && request()->get('tamada'))
+            $user->tamada = intval(request()->get('tamada'));
             
         $user->save();
 
