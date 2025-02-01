@@ -23,7 +23,7 @@ use App\Facades\L;
     <script type="text/javascript" src="/_libs/jquery-ui.js"></script>
     <script type="text/javascript" src="/_libs/tagify.min.js"></script>
     <script type="text/javascript" src="/_libs/jquery.fileupload.js"></script>
-    <script type="text/javascript" src="/_libs/scripts.js"></script>
+    <script type="text/javascript" src="/_libs/scripts.js?v=<?=date("dmyH")?>"></script>
 </head>
 
 <body class='<?= (isset($bodyClass) ? $bodyClass : '') ?>'>
