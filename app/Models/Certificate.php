@@ -13,7 +13,7 @@ class Certificate extends BaseGameModel
     protected $guarded = [];
     use SoftDeletes;
 
-    public function generateContent($project, $user, $params=null) {
+    public function generateContent(&$project, &$user, $projectUser=null, $params=null) {
         $res = '';
         $certificateBg = isset($params['certificateBg']) ? $params['certificateBg'] : $project->certificate_bg;
         $certificateHtml = isset($params['certificateHtml']) ? $params['certificateHtml'] : $project->certificate_html;
@@ -28,12 +28,26 @@ class Certificate extends BaseGameModel
             if(in_array($var, ['password']))
                 continue;
     
-            /*if($prop == 'login_url'){    
-                $url = $rootURL . '/cabinet/project?code=' . $project->code . '&login_url=' . $user->login_url;
-                $url = '<a href="' . $url . '"> ' . $url . '</a>';
-                $certificateHtml = str_replace($var, $url, $certificateHtml);
+            if($prop == 'cert_qrcode'){    
+                if(isset($this->id))
+                    $url = config('app.certificateUrl') . '/certificate?uuid=' . $this->url;
+                else
+                    $url = config('app.certificateUrl') . '/certificate';
+
+                $qrcodeOptions = new \chillerlan\QRCode\QROptions([
+                    'imageTransparent'    => false,
+                ]);
+                
+                $certificateHtml = str_replace($var, "<img style='width:100%; height:100%;' src='" . (new \chillerlan\QRCode\QRCode($qrcodeOptions))->render($url) . "' />", $certificateHtml);
             }
-            else*/if(str_contains($prop, 'user_')){
+            elseif(str_contains($prop, 'cert_')){
+                $prop2 = substr($prop, 5);
+                if(isset($this->id))
+                    $certificateHtml = str_replace($var, $this->$prop2 ? $this->$prop2 : '', $certificateHtml);
+                else
+                    $certificateHtml = str_replace($var, '###', $certificateHtml);
+            }
+            elseif(str_contains($prop, 'user_')){
                 $prop2 = substr($prop, 5);
                 $certificateHtml = str_replace($var, $user->$prop2 ? $user->$prop2 : '', $certificateHtml);
             }
@@ -45,12 +59,15 @@ class Certificate extends BaseGameModel
                 $certificateHtml = str_replace($var, '', $certificateHtml);
         }
 
+        
+
         return view('certificateContent', [
             'project' => $project, 
             'user' => $user, 
             'certificateBg' => $certificateBg, 
             'certificateHtml' => $certificateHtml,
             'certificateOrientation' => $certificateOrientation,
+            'active' => !$projectUser || $projectUser->certificate_active==1 ? 1 : 0,
         ])->render();
     }
 
@@ -86,7 +103,7 @@ class Certificate extends BaseGameModel
         $dompdf->setBasePath(public_path());
         $content = view('certificate', [
             'project' => $project,
-            'content' => $this->generateContent($project, $user)
+            'content' => $this->generateContent($project, $user, $projectUser)
         ])->render();
         $dompdf->loadHtml($content);
         

@@ -14,6 +14,12 @@
             <div class='formFieldCaption'>Адрес</div>
             <div class='formFieldInput'><input name="address" class="placeCardAddress" value="<?=$place->address?>" /></div>
         </div>
+
+        <div class='formFieldRoot'>
+            <div class='formFieldCaption'>Ссылка на карту</div>
+            <div class='formFieldInput'><input name="map_link" class="placeCardMapLink" value="<?=$place->map_link?>" /></div>
+        </div>
+        
         <div class='formFieldRoot'>
             <div class='formFieldCaption'>Описание</div>
         </div>
@@ -48,6 +54,7 @@
             'code': $('.placeCardRoot input[name="code"]').val(),
             'caption': $('.placeCardRoot input[name="caption"]').val(),
             'address': $('.placeCardRoot input[name="address"]').val(),
+            'map_link': $('.placeCardRoot input[name="map_link"]').val(),
             'descr': $('textarea[name="descr"]').val(),
             '_token': _token,
         };

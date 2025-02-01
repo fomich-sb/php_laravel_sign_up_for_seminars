@@ -26,7 +26,13 @@ class CertificateController extends AdminController
 
     public function actionIndexCertificateList($dataRender = [])
     {
-        $certificateItems = App(Certificate::class)->all();
+        $certificateItems = DB::select('SELECT c.id, c.num, c.url, pu.user_id, pu.project_id, pu.certificate_active, p.caption project_caption, u.phone, u.name1, u.name2, u.name3 
+        FROM certificates c
+            LEFT JOIN project_users pu ON pu.id=c.project_user_id
+            LEFT JOIN projects p ON p.id=pu.project_id
+            LEFT JOIN users u ON u.id=pu.user_id
+        WHERE c.deleted_at IS NULL');
+
 
         $dataRender['blockContent'] = view('/admin/certificate/certificateList', [
             'certificateItems' => $certificateItems,
@@ -43,8 +49,8 @@ class CertificateController extends AdminController
         $certificateOrientation = request()->get('certificate_orientation');
         
         
-
-        $response['content'] = App(Certificate::class)->generateContent($project, Auth::user(), [
+        $user = Auth::user();
+        $response['content'] = App(Certificate::class)->generateContent($project, $user, null, [
             'certificateBg' => $certificateBg,
             'certificateHtml' => $certificateHtml,
             'certificateOrientation' => $certificateOrientation,
@@ -58,20 +64,23 @@ class CertificateController extends AdminController
         $projectUser = App(ProjectUser::class)->findOrFail($projectUserId);
         $active = intval(request()->get('active'));
         $projectUser->certificate_active = $active;
+        $certificate = null;
+        if($projectUser->certificate_id)
+            $certificate = App(Certificate::class)->find($projectUser->certificate_id);
+
         if($active)
         {
-            $cert = null;
-            if($projectUser->certificate_id)
-                $cert = App(Certificate::class)->find($projectUser->certificate_id);
 
-            if(!$cert)
+            if(!$certificate)
             {
-                $cert = App(Certificate::class)->create($projectUser);
-                $response['num'] = $cert->num;
+                $certificate = App(Certificate::class)->create($projectUser);
+                $response['num'] = $certificate->num;
             } 
-            $cert->generate();
         }
-        $projectUser->save();   
+        if($certificate)
+            $projectUser->save(); 
+
+        $certificate->generate();
         $response['active'] = $active;
         return $this->successResponseJSON($response);
     }

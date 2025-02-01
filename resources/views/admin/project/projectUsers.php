@@ -77,6 +77,7 @@
                 <th>Участие</th>
                 <th colspan='3'>ФИО</th>
                 <th colspan='2'>ФИ англ.</th>
+                <th colspan='2'>Сертиф.</th>
                 <th>Пол</th>
                 <th>Теги</th>
                 <th>Действия</th>
@@ -93,6 +94,12 @@
                     <td class='userName3'><?=$userItems[$projectUser->user_id]->name3?></td>
                     <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->nameEn1?></td>
                     <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->nameEn2?></td>
+                    <td class='certificateActive'><input class="certificateActiveCheckbox certificateActiveCheckbox<?=$projectUser->id?>" type="checkbox" value="<?=$projectUser->id?>" onchange="onChangeCertificateActive(this)" <?=$projectUser->certificate_active ? "checked='checked'" : "" ?> style='margin-right:0;' ></td>
+                    <td class='certificateNum certificateNum<?=$projectUser->id?> <?=$projectUser->certificate_active ? '' : 'certificateNumDisactive'?>'>
+                        <?php if(isset($certificateItems[$projectUser->certificate_id])): ?>
+                            <span class='clickableDiv' onclick='getCertificate("<?=$certificateItems[$projectUser->certificate_id]->url?>")'><?=$certificateItems[$projectUser->certificate_id]->num ?></span>
+                        <?php endif; ?>
+                    </td>
                     <td class='userGender' value='<?=$userItems[$projectUser->user_id]->gender?>' style='text-align: center;'><?=$userItems[$projectUser->user_id]->gender ? 'М' : 'Ж'?></td>
                     <td class='tagsRoot'>
                         <?php if(isset($userTagItems[$projectUser->user_id])) 
@@ -118,6 +125,7 @@
                 <th>Участие</th>
                 <th colspan='3'>ФИО</th>
                 <th colspan='2'>ФИ англ.</th>
+                <th colspan='2'>Сертиф.</th>
                 <th>Пол</th>
                 <th>Теги</th>
                 <th>Действия</th>
@@ -134,6 +142,12 @@
                     <td class='userName3'><?=$userItems[$projectUser->user_id]->name3?></td>
                     <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->nameEn1?></td>
                     <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->nameEn2?></td>
+                    <td class='certificateActive'><input class="certificateActiveCheckbox certificateActiveCheckbox<?=$projectUser->id?>" type="checkbox" value="<?=$projectUser->id?>" onchange="onChangeCertificateActive(this)" <?=$projectUser->certificate_active ? "checked='checked'" : "" ?> style='margin-right:0;' ></td>
+                    <td class='certificateNum certificateNum<?=$projectUser->id?> <?=$projectUser->certificate_active ? '' : 'certificateNumDisactive'?>'>
+                        <?php if(isset($certificateItems[$projectUser->certificate_id])): ?>
+                            <span class='clickableDiv' onclick='getCertificate("<?=$certificateItems[$projectUser->certificate_id]->url?>")'><?=$certificateItems[$projectUser->certificate_id]->num ?></span>
+                        <?php endif; ?>
+                    </td>
                     <td class='userGender' value='<?=$userItems[$projectUser->user_id]->gender?>' style='text-align: center;'><?=$userItems[$projectUser->user_id]->gender ? 'М' : 'Ж'?></td>
                     <td class='tagsRoot'>
                         <?php if(isset($userTagItems[$projectUser->user_id])) 
@@ -347,12 +361,15 @@
         display: none;
     }
     .certificateNum{
-        border-left: 0;
+        border-left: 0!important;
     }
     .certificateActive{
-        border-right: 0;
+        border-right: 0!important;
     }
-    .certificateNumDisactive{
+    .projectUserTable0 .certificateActiveCheckbox, .projectUserTable-1 .certificateActiveCheckbox{
+        display: none;
+    }
+    .certificateNumDisactive, .projectUserTable0 .certificateNum, .projectUserTable-1 .certificateNum{
         text-decoration: line-through;
         opacity: 0.5;
     }

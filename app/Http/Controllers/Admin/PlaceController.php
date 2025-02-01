@@ -54,6 +54,7 @@ class PlaceController extends AdminController
         $place->caption = request()->get('caption');
         $place->code = request()->get('code');
         $place->address = request()->get('address');
+        $place->map_link = request()->get('map_link');
         $place->descr = request()->get('descr');
 
         $place->save();

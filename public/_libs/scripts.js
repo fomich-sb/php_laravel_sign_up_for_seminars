@@ -291,7 +291,7 @@ function deletePhoto(photoId)
 
 function getCertificate(url)
 {
-	window.open("/certificate?uuid="+url);
+	window.open("/certificate/file?uuid="+url);
 }
 
 

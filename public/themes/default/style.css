@@ -20,11 +20,25 @@ body {
     padding: 0;
     flex: 1 1 auto;
     display: flex;
+    flex-direction: column;
     background-color: var(--light-color);
     font-family: 'mainRegular';
     width: 100%;
-    max-width: 80em;
+   /* max-width: 80em;*/
     font-size: 18px;
+}
+.mainRoot{
+    flex: 1 1 auto;
+    display: flex;
+}
+.footerRoot{
+    flex: 0 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: #000;
+    color: var(--light-color);
+    padding: 0.5em 1em;
 }
 input, select{
     font-size: 1em;
@@ -75,6 +89,30 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     cursor: pointer;
     text-decoration: underline;
 }
+a, a:hover, a:visited, a:link, a.active:visited{
+    color:var(--dark-color);
+}
+.mapLink{
+    display: inline-block;
+    width:2em;
+    height: 1.5em;
+    margin: -0.25em 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+
+    -webkit-mask-image: url(map_link.svg);
+    mask-image: url(map_link.svg);
+}
+
 
 .projectContentRegisterButtonCheckLoginCodeError, .loginFormButtonCheckLoginCodeError{
     color: red;
@@ -86,6 +124,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     max-width: 25em;
     min-width: 20em;
     background-color: var(--dark-color);
+    padding-bottom: 1.5em;
 }
 .projectsMenu{
     position: sticky;
@@ -154,7 +193,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 .projectContentRoot{
     flex: 3 1;
 }
-.projectContentSector{
+.projectContentSector, .certificateContentSector{
     padding: 1.5em 1em 1.5em 2em;
 }
 .projectContentSector:nth-child(even){
@@ -432,7 +471,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     .projectsMenuButton{
         display: block;
     }
-    .projectContentSector {
+    .projectContentSector, .certificateContentSector {
         padding: 1.5em 1em 1.5em 1em;
     }
     .projectContentRoot{

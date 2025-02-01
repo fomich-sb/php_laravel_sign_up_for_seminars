@@ -5,12 +5,55 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Facades\Utils;
 use App\Models\Certificate;
+use App\Models\Project;
+use App\Models\ProjectUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class CertificateController extends Controller
 {
-
     public function actionIndex()
+    {        
+        $user = Auth::user();
+        $projectItems = App(Project::class)->getActual();
+        $currentProjectId = $projectItems[0]->id;
+
+
+        $dataRender = [
+            'bodyClass' => 'bodyMain',
+            'projectItems' => $projectItems,
+            'currentProjectId' => $currentProjectId,
+            'user' => $user,
+        ];
+        $url = request()->get('uuid');
+        $certificate = App(Certificate::class)->where('url', $url)->first();
+        if(!$certificate){
+            $dataRender['projectContent'] = view('certificate/notFound', []);
+            $dataRender['blockContent'] = view('main/index', $dataRender);
+            return view('/layouts/main', $dataRender);
+        }
+        $projectUser = App(ProjectUser::class)->where('id', $certificate->project_user_id)->first();
+        if(!$projectUser){
+            $dataRender['projectContent'] = view('certificate/notFound', []);
+            $dataRender['blockContent'] = view('main/index', $dataRender);
+            return view('/layouts/main', $dataRender);
+        }
+        
+        $project = App(Project::class)->where('id', $projectUser->project_id)->first();
+        $user = App(User::class)->where('id', $projectUser->user_id)->first();
+
+        $dataRender['certificate'] = $certificate;
+        $dataRender['projectUser'] = $projectUser;
+        $dataRender['certificateProject'] = $project;
+        $dataRender['certificateUser'] = $project;
+
+        $dataRender['projectContent'] = view('certificate/info', $dataRender);
+        $dataRender['blockContent'] = view('main/index', $dataRender);
+        return view('/layouts/main', $dataRender);
+
+    }
+
+    public function actionFile()
     {
         $url = intval(request()->get('uuid'));
         $certificate = App(Certificate::class)->where('url', $url)->first();

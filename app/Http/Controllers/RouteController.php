@@ -23,9 +23,10 @@ class RouteController extends Controller
     {
         //Вывод окна входа если нет прав
         if (!Auth::user() || !Auth::user()->admin) {
-            $controllerClass = Utils::getAdminControllerClass('Login');
+            return redirect()->route('root');
+          /*  $controllerClass = Utils::getAdminControllerClass('Login');
             $controller = new $controllerClass();
-            return $controller->actionIndex();
+            return $controller->actionIndex();*/
         } else {
             $controllerClass = Utils::getAdminControllerClass(ucfirst($controllerName));
             $controller = new $controllerClass();

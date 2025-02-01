@@ -27,73 +27,83 @@ use App\Facades\L;
 </head>
 
 <body class='<?= (isset($bodyClass) ? $bodyClass : '') ?>'>
-    <div class='projectsMenuRoot'>
-        <div class='projectsMenu'>
-            <div class='projectsMenuItem'>
-                <div class='projectsMenuItemHeader'></div>
-                <a href='/admin'>
-                    <div class = 'projectsMenuItemCaption'>Проекты</div>
-                </a>
-                <div class='projectsMenuItemFooter'></div>
-            </div>
-
-            <?php if(isset($project)): ?>
-                <div class='projectsMenuSubRoot'>
-                    <div class='projectsMenuSubItem'>
-                        <a href='/admin/project/main?project_id=<?=$project->id?>'>
-                            <div class = 'projectsMenuItemCaption'>Общая информация</div>
-                        </a>
-                    </div>
-                    <div class='projectsMenuSubItem'>
-                        <a href='/admin/project/user?project_id=<?=$project->id?>'>
-                            <div class = 'projectsMenuItemCaption'>Участники</div>
-                        </a>
-                    </div>
+    <div class='mainRoot'>
+        <div class='projectsMenuRoot'>
+            <div class='projectsMenu'>
+                <div class='projectsMenuItem'>
+                    <div class='projectsMenuItemHeader'></div>
+                    <a href='/admin'>
+                        <div class = 'projectsMenuItemCaption'>Проекты</div>
+                    </a>
+                    <div class='projectsMenuItemFooter'></div>
                 </div>
-            <?php endif; ?>
 
-            <div class='projectsMenuItem'>
-                <div class='projectsMenuItemHeader'></div>
-                <a href='/admin/user'>
-                    <div class = 'projectsMenuItemCaption'>Пользователи</div>
-                </a>
-                <div class='projectsMenuItemFooter'></div>
-            </div>
+                <?php if(isset($project)): ?>
+                    <div class='projectsMenuSubRoot'>
+                        <div class='projectsMenuSubItem'>
+                            <a href='/admin/project/main?project_id=<?=$project->id?>'>
+                                <div class = 'projectsMenuItemCaption'>Общая информация</div>
+                            </a>
+                        </div>
+                        <div class='projectsMenuSubItem'>
+                            <a href='/admin/project/user?project_id=<?=$project->id?>'>
+                                <div class = 'projectsMenuItemCaption'>Участники</div>
+                            </a>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
-            <div class='projectsMenuItem'>
-                <div class='projectsMenuItemHeader'></div>
-                <a href='/admin/place'>
-                    <div class = 'projectsMenuItemCaption'>Места / центры</div>
-                </a>
-                <div class='projectsMenuItemFooter'></div>
-            </div>
+                <div class='projectsMenuItem'>
+                    <div class='projectsMenuItemHeader'></div>
+                    <a href='/admin/user'>
+                        <div class = 'projectsMenuItemCaption'>Пользователи</div>
+                    </a>
+                    <div class='projectsMenuItemFooter'></div>
+                </div>
 
-            <div class='projectsMenuItem'>
-                <div class='projectsMenuItemHeader'></div>
-                <a href='/admin/settings/telegram'>
-                    <div class = 'projectsMenuItemCaption'>Telegram API</div>
-                </a>
-                <div class='projectsMenuItemFooter'></div>
+                <div class='projectsMenuItem'>
+                    <div class='projectsMenuItemHeader'></div>
+                    <a href='/admin/certificate'>
+                        <div class = 'projectsMenuItemCaption'>Сертификаты</div>
+                    </a>
+                    <div class='projectsMenuItemFooter'></div>
+                </div>
+
+                <div class='projectsMenuItem'>
+                    <div class='projectsMenuItemHeader'></div>
+                    <a href='/admin/place'>
+                        <div class = 'projectsMenuItemCaption'>Места / центры</div>
+                    </a>
+                    <div class='projectsMenuItemFooter'></div>
+                </div>
+
+                <div class='projectsMenuItem'>
+                    <div class='projectsMenuItemHeader'></div>
+                    <a href='/admin/settings/telegram'>
+                        <div class = 'projectsMenuItemCaption'>Telegram API</div>
+                    </a>
+                    <div class='projectsMenuItemFooter'></div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <div class='projectsMenuButton' onclick='$(".projectsMenuRoot").toggleClass("projectsMenuRootVisible");'></div>
-    <div class='projectContentRoot' onclick='$(".projectsMenuRoot").removeClass("projectsMenuRootVisible");'>
-        <?= $blockContent ?>
-    </div>
-
-    <div style='display:none;' id='modalWinTemplate' onclick='closeModalWindow(this);' class='pop_up_win'>
-        <div class='pop_up_top'>
-
+        
+        <div class='projectsMenuButton' onclick='$(".projectsMenuRoot").toggleClass("projectsMenuRootVisible");'></div>
+        <div class='projectContentRoot' onclick='$(".projectsMenuRoot").removeClass("projectsMenuRootVisible");'>
+            <?= $blockContent ?>
         </div>
-        <div class='pop_up_middle' onclick='event.stopPropagation();'>
-            <div class='pop_up_content_root'>
-                <div class='pop_up_win_close_button' onclick='closeModalWindow(this);'></div>
-                <div class='pop_up_content'></div>
+
+        <div style='display:none;' id='modalWinTemplate' onclick='closeModalWindow(this);' class='pop_up_win'>
+            <div class='pop_up_top'>
+
             </div>
+            <div class='pop_up_middle' onclick='event.stopPropagation();'>
+                <div class='pop_up_content_root'>
+                    <div class='pop_up_win_close_button' onclick='closeModalWindow(this);'></div>
+                    <div class='pop_up_content'></div>
+                </div>
+            </div>
+            <div class='pop_up_bottom'></div>
         </div>
-        <div class='pop_up_bottom'></div>
     </div>
 </body>
 
