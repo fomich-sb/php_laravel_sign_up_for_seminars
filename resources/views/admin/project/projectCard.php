@@ -159,7 +159,9 @@
 
 </div>
 <div style='position: sticky;bottom: 0;background: #FFF; padding: 0.5em'>
-<div class='button buttonDisabled buttonSave' onclick='saveProjectCard();' style='margin: 0 auto;'>Сохранить</div>
+    <div class='button buttonDisabled buttonSave' onclick='saveProjectCard();' style='margin: 0 auto;'>Сохранить</div>
+</div>
+
 
 <script>
     function onChangeFieldForm()

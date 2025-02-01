@@ -29,12 +29,21 @@ class ProjectUser extends BaseGameModel
         if($sendStatusMessage && $this->status != 0){
             $user = App(User::class)->find($this->user_id);
             $project = App(Project::class)->find($this->project_id);
-            if($this->status == 1) 
-                Utils::sendMessage($user, 'Ваша заявка на семинар "'.$project->caption.'" одобрена.
-Дополнительная информация: ' . Request::root().'/?id='.$project->id.'#materials');
-            if($this->status == -1) 
-                Utils::sendMessage($user, 'Ваша заявка на семинар "'.$project->caption.'" отклонена.
-Страница семинара: ' . Request::root().'/?id='.$project->id);
+            if($this->status == 1) {
+                $message = App(Setting::class)->get('project_register_status1');
+                if(strlen(trim($message))>0)
+                    return Utils::sendMessage($user, Utils::prepareText($message, ['project' => $project]));
+            }
+            if($this->status == 0) {
+                $message = App(Setting::class)->get('project_register_status0');
+                if(strlen(trim($message))>0)
+                    return Utils::sendMessage($user, Utils::prepareText($message, ['project' => $project]));
+            }
+            if($this->status == -1) {
+                $message = App(Setting::class)->get('project_register_status-1');
+                if(strlen(trim($message))>0)
+                    return Utils::sendMessage($user, Utils::prepareText($message, ['project' => $project]));
+            }
         }
         return $res; 
     }

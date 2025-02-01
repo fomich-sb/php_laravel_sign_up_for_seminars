@@ -75,7 +75,9 @@ class User extends Authenticatable
         }*/
     //    include public_path('madeline/madeline.php');
 
-        return Utils::sendMessage($user, "Код для авторизации: ".$user->login_code);
+        $message = App(Setting::class)->get('authoring_code_text');
+        if(strlen(trim($message))>0)
+            return Utils::sendMessage($user, Utils::prepareText($message, ['user' => $user]));
     }
     
     public function save(array $options = [])

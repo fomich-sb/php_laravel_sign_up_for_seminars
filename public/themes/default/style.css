@@ -40,7 +40,7 @@ body {
     color: var(--light-color);
     padding: 0.5em 1em;
 }
-input, select{
+input, select, textarea{
     font-size: 1em;
     background: transparent;
     border: solid var(--caption-color);
@@ -48,6 +48,9 @@ input, select{
     outline-width: 0;
     font-family: 'mainRegular';    
     min-width: 10em;
+}
+textarea{
+    border-width: 1px 0 2px 0;
 }
 input:disabled {
     color: #777;
@@ -193,14 +196,14 @@ a, a:hover, a:visited, a:link, a.active:visited{
 .projectContentRoot{
     flex: 3 1;
 }
-.projectContentSector, .certificateContentSector{
+.projectContentSector, .certificateContentSector, .settingContentSector{
     padding: 1.5em 1em 1.5em 2em;
 }
 .projectContentSector:nth-child(even){
     background-color: #0001;
 }
 
-.projectCaption{
+.projectCaption, .settingCaption{
     font-size: 2em;
     line-height: 1em;
     margin-bottom: 0.5em;
@@ -208,7 +211,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
 .projectDate{
     margin-bottom: 1em;
 }
-.projectSectionCaption{
+.projectSectionCaption, .settingSectionCaption{
     margin-top: 0.5em;
     font-size: 1.5em;
 }
@@ -263,7 +266,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
 .formFieldInput{
     flex: 1 1;
 }
-.formFieldInput input{
+.formFieldInput input, .formFieldInput textarea{
     width: 100%;
 }
 .formFieldInput input[type='date'] {
@@ -471,7 +474,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
     .projectsMenuButton{
         display: block;
     }
-    .projectContentSector, .certificateContentSector {
+    .projectContentSector, .certificateContentSector, .settingContentSector {
         padding: 1.5em 1em 1.5em 1em;
     }
     .projectContentRoot{

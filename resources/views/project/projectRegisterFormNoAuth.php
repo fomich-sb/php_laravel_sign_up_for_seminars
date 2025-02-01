@@ -1,4 +1,4 @@
-<div class='projectRegisterRoot projectContentSector'>
+<div class='projectRegisterRoot projectContentSector' id='registration'>
     <div class='projectContentRegisterCaption'>Регистрация</div>
     <div class='projectContentRegisterRoot'>
         <div>Для регистрации (или проверки состояния ранее поданной заявки) необходимо ввести номер телефона и подтвердить его.</div>

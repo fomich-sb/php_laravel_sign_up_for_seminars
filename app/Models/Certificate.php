@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Facades\Utils;
 use App\Models\BaseGameModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dompdf\Dompdf;
@@ -18,48 +19,13 @@ class Certificate extends BaseGameModel
         $certificateBg = isset($params['certificateBg']) ? $params['certificateBg'] : $project->certificate_bg;
         $certificateHtml = isset($params['certificateHtml']) ? $params['certificateHtml'] : $project->certificate_html;
         $certificateOrientation = isset($params['certificateOrientation']) ? $params['certificateOrientation'] : $project->certificate_orientation;
-        
-
-        $pattern = '/{{[^}]*}}/';
-        preg_match_all($pattern, $certificateHtml, $matches);
-        foreach($matches[0] as $var){
-            $prop = trim(str_replace('}}', '', str_replace('{{', '', $var)));
-
-            if(in_array($var, ['password']))
-                continue;
-    
-            if($prop == 'cert_qrcode'){    
-                if(isset($this->id))
-                    $url = config('app.certificateUrl') . '/certificate?uuid=' . $this->url;
-                else
-                    $url = config('app.certificateUrl') . '/certificate';
-
-                $qrcodeOptions = new \chillerlan\QRCode\QROptions([
-                    'imageTransparent'    => false,
-                ]);
-                
-                $certificateHtml = str_replace($var, "<img style='width:100%; height:100%;' src='" . (new \chillerlan\QRCode\QRCode($qrcodeOptions))->render($url) . "' />", $certificateHtml);
-            }
-            elseif(str_contains($prop, 'cert_')){
-                $prop2 = substr($prop, 5);
-                if(isset($this->id))
-                    $certificateHtml = str_replace($var, $this->$prop2 ? $this->$prop2 : '', $certificateHtml);
-                else
-                    $certificateHtml = str_replace($var, '###', $certificateHtml);
-            }
-            elseif(str_contains($prop, 'user_')){
-                $prop2 = substr($prop, 5);
-                $certificateHtml = str_replace($var, $user->$prop2 ? $user->$prop2 : '', $certificateHtml);
-            }
-            elseif(str_contains($prop, 'project_')){
-                $prop2 = substr($prop, 8);
-                $certificateHtml = str_replace($var, $project->$prop2 ? $project->$prop2 : '', $certificateHtml);
-            }
-            else
-                $certificateHtml = str_replace($var, '', $certificateHtml);
+        if(isset($this->id))
+            $certificate = $this;
+        else {
+            $certificate = new Certificate();
+            $certificate->num = '###';
         }
-
-        
+        $certificateHtml = Utils::prepareText($certificateHtml, ['certificate' => $certificate, 'project' => $project, 'user' => $user, ]);
 
         return view('certificateContent', [
             'project' => $project, 

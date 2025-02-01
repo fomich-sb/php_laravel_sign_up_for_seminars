@@ -58,7 +58,7 @@
                     $('textarea[name="projectAddUserList"]').val(data.notExistPhones.join('\n') + '\n' + data.badPhones.join('\n'));
                 }
                 else
-                    closeModalWindow($('.projectCardRoot<?=$project->id?>')[0]);
+                    closeModalWindow($('.projectAddUserCardRoot<?=$project->id?>')[0]);
             }
         });
     }

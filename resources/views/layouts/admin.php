@@ -79,7 +79,15 @@ use App\Facades\L;
 
                 <div class='projectsMenuItem'>
                     <div class='projectsMenuItemHeader'></div>
-                    <a href='/admin/settings/telegram'>
+                    <a href='/admin/setting'>
+                        <div class = 'projectsMenuItemCaption'>Общие настройки</div>
+                    </a>
+                    <div class='projectsMenuItemFooter'></div>
+                </div>
+
+                <div class='projectsMenuItem'>
+                    <div class='projectsMenuItemHeader'></div>
+                    <a href='/admin/setting/telegram'>
                         <div class = 'projectsMenuItemCaption'>Telegram API</div>
                     </a>
                     <div class='projectsMenuItemFooter'></div>

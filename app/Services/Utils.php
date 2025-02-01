@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Request;
 use Intervention\Image\ImageManager;
 
 class Utils
@@ -263,5 +264,46 @@ class Utils
 
     function sendMessage(&$user, $message) {
         return App(TelegramClient::class)->sendMessage($user, $message);
+    }
+
+    function prepareText($str, $objs) {
+        
+        $pattern = '/{{[^}]*}}/';
+        preg_match_all($pattern, $str, $matches);
+        $tables=['user', 'project', 'certificate'];
+        foreach($matches[0] as $var){
+            $prop = trim(str_replace('}}', '', str_replace('{{', '', $var)));
+
+            if(in_array($prop, ['user_password']))
+                continue;
+    
+            if($prop == 'certificate_qrcode'){    
+                if(isset($objs['certificate']->id))
+                    $url = config('app.certificateUrl') . '/certificate?uuid=' . $objs['certificate']->url;
+                else
+                    $url = config('app.certificateUrl') . '/certificate';
+
+                $qrcodeOptions = new \chillerlan\QRCode\QROptions([
+                    'imageTransparent'    => false,
+                ]);
+                
+                $str = str_replace($var, "<img style='width:100%; height:100%;' src='" . (new \chillerlan\QRCode\QRCode($qrcodeOptions))->render($url) . "' />", $str);
+            }
+            elseif($prop == 'root_url'){    
+                $str = str_replace($var, Request::root(), $str);
+            }
+            else {
+                foreach($tables as $table)
+                    if(str_contains($prop, $table.'_')){
+                        $prop2 = substr($prop, strlen($table)+1);
+                        if(isset($objs[$table]->$prop2)){
+                            $str = str_replace($var, $objs[$table]->$prop2, $str);
+                            continue;
+                        }
+                    }
+                $str = str_replace($var, '', $str);
+            }
+        }
+        return $str;
     }
 }
