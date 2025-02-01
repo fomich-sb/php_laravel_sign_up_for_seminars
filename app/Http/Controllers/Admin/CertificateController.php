@@ -26,7 +26,7 @@ class CertificateController extends AdminController
 
     public function actionIndexCertificateList($dataRender = [])
     {
-        $certificateItems = DB::select('SELECT c.id, c.num, c.url, pu.user_id, pu.project_id, pu.certificate_active, p.caption project_caption, u.phone, u.name1, u.name2, u.name3 
+        $certificateItems = DB::select('SELECT c.id, c.num, c.url, pu.user_id, pu.project_id, pu.status, pu.certificate_active, p.caption project_caption, u.phone, u.name1, u.name2, u.name3 
         FROM certificates c
             LEFT JOIN project_users pu ON pu.id=c.project_user_id
             LEFT JOIN projects p ON p.id=pu.project_id
@@ -80,7 +80,7 @@ class CertificateController extends AdminController
         if($certificate)
             $projectUser->save(); 
 
-        $certificate->generate();
+        $certificate->recreate();
         $response['active'] = $active;
         return $this->successResponseJSON($response);
     }

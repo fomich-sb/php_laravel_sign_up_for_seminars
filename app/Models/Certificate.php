@@ -33,7 +33,7 @@ class Certificate extends BaseGameModel
             'certificateBg' => $certificateBg, 
             'certificateHtml' => $certificateHtml,
             'certificateOrientation' => $certificateOrientation,
-            'active' => !$projectUser || $projectUser->certificate_active==1 ? 1 : 0,
+            'active' => !$projectUser || $projectUser->status == 1 && $projectUser->certificate_active==1 ? 1 : 0,
         ])->render();
     }
 
@@ -111,7 +111,7 @@ class Certificate extends BaseGameModel
 
         return;
     }
-    
+
     public function recreate()
     {
         if(file_exists(public_path('certificates') . '/' . $this->url . ".pdf"))

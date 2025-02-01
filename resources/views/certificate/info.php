@@ -8,7 +8,7 @@
     <div class='formFieldRoot'>
         <div class='formFieldCaption'>Состояние:</div>
         <div class='formFieldInput'>
-            <?=$projectUser->certificate_active ? 'Действующий' : '<span style="color:red; font-weight:bold;">Аннулирован</span>' ?>
+            <?=($projectUser->status == 1 && $projectUser->certificate_active) ? 'Действующий' : '<span style="color:red; font-weight:bold;">Аннулирован</span>' ?>
         </div>
     </div>
     <div class='formFieldRoot'>

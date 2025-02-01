@@ -11,9 +11,9 @@
         </thead>
         <tbody>
             <?php foreach($certificateItems as $certificate): ?>
-                <tr class='certificateTr<?=$certificate->id?> <?=$certificate->certificate_active ? "" : "certificateTrDisactive"?>'>
+                <tr class='certificateTr<?=$certificate->id?> <?=($certificate->status == 1 && $certificate->certificate_active) ? "" : "certificateTrDisactive"?>'>
                     <td class='certificateNum clickableDiv' onclick='getCertificate("<?=$certificate->url?>")'><?=$certificate->num?></td>
-                    <td class='certificateStatus'><?=$certificate->certificate_active ? 'Действ' : 'Аннул'?></td>
+                    <td class='certificateStatus'><?=($certificate->status == 1 && $certificate->certificate_active) ? 'Действ' : 'Аннул'?></td>
                     <td class='certificateProject'><div><a href="/admin/project?project_id=<?=$certificate->project_id?>"><?=$certificate->project_caption?></a></div></td>
                     <td class='certificateUser clickableDiv' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$certificate->user_id?>, "projectId": <?=$certificate->project_id?>});' title="+<?=$certificate->phone . ' ' . $certificate->name1 . ' ' . $certificate->name2 . ' ' . $certificate->name3?>"><div><?=strlen($certificate->name1 . $certificate->name2 . $certificate->name3)>0 ? $certificate->name1 . ' ' . $certificate->name2 . ' ' . $certificate->name3 : '+'.$certificate->phone?></div></td>
                 </tr>

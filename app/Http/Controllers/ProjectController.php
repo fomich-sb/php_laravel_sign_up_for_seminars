@@ -100,8 +100,6 @@ class ProjectController extends Controller
             ])->render();
         }
 
-        $res .= $this->getContentRegister($project, $user, $projectUser);
-
         if($user && $projectUser && $projectUser->status == 1){
             if($projectUser->certificate_active && $projectUser->certificate_id){
                 $cert = App(Certificate::class)->find($projectUser->certificate_id);
@@ -112,7 +110,11 @@ class ProjectController extends Controller
                     ])->render();
                 }
             }
+        }
 
+        $res .= $this->getContentRegister($project, $user, $projectUser);
+
+        if($user && $projectUser && $projectUser->status == 1){
             $photoItems = App(Photo::class)->where('project_id', $project->id)->orderBy('num')->orderBy('id')->get();
             if($project->photo_user_upload_allow || count($photoItems)>0)
                 $res .= view('/project/projectPhotos', [
@@ -153,7 +155,7 @@ class ProjectController extends Controller
                         'project' => $project,
                     ])->render();
             }
-            if($project->status == App(Project::class)->getStatusId('fixed') || $project->status == App(Project::class)->getStatusId('closed')){
+            if($project->status == App(Project::class)->getStatusId('fixed')){
                 if($user)
                     return view('/project/projectRegisterClosedAuth', [
                         'project' => $project,
