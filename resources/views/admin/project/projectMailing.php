@@ -75,7 +75,9 @@
             <pre class='mailingTextPreview' style='min-height:8em; white-space: pre-wrap;margin: 0; background:white;'></pre>
         </div>
         <div style='flex:1 1;padding-left:1em;'>
-            шаблоны
+            <?php foreach($mailingTemplateItems as $item): ?>
+                <div style='border:1px solid var(--caption-color);padding:0.5em; margin:0.5em;' class='clickableDiv' title='<?=$item->text?>' onclick='$(".mailingText").val(this.title); updateMailingPreview();'><?=$item->caption?></div>
+            <?php endforeach; ?>
         </div>
     </div>
     <div class='button' onclick='sendMailing()'>Отправить</div>

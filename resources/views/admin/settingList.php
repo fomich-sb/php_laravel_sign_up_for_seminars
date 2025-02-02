@@ -145,6 +145,6 @@
         max-width: 40em;
         margin: 0.5em;
         padding: 0.5em;
-        border: 1px solid #0003;
+        border: 1px solid var(--caption-color);
     }
 </style>

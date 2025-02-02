@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Facades\Utils;
 use App\Models\Certificate;
+use App\Models\MailingTemplate;
 use App\Models\Photo;
 use App\Models\Place;
 use App\Models\Project;
@@ -135,6 +136,7 @@ class ProjectController extends AdminController
         $projectUserItems = App(ProjectUser::class)->where('project_id', $project->id)->orderBy('created_at')->get();
         $userItems = App(User::class)->whereIn('id', $projectUserItems->pluck('user_id'))->get()->keyBy('id');
         $userTagItems = App(UserTag::class)->whereIn('user_id', $userItems->pluck('id'))->orderBy('tag')->get();
+        $mailingTemplateItems = App(MailingTemplate::class)->whereNotNull('caption')->where('caption', '<>', '')->get();
 
         $dataRender['blockContent'] = view(
             config('projectCode') . '/admin/project/projectMailing',
@@ -144,6 +146,7 @@ class ProjectController extends AdminController
                 'userItems' => $userItems,
                 'userTagItems' => $userTagItems->groupBy('user_id'),
                 'tagItems' => $userTagItems->unique('tag')->pluck('tag'),
+                'mailingTemplateItems' => $mailingTemplateItems,
             ],
         );
         $dataRender['project'] =  $project;
