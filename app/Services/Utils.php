@@ -146,10 +146,10 @@ class Utils
                 return $res;
             } 
             // Проверим нужные параметры
-            if ($fileSize > config('uploadMaxFileSize')) {
+           /* if ($fileSize > config('uploadMaxFileSize')) {
                 $res['error'] .= $newFileName . ' ' . 'Размер файла слишком большой. <br>';
                 return $res;
-            }
+            }*/
             $fileExtension = mb_strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
             if(in_array($fileExtension, $blacklist)) {	
                 $res['error'] .= $newFileName . ' ' . 'Не допускаются файлы с расширением' .' ' .$fileExtension. '. <br>';

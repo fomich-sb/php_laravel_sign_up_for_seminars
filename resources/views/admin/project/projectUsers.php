@@ -61,8 +61,8 @@
                         <?php endforeach; ?>
                     </td>
                     <td>
-                        <div class='button buttonSmall buttonProjectUserSetStatus1' style='background:#9F9;' onclick='setProjectUserStatus(<?=$projectUser->id?>, 1)'>Принять</div>
-                        <div class='button buttonSmall buttonProjectUserSetStatus-1' style='background:#F99;' onclick='setProjectUserStatus(<?=$projectUser->id?>, -1)'>Откл.</div>
+                        <div class='button buttonSmall buttonProjectUserSetStatus1' style='background:#9F9;' onclick='setProjectUserStatus(<?=$projectUser->id?>, 1)'><div class='buttonAcceptIcon'></div></div>
+                        <div class='button buttonSmall buttonProjectUserSetStatus-1' style='background:#F99;' onclick='setProjectUserStatus(<?=$projectUser->id?>, -1)'><div class='buttonDismissIcon'></div></div>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -108,8 +108,8 @@
                         <?php endforeach; ?>
                     </td>
                     <td>
-                        <div class='button buttonSmall buttonProjectUserSetStatus1' style='background:#9F9;' onclick='setProjectUserStatus(<?=$projectUser->id?>, 1)'>Принять</div>
-                        <div class='button buttonSmall buttonProjectUserSetStatus-1' style='background:#F99;' onclick='setProjectUserStatus(<?=$projectUser->id?>, -1)'>Откл.</div>
+                        <div class='button buttonSmall buttonProjectUserSetStatus1' style='background:#9F9;' onclick='setProjectUserStatus(<?=$projectUser->id?>, 1)'><div class='buttonAcceptIcon'></div></div>
+                        <div class='button buttonSmall buttonProjectUserSetStatus-1' style='background:#F99;' onclick='setProjectUserStatus(<?=$projectUser->id?>, -1)'><div class='buttonDismissIcon'></div></div>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -156,8 +156,8 @@
                         <?php endforeach; ?>
                     </td>
                     <td>
-                        <div class='button buttonSmall buttonProjectUserSetStatus1' style='background:#9F9;' onclick='setProjectUserStatus(<?=$projectUser->id?>, 1)'>Принять</div>
-                        <div class='button buttonSmall buttonProjectUserSetStatus-1' style='background:#F99;' onclick='setProjectUserStatus(<?=$projectUser->id?>, -1)'>Откл.</div>
+                        <div class='button buttonSmall buttonProjectUserSetStatus1' style='background:#9F9;' onclick='setProjectUserStatus(<?=$projectUser->id?>, 1)'><div class='buttonAcceptIcon'></div></div>
+                        <div class='button buttonSmall buttonProjectUserSetStatus-1' style='background:#F99;' onclick='setProjectUserStatus(<?=$projectUser->id?>, -1)'><div class='buttonDismissIcon'></div></div>
                     </td>
                 </tr>
             <?php endforeach; ?>

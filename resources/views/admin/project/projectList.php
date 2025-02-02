@@ -7,6 +7,7 @@
                 <th rowspan='2'>Статус</th>
                 <th colspan='2'>Даты</th>
                 <th colspan='2'>Кол-во участников</th>
+                <th rowspan='2'></th>
             </tr>
             <tr>
                 <th>с</th>
@@ -24,6 +25,11 @@
                     <td style='text-align: center;'><?=$project->date_end?></td>
                     <td style='text-align: center;'><?=$project->users_1?></td>
                     <td style='text-align: center;'><?=$project->users_0?></td>
+                    <td>
+                        <div class='button buttonDelete buttonSmall' onclick='deleteElement("/admin/project/delete", <?=$project->id?>, 1)'>
+                            <div class='buttonDeleteIcon'></div>
+                        </div>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

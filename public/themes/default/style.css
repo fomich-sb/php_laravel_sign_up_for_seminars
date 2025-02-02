@@ -219,7 +219,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
 .projectContentRegisterRoot{
     font-size: 1.2em;
 }
-.projectContentRegisterCaption, .projectContentMaterialsCaption, .projectContentPhotosCaption, .projectContentCertificateCaption{
+.projectContentRegisterCaption, .projectContentMaterialsCaption, .projectContentPhotosCaption, .projectContentCertificateCaption, .projectContentForAcceptCaption{
     font-size: 1.5em;
     line-height: 1em;
     margin-bottom: 1em;
@@ -248,6 +248,9 @@ a, a:hover, a:visited, a:link, a.active:visited{
     max-width: 100%;
     max-height: 10em;
     cursor: pointer;
+}
+.projectContentMaterialDiv{
+    margin: 0.5em 0;
 }
 
 .projectRegisterForm{
@@ -367,6 +370,34 @@ a, a:hover, a:visited, a:link, a.active:visited{
     -webkit-mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
     mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
 
+}
+
+.buttonDeleteIcon, .buttonOpenIcon, .buttonAcceptIcon, .buttonDismissIcon{   
+    height: 1.4em;
+    width: 1.4em;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+}
+.buttonDeleteIcon{   
+    -webkit-mask-image: url(delete_icon.svg);
+    mask-image: url(delete_icon.svg);
+}
+.buttonOpenIcon{   
+    -webkit-mask-image: url(open_icon.svg);
+    mask-image: url(open_icon.svg);
+}
+.buttonAcceptIcon{
+    -webkit-mask-image: url(accept_icon.svg);
+    mask-image: url(accept_icon.svg);
+}
+.buttonDismissIcon{
+    -webkit-mask-image: url(dismiss_icon.svg);
+    mask-image: url(dismiss_icon.svg);
 }
 
 .projectsMenuButton{

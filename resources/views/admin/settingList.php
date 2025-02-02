@@ -40,19 +40,28 @@
         <div class='mailingTemplates' style='display:flex; flex-wrap:wrap;'>
             <?php foreach($mailingTemplateItems as $item): ?>
                 <div class='mailingTemplateDiv mailingTemplateDiv<?=$item->id?>' data-id='<?=$item->id?>'>
-                    <input class='mailingTemplateCaption' style='width:100%' value='<?= $item->caption ?>' onchange="onChangeSetting(this)" placeholder="Название">
+                    <div style='display:flex;'>
+                        <input class='mailingTemplateCaption' style='width:100%' value='<?= $item->caption ?>' onchange="onChangeSetting(this)" placeholder="Название">&nbsp;
+                        <div class='button buttonDelete buttonSmall' onclick='deleteMailingTemplate(<?=$item->id?>)'>
+                            <div class='buttonDeleteIcon'></div>
+                        </div>
+                    </div>
                     <br>
                     <textarea class='mailingTemplateText' style='min-height:8em; width:100%' onchange="onChangeSetting(this)" placeholder="Текст"><?= $item->text ?></textarea>
-                    <div class='button buttonDelete' onclick='deleteMailingTemplate(<?=$item->id?>)'>Удалить</div>
+                    
                 </div>
             <?php endforeach; ?>
         </div>
 
                 <div class='mailingTemplateDivTemplate' style='display:none;'>
-                    <input class='mailingTemplateCaption' style='width:100%' value='' onchange="onChangeSetting(this)" placeholder="Название">
+                <div style='display:flex;'>
+                        <input class='mailingTemplateCaption' style='width:100%' value='<?= $item->caption ?>' onchange="onChangeSetting(this)" placeholder="Название">&nbsp;
+                        <div class='button buttonDelete buttonSmall'>
+                            <div class='buttonDeleteIcon'></div>
+                        </div>
+                    </div>
                     <br>
                     <textarea class='mailingTemplateText' style='min-height:8em; width:100%' onchange="onChangeSetting(this)" placeholder="Текст"></textarea>
-                    <div class='button buttonDelete'>Удалить</div>
                 </div>
 
         <div class='button' onclick='addElement("/admin/mailingTemplate/add", null, null, 1, false, function(data){addMailingTemplate(data)})'>Добавить</div>
@@ -142,7 +151,8 @@
 
 <style>
     .mailingTemplateDiv{
-        max-width: 40em;
+        max-width: 20em;
+        width: 100%;
         margin: 0.5em;
         padding: 0.5em;
         border: 1px solid var(--caption-color);

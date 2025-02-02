@@ -9,11 +9,8 @@ use Illuminate\Support\Facades\Auth;
 abstract class AdminController extends Controller
 {
 
-   /* public function actionDelete()
+    public function actionDelete()
     {
-        if($this->editOnlyAdmin && !Auth::user()->admin) {
-            return $this->errorResponseJSON("Не хватает прав");
-        }
 
         $element_id = intval(request()->get('id'));
         if(!$element_id>0) {
@@ -30,6 +27,7 @@ abstract class AdminController extends Controller
 
         return $this->successResponseJSON($response);
     }
+    /*
     public function actionSetWithParams($element_id=null, $property=null, $value=null)
     {
         if($this->editOnlyAdmin && !Auth::user()->isAdminGame()) {

@@ -224,6 +224,39 @@ function addElement(url_action, root_field = null, root_id = null, cnt = null, r
 	return false;
 }
 
+function deleteElement(url_action, id, reload = false, callback = null)
+{
+	if(!confirm('Удалить элемент?'))
+		return;
+
+	let data = {
+		'id': id,
+		'_token': _token,
+	};
+	fetch(url_action, {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify(data),
+	})
+	.then(response => response.json())
+	.then(data => {
+		if(data.success!=1)
+			alert("Ошибка: "+data.error);
+		if(reload == true){
+		//	document.location.reload();
+			var url = new URL(document.location.href);
+			var scrollTop = $('#adminBlockContent').scrollTop();
+			if(scrollTop)
+				url.searchParams.set('scrollTop', scrollTop);
+			document.location.href = url.toString();
+		}
+		if(callback)
+			callback(data);
+	});
+	/*e.preventDefault();
+	e.stopPropagation();*/
+}
+
 function uploadPhotos(type, elId, elButton) {
 	let rootEl = $('.photoViewer' + type + elId);
 	rootEl.find('.photoViewerUploadResult').text("");

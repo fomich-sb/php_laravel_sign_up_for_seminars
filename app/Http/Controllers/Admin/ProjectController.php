@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Facades\Utils;
 use App\Models\Certificate;
 use App\Models\MailingTemplate;
+use App\Models\Material;
 use App\Models\Photo;
 use App\Models\Place;
 use App\Models\Project;
@@ -39,6 +40,7 @@ class ProjectController extends AdminController
         $projectItems = DB::select('SELECT * 
             FROM projects p 
                 LEFT JOIN (SELECT project_id, SUM(IF(status=1, 1, 0) ) users_1, SUM(IF(status=0, 1, 0) ) users_0 FROM project_users GROUP BY project_id) pu ON p.id=pu.project_id
+            WHERE p.deleted_at is NULL
             ORDER BY p.date_start', []);
         $dataRender['blockContent'] = view('/admin/project/projectList', [
             'projectItems' => $projectItems,
@@ -51,8 +53,9 @@ class ProjectController extends AdminController
     {
         $photoItems = App(Photo::class)->where('project_id', $project->id)->orderBy('num')->orderBy('id')->get();
         $projectTamadaItems = App(ProjectTamada::class)->where('project_id', $project->id)->get()->pluck('user_id');
-
         $tamadaItems = App(User::class)->where('tamada', 1)->orWhereIn('id', $projectTamadaItems)->get();
+        $materialItems = App(Material::class)->where('project_id', $project->id)->orderBy('num')->orderBy('id')->get();
+
         $dataRender['blockContent'] = view(
             config('projectCode') . '/admin/project/projectCard',
             [
@@ -61,6 +64,7 @@ class ProjectController extends AdminController
                 'projectTamadaItems' => $projectTamadaItems,
                 'tamadaItems' => $tamadaItems,
                 'photoItems' => $photoItems,
+                'materialItems' => $materialItems,
             ],
         );
         $dataRender['project'] =  $project;
@@ -72,34 +76,67 @@ class ProjectController extends AdminController
     {
         $projectId = intval(request()->get('projectId'));
         $project = App(Project::class)->findOrFail($projectId);
-        $project->caption = request()->get('caption');
-        $project->status = intval(request()->get('status'));
-        $project->date_start = request()->get('date_start');
-        $project->date_end = request()->get('date_end');
-        $project->dates = request()->get('dates');
-        //$project->place = request()->get('place');
+        if(request()->get('caption') !== null)
+            $project->caption = request()->get('caption');
+        if(request()->get('status') !== null)
+            $project->status = intval(request()->get('status'));
+        if(request()->get('date_start') !== null)
+            $project->date_start = request()->get('date_start');
+        if(request()->get('date_end') !== null)
+            $project->date_end = request()->get('date_end');
+        if(request()->get('dates') !== null)
+            $project->dates = request()->get('dates');
         $project->place_id = intval(request()->get('place_id'));
-        $project->time = request()->get('time');
-        $project->price = intval(request()->get('price'));
-        $project->descr = request()->get('descr');
-        $project->text_for_accepted = request()->get('text_for_accepted');
-        $project->telegram_group = request()->get('telegram_group');
-        $project->zoom_url = request()->get('zoom_url');
-        $project->css = request()->get('css');
-        $project->photo_user_upload_allow = intval(request()->get('photo_user_upload_allow'));
-        $project->certificate_enabled = intval(request()->get('certificate_enabled'));
-        $project->certificate_bg = request()->get('certificate_bg');
-        $project->certificate_html = request()->get('certificate_html');
-        $project->certificate_orientation = intval(request()->get('certificate_orientation'));
+        if(request()->get('time') !== null)
+            $project->time = request()->get('time');
+        if(request()->get('price') !== null)
+            $project->price = intval(request()->get('price'));
+        if(request()->get('descr') !== null)
+            $project->descr = request()->get('descr');
+        if(request()->get('text_for_accepted') !== null)
+            $project->text_for_accepted = request()->get('text_for_accepted');
+    /*    $project->telegram_group = request()->get('telegram_group');
+        $project->zoom_url = request()->get('zoom_url');*/
+        if(request()->get('css') !== null)
+            $project->css = request()->get('css');
+        if(request()->get('photo_user_upload_allow') !== null)
+            $project->photo_user_upload_allow = intval(request()->get('photo_user_upload_allow'));
+        if(request()->get('certificate_enabled') !== null)
+            $project->certificate_enabled = intval(request()->get('certificate_enabled'));
+        if(request()->get('certificate_bg') !== null)
+            $project->certificate_bg = request()->get('certificate_bg');
+        if(request()->get('certificate_html') !== null)
+            $project->certificate_html = request()->get('certificate_html');
+        if(request()->get('certificate_orientation') !== null)
+            $project->certificate_orientation = intval(request()->get('certificate_orientation'));
         
-        
-
         $project->save();
 
         $tamadaItems = request()->get('tamada_items');
         App(ProjectTamada::class)->where('project_id', $project->id)->whereNotIn('user_id', $tamadaItems)->delete();
         foreach($tamadaItems as $tamadaId)
             App(ProjectTamada::class)->updateOrCreate(['project_id' => $project->id, 'user_id' => $tamadaId], []);
+
+
+        $materialDeletes = request()->get('materialDeletes');
+        foreach($materialDeletes as $materialId){
+            $item = App(Material::class)->find($materialId);
+            if($item)
+                $item->delete();
+        }
+
+        $materials = request()->get('materials');
+        foreach($materials as $key=>$data)
+        {
+            $item = App(Material::class)->find($key);
+            if($item){
+                $item->caption = $data['caption'];
+                $item->for_accepted = $data['for_accepted'];
+                $item->type = $data['type'];
+                $item->url = $data['url'];
+                $item->save();
+            }
+        }
 
         return $this->successResponseJSON();
     }

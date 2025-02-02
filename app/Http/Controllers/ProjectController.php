@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Facades\Utils;
 use App\Models\Certificate;
+use App\Models\Material;
 use App\Models\Photo;
 use App\Models\Place;
 use App\Models\Project;
@@ -95,8 +96,19 @@ class ProjectController extends Controller
         ])->render();
 
         if($user && $projectUser && $projectUser->status == 1){
+            $res .= view('/project/projectContentForAccept', [
+                'project' => $project,
+            ])->render();
+        }
+
+        if($user && $projectUser && $projectUser->status == 1)
+            $materialItems = App(Material::class)->where('project_id', $project->id)->whereNotNull('caption')->where('caption', '<>', '')->whereNotNull('url')->where('url', '<>', '')->orderBy('num')->orderBy('id')->get();
+        else
+            $materialItems = App(Material::class)->where('project_id', $project->id)->whereNotNull('caption')->where('caption', '<>', '')->whereNotNull('url')->where('url', '<>', '')->where('for_accepted', 0)->orderBy('num')->orderBy('id')->get();
+        if(count($materialItems)>0){
             $res .= view('/project/projectMaterials', [
                 'project' => $project,
+                'materialItems' => $materialItems,
             ])->render();
         }
 

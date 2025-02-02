@@ -6,6 +6,7 @@
                 <th>Код</th>
                 <th>Название</th>
                 <th>Адрес</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +15,11 @@
                     <td class='placeCode clickableDiv' onclick='openModalWindowAndLoadContent("/admin/place/getCardContent", {"placeId": <?=$place->id?>});'><?=$place->code?></td>
                     <td class='placeCaption'><?=$place->caption?></td>
                     <td class='placeAddress'><?=$place->address?></td>
+                    <td>
+                        <div class='button buttonDelete buttonSmall' onclick='deleteElement("/admin/place/delete", <?=$place->id?>, 1)'>
+                            <div class='buttonDeleteIcon'></div>
+                        </div>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
