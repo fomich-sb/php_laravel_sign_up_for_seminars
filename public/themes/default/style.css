@@ -25,7 +25,7 @@ body {
     font-family: 'mainRegular';
     width: 100%;
    /* max-width: 80em;*/
-    font-size: 18px;
+    font-size: 20px;
 }
 .mainRoot{
     flex: 1 1 auto;
@@ -447,6 +447,17 @@ a, a:hover, a:visited, a:link, a.active:visited{
     min-height:15em;
 }
 
+@media screen and (max-width: 1800px) {
+    body {
+        font-size: 19px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    body {
+        font-size: 18px;
+    }
+}
 
 @media screen and (max-width: 1200px) {
     body {

@@ -45,8 +45,8 @@
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
                     <td class='userName2'><?=$userItems[$projectUser->user_id]->name2?></td>
                     <td class='userName3'><?=$userItems[$projectUser->user_id]->name3?></td>
-                    <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->nameEn1?></td>
-                    <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->nameEn2?></td>
+                    <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->name_en1?></td>
+                    <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->name_en2?></td>
                     <td class='certificateActive'><input class="certificateActiveCheckbox certificateActiveCheckbox<?=$projectUser->id?>" type="checkbox" value="<?=$projectUser->id?>" onchange="onChangeCertificateActive(this)" <?=$projectUser->certificate_active ? "checked='checked'" : "" ?> style='margin-right:0;' ></td>
                     <td class='certificateNum certificateNum<?=$projectUser->id?> <?=$projectUser->certificate_active ? '' : 'certificateNumDisactive'?>'>
                         <?php if(isset($certificateItems[$projectUser->certificate_id])): ?>
@@ -92,8 +92,8 @@
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
                     <td class='userName2'><?=$userItems[$projectUser->user_id]->name2?></td>
                     <td class='userName3'><?=$userItems[$projectUser->user_id]->name3?></td>
-                    <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->nameEn1?></td>
-                    <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->nameEn2?></td>
+                    <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->name_en1?></td>
+                    <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->name_en2?></td>
                     <td class='certificateActive'><input class="certificateActiveCheckbox certificateActiveCheckbox<?=$projectUser->id?>" type="checkbox" value="<?=$projectUser->id?>" onchange="onChangeCertificateActive(this)" <?=$projectUser->certificate_active ? "checked='checked'" : "" ?> style='margin-right:0;' ></td>
                     <td class='certificateNum certificateNum<?=$projectUser->id?> <?=$projectUser->certificate_active ? '' : 'certificateNumDisactive'?>'>
                         <?php if(isset($certificateItems[$projectUser->certificate_id])): ?>
@@ -140,8 +140,8 @@
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
                     <td class='userName2'><?=$userItems[$projectUser->user_id]->name2?></td>
                     <td class='userName3'><?=$userItems[$projectUser->user_id]->name3?></td>
-                    <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->nameEn1?></td>
-                    <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->nameEn2?></td>
+                    <td class='userNameEn1'><?=$userItems[$projectUser->user_id]->name_en1?></td>
+                    <td class='userNameEn2'><?=$userItems[$projectUser->user_id]->name_en2?></td>
                     <td class='certificateActive'><input class="certificateActiveCheckbox certificateActiveCheckbox<?=$projectUser->id?>" type="checkbox" value="<?=$projectUser->id?>" onchange="onChangeCertificateActive(this)" <?=$projectUser->certificate_active ? "checked='checked'" : "" ?> style='margin-right:0;' ></td>
                     <td class='certificateNum certificateNum<?=$projectUser->id?> <?=$projectUser->certificate_active ? '' : 'certificateNumDisactive'?>'>
                         <?php if(isset($certificateItems[$projectUser->certificate_id])): ?>

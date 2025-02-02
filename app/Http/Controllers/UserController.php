@@ -108,8 +108,8 @@ class UserController extends Controller
         $user->name1 = trim(request()->get('name1'));
         $user->name2 = trim(request()->get('name2'));
         $user->name3 = trim(request()->get('name3'));
-        $user->nameEn1 = trim(request()->get('nameEn1'));
-        $user->nameEn2 = trim(request()->get('nameEn2'));
+        $user->name_en1 = trim(request()->get('nameEn1'));
+        $user->name_en2 = trim(request()->get('nameEn2'));
         $user->gender = intval(request()->get('gender'));
         if($curUser->admin && request()->get('autoApprove'))
             $user->auto_approve = intval(request()->get('autoApprove'));

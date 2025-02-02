@@ -35,6 +35,28 @@
         </div>
     </div>
 
+    <div class='settingSectionCaption'>Шаблоны рассылок</div>
+    <div>
+        <div class='mailingTemplates' style='display:flex; flex-wrap:wrap;'>
+            <?php foreach($mailingTemplateItems as $item): ?>
+                <div class='mailingTemplateDiv mailingTemplateDiv<?=$item->id?>' data-id='<?=$item->id?>'>
+                    <input class='mailingTemplateCaption' style='width:100%' value='<?= $item->caption ?>' onchange="onChangeSetting(this)" placeholder="Название">
+                    <br>
+                    <textarea class='mailingTemplateText' style='min-height:8em; width:100%' onchange="onChangeSetting(this)" placeholder="Текст"><?= $item->text ?></textarea>
+                    <div class='button buttonDelete' onclick='deleteMailingTemplate(<?=$item->id?>)'>Удалить</div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+                <div class='mailingTemplateDivTemplate' style='display:none;'>
+                    <input class='mailingTemplateCaption' style='width:100%' value='' onchange="onChangeSetting(this)" placeholder="Название">
+                    <br>
+                    <textarea class='mailingTemplateText' style='min-height:8em; width:100%' onchange="onChangeSetting(this)" placeholder="Текст"></textarea>
+                    <div class='button buttonDelete'>Удалить</div>
+                </div>
+
+        <div class='button' onclick='addElement("/admin/mailingTemplate/add", null, null, 1, false, function(data){addMailingTemplate(data)})'>Добавить</div>
+    </div>
 
 </div>
 
@@ -43,6 +65,25 @@
 </div>
 
 <script>
+    function addMailingTemplate(data)
+    {
+        var el = $('.mailingTemplateDivTemplate').clone()
+            .removeClass('mailingTemplateDivTemplate')
+            .addClass('mailingTemplateDiv')
+            .addClass('mailingTemplateDiv'+data.ids[0])
+            .show();
+        el[0].dataset.id=data.ids[0];
+        el.find('.buttonDelete').on('click', function() {deleteMailingTemplate(data.ids[0])});
+        $('.mailingTemplates').append(el);
+    }
+    function deleteMailingTemplate(id)
+    {
+        if(!confirm('Удалить элемент?')) return;
+        $('.mailingTemplateDiv'+id).hide();
+        $('.mailingTemplateDiv'+id)[0].dataset.deleted = 1;
+        $('.buttonSave').removeClass('buttonDisabled');
+    }
+
     function onChangeSetting(el)
     {
         $('.buttonSave').removeClass('buttonDisabled');
@@ -52,6 +93,9 @@
     function saveSettings()
     {
         let data = {
+            'fields': {},
+            'mailingTemplatesDeletes':[],
+            'mailingTemplates':{},
             '_token': _token,
         };
         let inpts = $('.settingContentSector input, .settingContentSector textarea');
@@ -59,7 +103,23 @@
         {
             let inpt = inpts[i];
             if(inpt.dataset && inpt.dataset.dirty)
-                data[inpt.name] = inpt.value;
+                data['fields'][inpt.name] = inpt.value;
+        }
+        
+        let els = $('.mailingTemplateDiv');
+        for(i in els)
+        {
+            if(els[i].dataset && els[i].dataset.deleted==1){
+                data['mailingTemplatesDeletes'].push(els[i].dataset.id);
+                continue;
+            }
+            if(els[i].dataset && $(els[i]).find('[data-dirty=1]').length>0){
+                data['mailingTemplates'][els[i].dataset.id]={
+                    'caption': $(els[i]).find('.mailingTemplateCaption').val(), 
+                    'text': $(els[i]).find('.mailingTemplateText').val()
+                };
+                continue;
+            }
         }
 
         fetch('/admin/setting/save', {
@@ -79,3 +139,12 @@
         });
     }
 </script>
+
+<style>
+    .mailingTemplateDiv{
+        max-width: 40em;
+        margin: 0.5em;
+        padding: 0.5em;
+        border: 1px solid #0003;
+    }
+</style>

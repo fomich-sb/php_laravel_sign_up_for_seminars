@@ -42,11 +42,11 @@
                 <div style='margin-top:1em;'>На английском:</div>
                 <div class='formFieldRoot'>
                     <div class='formFieldCaption'>Фамилия</div>
-                    <div class='formFieldInput'><?=$user->nameEn1?></div>
+                    <div class='formFieldInput'><?=$user->name_en1?></div>
                 </div>
                 <div class='formFieldRoot'>
                     <div class='formFieldCaption'>Имя</div>
-                    <div class='formFieldInput'><?=$user->nameEn2?></div>
+                    <div class='formFieldInput'><?=$user->name_en2?></div>
                 </div>
                 <br>
                 <div class='formFieldRoot'>

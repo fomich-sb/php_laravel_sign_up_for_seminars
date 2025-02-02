@@ -50,6 +50,11 @@ use App\Facades\L;
                                 <div class = 'projectsMenuItemCaption'>Участники</div>
                             </a>
                         </div>
+                        <div class='projectsMenuSubItem'>
+                            <a href='/admin/project/mailing?project_id=<?=$project->id?>'>
+                                <div class = 'projectsMenuItemCaption'>Рассылка</div>
+                            </a>
+                        </div>
                     </div>
                 <?php endif; ?>
 

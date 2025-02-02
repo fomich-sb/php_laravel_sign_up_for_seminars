@@ -39,11 +39,11 @@
                 <div style='margin-top:1em;'>На английском:</div>
                 <div class='formFieldRoot'>
                     <div class='formFieldCaption'>Фамилия</div>
-                    <div class='formFieldInput'><input name="lastnameEn" class="projectContentRegisterNameEn1"  onkeyup="onRegisterFormChange()" value="<?=$user->nameEn1?>" /></div>
+                    <div class='formFieldInput'><input name="lastnameEn" class="projectContentRegisterNameEn1"  onkeyup="onRegisterFormChange()" value="<?=$user->name_en1?>" /></div>
                 </div>
                 <div class='formFieldRoot'>
                     <div class='formFieldCaption'>Имя</div>
-                    <div class='formFieldInput'><input name="firstnameEn" class="projectContentRegisterNameEn2"  onkeyup="onRegisterFormChange()"  value="<?=$user->nameEn2?>"/></div>
+                    <div class='formFieldInput'><input name="firstnameEn" class="projectContentRegisterNameEn2"  onkeyup="onRegisterFormChange()"  value="<?=$user->name_en2?>"/></div>
                 </div>
                 <br>
                 

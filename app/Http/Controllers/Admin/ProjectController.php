@@ -128,6 +128,29 @@ class ProjectController extends AdminController
         return $this->renderAdmin($dataRender);
     }
 
+    public function actionMailing()
+    {
+        $project_id = intval(request()->get('project_id'));
+        $project = App(Project::class)->findOrFail($project_id);
+        $projectUserItems = App(ProjectUser::class)->where('project_id', $project->id)->orderBy('created_at')->get();
+        $userItems = App(User::class)->whereIn('id', $projectUserItems->pluck('user_id'))->get()->keyBy('id');
+        $userTagItems = App(UserTag::class)->whereIn('user_id', $userItems->pluck('id'))->orderBy('tag')->get();
+
+        $dataRender['blockContent'] = view(
+            config('projectCode') . '/admin/project/projectMailing',
+            [
+                'project' => $project,
+                'projectUserItems' => $projectUserItems,
+                'userItems' => $userItems,
+                'userTagItems' => $userTagItems->groupBy('user_id'),
+                'tagItems' => $userTagItems->unique('tag')->pluck('tag'),
+            ],
+        );
+        $dataRender['project'] =  $project;
+        
+        return $this->renderAdmin($dataRender);
+    }
+
    /* public function actionCreateProject()
     {
         $projectClass = $this->getModelClass();

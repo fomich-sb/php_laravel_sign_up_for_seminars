@@ -40,8 +40,8 @@
                     <td class='userName1'><?=$user->name1?></td>
                     <td class='userName2'><?=$user->name2?></td>
                     <td class='userName3'><?=$user->name3?></td>
-                    <td class='userNameEn1'><?=$user->nameEn1?></td>
-                    <td class='userNameEn2'><?=$user->nameEn2?></td>
+                    <td class='userNameEn1'><?=$user->name_en1?></td>
+                    <td class='userNameEn2'><?=$user->name_en2?></td>
                     <td class='userGender' value='<?=$user->gender?>' style='text-align: center;'><?=$user->gender ? 'М' : 'Ж'?></td>
                     <td style='text-align: center;'><?=$user->projects_1?></td>
                     <td class='tagsRoot'>
