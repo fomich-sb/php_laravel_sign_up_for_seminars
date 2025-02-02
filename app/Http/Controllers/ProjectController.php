@@ -112,7 +112,7 @@ class ProjectController extends Controller
             ])->render();
         }
 
-        if($user && $projectUser && $projectUser->status == 1){
+        if($project->status >= App(Project::class)->getStatusId('ended') && $user && $projectUser && $projectUser->status == 1){
             if($projectUser->certificate_active && $projectUser->certificate_id){
                 $cert = App(Certificate::class)->find($projectUser->certificate_id);
                 if($cert){

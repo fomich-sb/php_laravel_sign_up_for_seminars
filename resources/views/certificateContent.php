@@ -1,4 +1,4 @@
-<div style=' <?=$certificateOrientation ? "width: 210mm; height: 297mm;" : "width: 297mm; height: 210mm;" ?> background-size:cover; background-position:center; background-repeat: no-repeat; background-image: url(<?=config('app.uploadImageFolder')?>/certificates/<?=$certificateBg?>); font-family: "Regular";'>
+<div style=' <?=$certificateOrientation ? "width: 210mm; height: 297mm;" : "width: 297mm; height: 210mm;" ?> background-size:cover; background-position:center; background-repeat: no-repeat; background-image: url(<?=config('app.uploadImageFolder')?>/certificates/<?=$certificateBg?>); font-family: "Regular"; font-size:18mm;'>
     <?=$certificateHtml?>
     <?php if(isset($active) && $active==0): ?>
         <div style='position:absolute; left:0; top:0; width:100%; height:100%; background: #000B; color: #FFF;'>
@@ -15,10 +15,10 @@
 }
 @font-face {
     font-family: "Regular"; 
-    src: url('/themes/default/Manrope-Regular.ttf');
+    src: url('/themes/default/Circe-Regular.ttf');
 } 
 @font-face {
     font-family: "Bold"; 
-    src: url('/themes/default/Manrope-Bold.ttf');
+    src: url('/themes/default/Circe-Bold.ttf');
 } 
 </style>

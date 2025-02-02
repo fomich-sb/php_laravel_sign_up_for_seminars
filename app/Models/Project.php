@@ -22,7 +22,8 @@ class Project extends BaseGameModel
             "created" => ['id' => 0, 'caption' => 'Не открыт'],
             "opened" => ['id' => 10, 'caption' => 'До регистрации'],
             "registration" => ['id' => 20, 'caption' => 'Регистрация'],
-            "fixed" => ['id' => 30, 'caption' => 'После регистрации'],
+            "fixed" => ['id' => 30, 'caption' => 'Регистрация закрыта'],
+            "ended" => ['id' => 40, 'caption' => 'После семинара / доступен сертификат'],
             "closed" => ['id' => 100, 'caption' => 'Закрыт'],
         ];
     }
