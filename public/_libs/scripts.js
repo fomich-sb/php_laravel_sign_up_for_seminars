@@ -26,6 +26,9 @@ function nicEditorInit()
 
 /*МОДАЛЬНОЕ ОКНО*/
 function openModalWindowHTMLContent(content, params = {}, config = {}) {
+	if(location.href.indexOf('#')===-1)
+		location.href += "#";
+
 	win = document.getElementById('modalWinTemplate').cloneNode(true);
 	if (config['class'])
 		$(win).addClass(config['class']);
@@ -85,8 +88,14 @@ function closeModalWindow(el, callBack = function(){}) {
 	if (typeof (updateListRow) != "undefined" && $(win).data('id') && $(win).data('listRootElClass'))
 		setTimeout(() => { updateListRow($(win).data('listRootElClass'), $(win).data('id')); }, 500);
 
-	if($('.pop_up_win:visible').length <= 1)
+	if($('.pop_up_win:visible').length <= 1){
 		document.body.classList.remove('bodyHasActiveModalWin');
+		if(location.href.indexOf('#')>0)
+			history.back();
+	}
+	/*else
+	{
+	}*/
 
 	callBack();
 
@@ -649,11 +658,39 @@ function openPhotoSlider(photoViewerClass, photoId)
 
 
 window.addEventListener('popstate', function(event) {
-	let wins = $('.pop_up_win');
-	if(wins.length>0 && wins[wins.length-1].style.display!='none'){
+	let wins = $('.pop_up_win:visible');
+	if(wins.length>0){
 		closeModalWindow(wins[wins.length-1]);
-		history.pushState(null, document.title, location.href);
+		if(wins.length>1 && location.href.indexOf('#')===-1)
+			location.href += "#";
 	}
 	else
-		history.back();
+	{
+		if(event.state){
+			if(event.state.projectId)
+				loadProject(event.state.projectId);
+		}
+		//history.back();
+	}
 }, false);
+
+
+
+/*history.pushState({
+	'mainMenuItem': mainMenuItem.id
+}, $(mainMenuItem).find('a').text(), $(mainMenuItem).find('a').prop('href'));*/
+
+/*addEventListener('popstate', (event) => {
+	let mainMenuItem = document.getElementById(event.state.mainMenuItem);
+	$('.mainMenuItemActive').removeClass('mainMenuItemActive');
+
+	if (!mainMenuItem) {
+		getProjectInfoData.tab = "";
+		getProjectInfoData.event_activity_id = null;
+	} else {
+		getProjectInfoData.tab = mainMenuItem.dataset.tab;
+		getProjectInfoData.event_activity_id = mainMenuItem.dataset.event_activity_id ? mainMenuItem.dataset.event_activity_id : null;
+		mainMenuItem.classList.add('mainMenuItemActive');
+	}
+	getProjectInfo();
+});*/
