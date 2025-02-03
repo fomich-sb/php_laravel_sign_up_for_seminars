@@ -7,10 +7,10 @@ $user=Auth::user();
     <div class='photoViewerContent'>
         <?php foreach($photoItems as $photo): ?>
             <div class='photoDiv photoDiv<?= $photo->id ?>'>
+                <img data-id='<?= $photo->id ?>' src='<?=config('app.uploadImageFolder')?>/photos/thumbs/<?=$photo->file?>' onclick='openPhotoSlider("photoViewer<?=$type?><?=$id?>", <?= $photo->id ?>)'>
                 <?php if($user && ($user->admin || $user->id==$photo->creator_id)): ?>
                     <div class='photoDeleteButton button buttonSmall' onclick='deletePhoto(<?= $photo->id ?>)'><div class='buttonDeleteIcon'></div></div>
                 <?php endif; ?>
-                <img src='<?=config('app.uploadImageFolder')?>/photos/thumbs/<?=$photo->file?>'>
             </div>
         <?php endforeach; ?>
     </div>

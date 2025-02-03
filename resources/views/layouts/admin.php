@@ -9,6 +9,8 @@ use App\Facades\L;
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="stylesheet" type="text/css" href="/_libs/carousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="/_libs/carousel/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="/themes/default/style.css?v=<?=date("dmyH")?>">
     <link rel="stylesheet" type="text/css" href="/themes/default/style_admin.css?v=<?=date("dmyH")?>">
     <link rel="stylesheet" type="text/css" href="/_libs/tagify.css">
@@ -23,6 +25,7 @@ use App\Facades\L;
     <script type="text/javascript" src="/_libs/jquery-ui.js"></script>
     <script type="text/javascript" src="/_libs/tagify.min.js"></script>
     <script type="text/javascript" src="/_libs/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="/_libs/carousel/owl.carousel.min.js"></script>
     <script type="text/javascript" src="/_libs/scripts.js?v=<?=date("dmyH")?>"></script>
 </head>
 
@@ -111,12 +114,20 @@ use App\Facades\L;
             </div>
             <div class='pop_up_middle' onclick='event.stopPropagation();'>
                 <div class='pop_up_content_root'>
-                    <div class='pop_up_win_close_button' onclick='closeModalWindow(this);'></div>
+                    <div class='pop_up_win_close_button' onclick='closeModalWindow(this);'><div class='pop_up_win_close_button_inner'></div></div>
                     <div class='pop_up_content'></div>
                 </div>
             </div>
             <div class='pop_up_bottom'></div>
         </div>
+    </div>
+    
+    
+    <div class="owl-carousel owl-theme photoSliderRoot photoSliderTemplate" style='display:none;'>
+        
+    </div>
+    <div class="slide photoSliderSlideTemplate" style='display:none;' onclick='closeModalWindow(this);'>
+        <img class="owl-lazy" src='' onclick='event.stopPropagation()'>
     </div>
 </body>
 

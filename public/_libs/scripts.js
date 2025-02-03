@@ -604,3 +604,45 @@ function updateProjectRegisterSector()
 		$('.projectRegisterRoot')[0].outerHTML=data.content;
 	});
 }
+
+function openPhotoSlider(photoViewerClass, photoId)
+{
+	var slider = $('.photoSliderTemplate').clone()
+		.removeClass('photoSliderTemplate')
+		.addClass('photoSliderRoot'+photoViewerClass)
+		.show();
+
+	let els = $('.'+photoViewerClass+' img');
+	let curPhoto=1;
+	for(i=0; i<els.length; i++)
+	{
+		var slide = $('.photoSliderSlideTemplate').clone()
+			.removeClass('photoSliderSlideTemplate')
+			.show();
+		if(els[i].dataset && els[i].dataset.id==photoId){
+			curPhoto=i;
+			slide.find('img').prop('src', els[i].src.replace('/thumbs',''));
+		}
+		else{
+			//slide.find('img').prop('src', els[i].src);
+			slide.find('img')[0].dataset.src = els[i].src.replace('/thumbs','');
+		}
+		slider.append(slide);
+	}
+
+	openModalWindowHTMLContent(slider[0].outerHTML, {}, {'class': 'photoSliderWin'});
+
+	$('.photoSliderRoot'+photoViewerClass).owlCarousel({
+		items: 1,
+		startPosition: curPhoto,
+        margin: 10,
+        nav:true,
+		center: true,
+		lazyLoad: true,
+		lazyLoadEager: 2,
+        navText: [
+          '<svg width="35" height="35" viewBox="0 0 24 24" style="width:100%"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" style="fill: var(--caption-color);"/></svg>',
+          '<svg width="35" height="35" viewBox="0 0 24 24" style="width:100%"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" style="fill: var(--caption-color);"/></svg>'
+        ]
+    });
+}
