@@ -646,3 +646,14 @@ function openPhotoSlider(photoViewerClass, photoId)
         ]
     });
 }
+
+
+window.addEventListener('popstate', function(event) {
+	let wins = $('.pop_up_win');
+	if(wins.length>0 && wins[wins.length-1].style.display!='none'){
+		closeModalWindow(wins[wins.length-1]);
+		history.pushState(null, document.title, location.href);
+	}
+	else
+		history.back();
+}, false);
