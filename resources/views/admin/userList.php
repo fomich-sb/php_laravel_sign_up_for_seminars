@@ -36,7 +36,7 @@
         <tbody>
             <?php foreach($userItems as $user): ?>
                 <tr class='userTr<?=$user->id?>'>
-                    <td class='userPhone clickableDiv' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$user->id?>});'><?=$user->phone?></td>
+                    <td class='userPhone clickableDiv <?=$user->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$user->id?>});'><?=$user->phone?></td>
                     <td class='userName1'><?=$user->name1?></td>
                     <td class='userName2'><?=$user->name2?></td>
                     <td class='userName3'><?=$user->name3?></td>

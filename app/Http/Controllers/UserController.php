@@ -18,12 +18,13 @@ class UserController extends Controller
         if(!$phone)
             return $this->errorResponseJSON("Проверьте номер телефона");
 
-        $response = App(User::class)->sendLoginCode($phone);
+        $messagerType = intval(request()->get('messagerType'));
 
-        if(!$response)
+        $response = App(User::class)->sendLoginCode($phone, $messagerType);
+        if($response==null || !isset($response['error']))
             return $this->successResponseJSON($response);
         else
-            return $this->errorResponseJSON($response);
+            return $this->errorResponseJSON($response['error']);
     }
 
     public function actionCheckLoginCode()
@@ -111,6 +112,7 @@ class UserController extends Controller
         $user->name_en1 = trim(request()->get('nameEn1'));
         $user->name_en2 = trim(request()->get('nameEn2'));
         $user->gender = intval(request()->get('gender'));
+        $user->messager_type = intval(request()->get('messagerType'));
         if($curUser->admin && request()->get('autoApprove'))
             $user->auto_approve = intval(request()->get('autoApprove'));
         if($curUser->admin && request()->get('descr'))

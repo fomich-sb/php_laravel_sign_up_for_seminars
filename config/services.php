@@ -36,4 +36,9 @@ return [
         'api_hash' => env('TELEGRAM_API_HASH'),
     ],
 
+    'whatsapp' => [
+        'server' => env('WHATSAPP_SERVER'),
+        'session_id' => env('WHATSAPP_SESSION_ID'),
+    ],
+
 ];

@@ -50,6 +50,7 @@ class ProjectUserController extends Controller
         $user->name_en1 = trim(request()->get('nameEn1'));
         $user->name_en2 = trim(request()->get('nameEn2'));
         $user->gender = intval(request()->get('gender'));
+        $user->messager_type = intval(request()->get('messagerType'));
         $user->save();
 
         $projectUser = App(ProjectUser::class)->firstOrCreate(['user_id' => $user->id, 'project_id' => $projectId]);

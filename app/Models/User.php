@@ -55,20 +55,23 @@ class User extends Authenticatable
        /* request()->session()->regenerateToken();*/
     }
 
-    public function sendLoginCode($phone)
+    public function sendLoginCode($phone, $messagerType=null)
     {
         $user = App(User::class)->where('phone', $phone)->first();
-        
+        $newUser=false;
         if(!$user)
         {
             $user = new User();
             $user->phone = $phone;
+            $newUser = true;
         }
+        if($messagerType !== null)
+            $user->messager_type = $messagerType;
 
         if(!$user->login_code){
             $user->login_code = random_int(10000,99999);
-            $user->save();
         }
+        $user->save();
 
      /*   if (!file_exists(public_path('madeline/madeline.php'))) {
             copy('https://phar.madelineproto.xyz/madeline.php', public_path('madeline/madeline.php'));
@@ -76,8 +79,15 @@ class User extends Authenticatable
     //    include public_path('madeline/madeline.php');
 
         $message = App(Setting::class)->get('authoring_code_text');
-        if(strlen(trim($message))>0)
-            return Utils::sendMessage($user, Utils::prepareText($message, ['user' => $user]));
+        if(strlen(trim($message))>0){
+            $res = Utils::sendMessage($user, Utils::prepareText($message, ['user' => $user]));
+            if($newUser && isset($res['error'])){
+                $user->messager_type = $user->messager_type == 0 ? 1 : 0;
+                $user->save();
+                return Utils::sendMessage($user, Utils::prepareText($message, ['user' => $user]));
+            }
+            return $res;
+        }
     }
     
     public function save(array $options = [])

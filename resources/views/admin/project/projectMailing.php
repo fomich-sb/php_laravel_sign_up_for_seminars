@@ -45,7 +45,7 @@
             <?php foreach($projectUserItems as $projectUser): ?>
                 <tr class='projectUserTr<?=$projectUser->id?>'>
                     <td><input type='checkbox' class='mailingSelector' onchange='calcSelected()' value='<?=$projectUser->user_id?>'></td>
-                    <td class='userPhone clickableDiv' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
+                    <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
                     <td class='userStatus' value='<?=$projectUser->status?>' style='text-align: center;'><?=$projectUser->status>0 ? 'Одобр' : ($projectUser->status<0 ? 'Отклон' : 'На рассм')?></td>
                     <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>

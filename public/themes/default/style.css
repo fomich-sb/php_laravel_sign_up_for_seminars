@@ -75,6 +75,11 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     text-align: center;
     margin: 1em auto;
 }
+.projectContentRegisterButtonCheckPhoneMessager{
+    font-size: 0.8em;
+    margin: 0.2em;
+    min-width: 12em;
+}
 .button:hover{
     opacity: 0.8;
 }
@@ -117,8 +122,11 @@ a, a:hover, a:visited, a:link, a.active:visited{
 }
 
 
-.projectContentRegisterButtonCheckLoginCodeError, .loginFormButtonCheckLoginCodeError{
+.projectContentRegisterButtonCheckLoginCodeError, .loginFormButtonCheckLoginCodeError, .loginFormSendMessageError, .projectContentRegisterSendMessageError{
     color: red;
+    font-size: 0.8em;
+}.loginFormSendMessageSuccess, .projectContentRegisterSendMessageSuccess{
+    color: green;
     font-size: 0.8em;
 }
 
@@ -442,6 +450,28 @@ a, a:hover, a:visited, a:link, a.active:visited{
 .userCardImageImg, .projectTamadaPhoto{
     border-radius: 10em;
 }
+.telegramIcon, .adminTable td.telegramIcon{
+    background-image: url(telegramIcon.svg);
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 1.7em;
+}
+.whatsappIcon, .adminTable td.whatsappIcon{
+    background-image: url(whatsappIcon.svg);
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 1.7em;
+}
+.telegramColor{
+    color: #0481bf;
+}
+.whatsappColor{
+    color: #509749;
+}
+
+
 .projectTamadaPhoto{
     margin: 0 auto;
     margin-bottom: 0.5em;
@@ -559,6 +589,21 @@ a, a:hover, a:visited, a:link, a.active:visited{
     bottom: 0;
     width: 100%;
 }
+
+* {
+    scrollbar-color: var(--caption-color) var(--dark-color);
+    scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+    background-color: var(--dark-color);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--caption-color);
+}
+
 
 @media screen and (max-width: 1800px) {
     body {

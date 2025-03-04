@@ -74,7 +74,8 @@ class Utils
     function isPhone($phone)  
     {
         $phone2 = preg_replace("/[^0-9]/", '', $phone);
-        
+        if (substr($phone2, 0, 1) == "9" && strlen($phone2) == 10)
+            $phone2 = '7'.$phone2;
         if (substr($phone2, 0, 1) == "7" && strlen($phone2) != 11 || strlen($phone2) < 8) 
             return false;
         return $phone2;
@@ -263,7 +264,10 @@ class Utils
     }
 
     function sendMessage(&$user, $message) {
-        return App(TelegramClient::class)->sendMessage($user, $message);
+        if($user->messager_type==0)
+            return App(TelegramClient::class)->sendMessage($user, $message);
+        elseif($user->messager_type==1)
+            return App(WhatsappClient::class)->sendMessage($user, $message);
     }
 
     function prepareText($str, $objs) {

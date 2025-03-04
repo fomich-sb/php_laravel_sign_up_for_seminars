@@ -40,7 +40,7 @@
             <?php foreach($projectUserItems as $projectUser): 
                     if($projectUser->status <= 0) continue;?>
                 <tr class='projectUserTr<?=$projectUser->id?>'>
-                    <td class='userPhone clickableDiv' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
+                    <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
                     <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
                     <td class='userName2'><?=$userItems[$projectUser->user_id]->name2?></td>
@@ -87,7 +87,7 @@
             <?php foreach($projectUserItems as $projectUser): 
                     if($projectUser->status != 0) continue;?>
                 <tr class='projectUserTr<?=$projectUser->id?>'>
-                    <td class='userPhone clickableDiv' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
+                    <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
                     <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
                     <td class='userName2'><?=$userItems[$projectUser->user_id]->name2?></td>
@@ -135,7 +135,7 @@
             <?php foreach($projectUserItems as $projectUser): 
                     if($projectUser->status >= 0) continue;?>
                 <tr class='projectUserTr<?=$projectUser->id?>'>
-                    <td class='userPhone clickableDiv' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
+                    <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
                     <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
                     <td class='userName2'><?=$userItems[$projectUser->user_id]->name2?></td>

@@ -156,6 +156,7 @@ function saveUserCard(userId, projectId=null)
 		'nameEn1': $('.userCardRoot'+userId+' .userCardNameEn1').val(),
 		'nameEn2': $('.userCardRoot'+userId+' .userCardNameEn2').val(),
 		'gender': $('.userCardRoot'+userId+' input[name="gender"]').prop('checked') ? 1 : 0,
+		'messagerType': $('.userCardRoot'+userId+' input[name="messagerType"]').prop('checked') ? 1 : 0,
 		'participationType': $('.userCardRoot'+userId+' input[name="participationType"]').prop('checked') ? 1 : 0,
 		'_token': _token,
 	};
@@ -348,46 +349,46 @@ function onPhoneChange(phoneEl, type = 0){
 	var phone = getPhone(phoneEl);
 	if(prevPhone != phone)
 	{
-		if(type==0){
-			$('.loginFormCorrectPhoneRoot').hide();
-			$('.loginFormButtonCheckPhone').text('Отправить код');
-			$('.loginFormButtonCheckPhone').show();
-		}
-		if(type==1)
-			$('.projectContentRegisterButtonCheckPhone').show();
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'CorrectPhoneRoot').hide();
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhone').text('Отправить код');
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhone').show();
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhoneMessager').hide();
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'SendMessageError').text('');
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'SendMessageSuccess').text('');
 	}
 	prevPhone = phone;
 	if(!phone || phone.substr(0, 1)=="7" && phone.length != 11 || phone.length < 8)
-	{
-		if(type==0)
-			$('.loginFormButtonCheckPhone').addClass('buttonDisabled');
-		if(type==1)
-			$('.projectContentRegisterButtonCheckPhone').addClass('buttonDisabled');
-	}
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhone').addClass('buttonDisabled');
 	else
-	{
-		if(type==0)
-			$('.loginFormButtonCheckPhone').removeClass('buttonDisabled');
-		if(type==1)
-			$('.projectContentRegisterButtonCheckPhone').removeClass('buttonDisabled');
-	}
+		$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhone').removeClass('buttonDisabled');
 }
 function getPhone(phoneEl)
 {
 	var numberPattern = /\d+/g;
-	return phoneEl.val().match( numberPattern ).join('');
+	if(phoneEl.val().match( numberPattern ))
+		return phoneEl.val().match( numberPattern ).join('');
+	else
+		return null;
 }
 
-function sendLoginCode(elButton, phoneEl, type=0)
+function sendLoginCode(elButton, phoneEl, type=0, messagerType=null)
 {
 	if($(elButton).hasClass('buttonDisabled'))
 		return;
 
-	$(elButton).addClass('buttonDisabled').text('Отправить код повторно');
-	setTimeout(function() { $(elButton).removeClass('buttonDisabled'); }, 10000);
+	$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhone').hide();
+	$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'CorrectPhoneRoot').show();
+	$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'LoginCode').focus()
+	$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'SendMessageError').html('')
+	$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'SendMessageSuccess').text('');
+
+
+	$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhoneMessager').addClass('buttonDisabled').show();
+	setTimeout(function() { $('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhoneMessager').removeClass('buttonDisabled'); }, 10000);
 
 	let data = {
 		'phone': getPhone(phoneEl),
+		'messagerType': messagerType,
 		'_token': _token,
 	};
 	fetch('/user/sendLoginCode', {
@@ -400,18 +401,14 @@ function sendLoginCode(elButton, phoneEl, type=0)
 	.then(response => response.json())
 	.then(data => {
 		if (data.success !== 1){
+			$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'SendMessageError').html(data.error);
+			$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckPhoneMessager').removeClass('buttonDisabled');
 			console.log(data.error);
 			return;
 		}
+		else 
+			$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'SendMessageSuccess').html(data.result);
 	});
-	if(type==0){
-		$('.loginFormCorrectPhoneRoot').show();
-		$('.loginFormLoginCode').focus()
-	}
-	if(type==1){
-		$('.projectContentRegisterCorrectPhoneRoot').show();
-		$('.projectContentRegisterLoginCode').focus()
-	}
 }
 
 function checkLoginCode(elButton, phoneEl, codeEl, type=0)
@@ -434,10 +431,7 @@ function checkLoginCode(elButton, phoneEl, codeEl, type=0)
 	.then(response => response.json())
 	.then(data => {
 		if (data.success !== 1){
-			if(type==0)
-				$('.loginFormButtonCheckLoginCodeError').text(data.error);
-			if(type==1)
-				$('.projectContentRegisterButtonCheckLoginCodeError').text(data.error);
+			$('.'+(type==0 ? 'loginForm' : 'projectContentRegister')+'ButtonCheckLoginCodeError').text(data.error);
 			return;
 		}
 		document.location.reload();
@@ -543,6 +537,7 @@ function register()
 		'nameEn1': $('.projectContentRegisterStep2 .projectContentRegisterNameEn1').val(),
 		'nameEn2': $('.projectContentRegisterStep2 .projectContentRegisterNameEn2').val(),
 		'gender': $('.projectContentRegisterStep2 input[name="gender"]').prop('checked') ? 1 : 0,
+		'messagerType': $('.projectContentRegisterStep2 input[name="messagerType"]').prop('checked') ? 1 : 0,
 		'participationType': $('.projectContentRegisterStep2 input[name="participationType"]').prop('checked') ? 1 : 0,
 		'_token': _token,
 	};
@@ -591,7 +586,7 @@ function deleteRegistration()
 
 function updateProjectRegisterSector()
 {
-	if(!currentProjectId) 
+	if(typeof(currentProjectId)=='undefined' || !currentProjectId) 
 		return;
 	let data = {
 		'projectId': currentProjectId,

@@ -20,23 +20,23 @@ class TelegramClient
             'message' => $message,
         ]);
         $responseContent = $response->getBody()->getContents();
-        if(strpos($responseContent, 'SUCCESS')>=0){
+        if(strpos($responseContent, 'SUCCESS')!==false){
             preg_match('/telegramId=([0-9]+)/', $responseContent, $matches);
             if(count($matches)>1 && $user->telegram_id != $matches[1]){
                 $user->telegram_id != $matches[1];
                 $user->save();
             }
-            return null;
+            return ['result' => 'Код отправлен в Telegram.'];;
         }
         elseif($user->telegram_id && $try==1) {
             $user->telegram_id = null;
             $user->save();
-            $this->sendMessage($user, $message, $try++);
+            return $this->sendMessage($user, $message, $try++);
         }
         else
         {
             if(strpos($responseContent, 'ERROR: NO TELEGRAM')>=0)
-                return ['error' => 'К сожалению, мы не нашли вас в Telegram. Установите Telegram на свой телефон.'];
+                return ['error' => 'К сожалению, мы не нашли Вас в Telegram.'];
 
             return ['error' => 'Ошибка отправки сообщения в Telegram.'];
         }

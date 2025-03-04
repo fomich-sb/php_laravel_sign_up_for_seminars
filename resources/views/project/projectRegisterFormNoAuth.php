@@ -15,7 +15,12 @@
                 </div>
             </div>
             <div class='button buttonDisabled projectContentRegisterButtonCheckPhone' onclick='sendLoginCode(this, $(".projectContentRegisterPhone"), 1)'>Отправить код</div>
-            
+            <div class='projectContentRegisterSendMessageError'></div>
+            <div class='projectContentRegisterSendMessageSuccess'></div>
+            <div style='display:flex;justify-content: center;'>
+                <div class='button projectContentRegisterButtonCheckPhoneMessager projectContentRegisterButtonCheckPhoneMessager0' onclick='sendLoginCode(this, $(".projectContentRegisterPhone"), 1, 0)' style=' display:none;'><div class='telegramIcon' style='margin: 0 auto;  width: max-content;'>Отправить в Telegram</div></div>
+                <div class='button projectContentRegisterButtonCheckPhoneMessager projectContentRegisterButtonCheckPhoneMessager1' onclick='sendLoginCode(this, $(".projectContentRegisterPhone"), 1, 1)' style=' display:none;'><div class='whatsappIcon' style='margin: 0 auto;  width: max-content;'>Отправить в WhatsApp</div></div>
+            </div>
             <div class='projectContentRegisterCorrectPhoneRoot' style='display:none;'>
                 <div class='formFieldRoot'>
                     <div class='formFieldCaption'>Введите код:</div>

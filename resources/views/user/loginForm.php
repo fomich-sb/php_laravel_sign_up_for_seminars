@@ -10,6 +10,13 @@
             </div>
         </div>
         <div class='button buttonDisabled loginFormButtonCheckPhone' onclick='sendLoginCode(this, $(".loginFormPhone"))'>Отправить код</div>
+        <div class='loginFormSendMessageError'></div>
+        <div class='loginFormSendMessageSuccess'></div>
+        <div style='display:flex;justify-content: center;'>
+            <div class='button loginFormButtonCheckPhoneMessager loginFormButtonCheckPhoneMessager0' onclick='sendLoginCode(this, $(".loginFormPhone"), 0, 0)' style=' display:none;'><div class='telegramIcon' style='margin: 0 auto;  width: max-content;'>Отправить в Telegram</div></div>
+            <div class='button loginFormButtonCheckPhoneMessager loginFormButtonCheckPhoneMessager1' onclick='sendLoginCode(this, $(".loginFormPhone"), 0, 1)' style=' display:none;'><div class='whatsappIcon' style='margin: 0 auto;  width: max-content;'>Отправить в WhatsApp</div></div>
+        </div>
+
         <div class='loginFormCorrectPhoneRoot' style='display:none;'>
             <div class='formFieldRoot'>
                 <div class='formFieldCaption'>Введите код:</div>

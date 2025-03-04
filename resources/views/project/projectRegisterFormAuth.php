@@ -10,6 +10,20 @@
 
             <div class='projectContentRegisterStep2'>
                 <div class='formFieldRoot'>
+                    <div class='formFieldCaption'>Месседжер</div>
+                    <div class='formFieldInput toggleControlRoot'>
+                        <div><div class='telegramIcon telegramColor' style='margin: 0 auto;  width: max-content;'> Telegram</div></div>
+                        <div style='flex:0 0 auto;'>
+                            <label class="toggleControl">
+                                <input type="checkbox" name="messagerType" class='projectContentRegisterMessagerType' <?=$user->messager_type ? " checked='checked' " : "" ?> >
+                                <span class="control"></span>
+                            </label>
+                        </div>
+                        <div><div class='whatsappIcon whatsappColor' style='margin: 0 auto;  width: max-content;'> WhatsApp</div></div>
+                    </div>
+                </div>
+
+                <div class='formFieldRoot'>
                     <div class='formFieldCaption'>Фамилия</div>
                     <div class='formFieldInput'><input name="lastname" class="projectContentRegisterName1" onkeyup="onRegisterFormChange()" value="<?=$user->name1?>" /></div>
                 </div>
