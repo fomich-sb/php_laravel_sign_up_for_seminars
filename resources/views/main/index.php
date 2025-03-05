@@ -1,7 +1,7 @@
 <div class='mainRoot'>
     <div class='projectsMenuRoot'>
         <div class='projectsMenuLogin'>
-            <div class='projectsMenuButtonClose' onclick='$(".projectsMenuRoot").toggleClass("projectsMenuRootVisible");'></div>
+            <div class='projectsMenuButtonClose' onclick='$("body").toggleClass("projectsMenuRootVisible");'></div>
             <?php if($user): ?>
                 <div class='button' onclick="openUserCard()">
                     +<?=$user->phone?>
@@ -43,8 +43,8 @@
         </div>
     </div>
     
-    <div class='projectsMenuButton' onclick='$(".projectsMenuRoot").toggleClass("projectsMenuRootVisible");'></div>
-    <div class='projectContentRoot' onclick='$(".projectsMenuRoot").removeClass("projectsMenuRootVisible");'>
+    <div class='projectsMenuButton' onclick='$("body").toggleClass("projectsMenuRootVisible");'></div>
+    <div class='projectContentRoot' onclick='$("body").removeClass("projectsMenuRootVisible");'>
         <?= $projectContent ?>
     </div>
 </div>
@@ -104,6 +104,6 @@
                     $('html, body').scrollTop(el.offset().top);
             }
         });
-        $(".projectsMenuRoot").removeClass("projectsMenuRootVisible");
+        $("body").removeClass("projectsMenuRootVisible");
     }
 </script>

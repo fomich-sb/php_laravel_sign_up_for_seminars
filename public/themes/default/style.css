@@ -35,6 +35,9 @@ body {
    /* max-width: 80em;*/
     font-size: 20px;
 }
+body.bodyHasActiveModalWin{
+    overflow: hidden;
+}
 .mainRoot{
     flex: 1 1 auto;
     display: flex;
@@ -145,10 +148,10 @@ a, a:hover, a:visited, a:link, a.active:visited{
     flex: 1 1;
     max-width: 25em;
     min-width: 20em;
-    background: url(bg1.png), radial-gradient(#041a18, #136a61);
+    background: url(bg1.png), radial-gradient(#136a61, #041a18);
     background-size: 5em, cover;
-    background-attachment: fixed;
-    background-position: center;
+    background-attachment: fixed,local;
+    background-position: center, center;
     padding-bottom: 1.5em;
 }
 .projectsMenu{
@@ -481,10 +484,10 @@ a, a:hover, a:visited, a:link, a.active:visited{
     flex-direction: column;
     flex: 0 0 auto;
     
-    background: url(bg1.png), radial-gradient(#041a18, #136a61);
+    background: url(bg1.png), radial-gradient( #136a61, #041a18);
     background-size: 5em, cover;
-    background-attachment: fixed;
-    background-position: center;
+    background-attachment: fixed,local;
+    background-position: center, center;
     color: var(--caption-color);
 }
 
@@ -693,8 +696,11 @@ a, a:hover, a:visited, a:link, a.active:visited{
         overflow-x: hidden;
         z-index: 10;
     }
-    .projectsMenuRoot.projectsMenuRootVisible{
+    .projectsMenuRootVisible .projectsMenuRoot{
         display: block;
+    }
+    body.projectsMenuRootVisible{
+        overflow: hidden;
     }
     
     .projectsMenuButton, .projectsMenuButtonClose{

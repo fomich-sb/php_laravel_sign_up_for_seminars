@@ -103,8 +103,8 @@ use App\Facades\L;
             </div>
         </div>
         
-        <div class='projectsMenuButton' onclick='$(".projectsMenuRoot").toggleClass("projectsMenuRootVisible");'></div>
-        <div class='projectContentRoot' onclick='$(".projectsMenuRoot").removeClass("projectsMenuRootVisible");'>
+        <div class='projectsMenuButton' onclick='$("body").toggleClass("projectsMenuRootVisible");'></div>
+        <div class='projectContentRoot' onclick='$("body").removeClass("projectsMenuRootVisible");'>
             <?= $blockContent ?>
         </div>
 
