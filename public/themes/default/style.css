@@ -1,12 +1,17 @@
 :root {
-    --dark-color: #222;
+    --dark-color: #0b403b;
     --light-color: #f5f5f5;
-    --caption-color: #ebc445;
+    --caption-color: #d5ad3c;
 }
 @font-face {
     font-family: 'mainRegular';
     src: url('circe.ttf');
 }
+@font-face {
+    font-family: 'logoRegular';
+    src: url('ds-arabic.ttf');
+}
+
 html{
     min-height: 100%;
     margin: 0;
@@ -21,7 +26,10 @@ body {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    background-color: var(--light-color);
+    background: url(bg1_gold.png), var(--light-color);
+    background-size: 5em, cover;
+    background-attachment: fixed;
+    background-position: center;
     font-family: 'mainRegular';
     width: 100%;
    /* max-width: 80em;*/
@@ -34,11 +42,13 @@ body {
 .footerRoot{
     flex: 0 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
-    background-color: #000;
+    background-color: var(--dark-color);
     color: var(--light-color);
-    padding: 0.5em 1em;
+    padding: 1em 1em;
+    font-size: 0.8em;
+    
 }
 input, select, textarea{
     font-size: 1em;
@@ -74,6 +84,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     min-width: 15em;
     text-align: center;
     margin: 1em auto;
+    border-radius: 0.2em;
 }
 .projectContentRegisterButtonCheckPhoneMessager{
     font-size: 0.8em;
@@ -98,7 +109,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     text-decoration: underline;
 }
 a, a:hover, a:visited, a:link, a.active:visited{
-    color:var(--dark-color);
+    color:#000;
 }
 .mapLink{
     display: inline-block;
@@ -115,7 +126,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    background-color: var(--dark-color);
+    background-color: var(--caption-color);
 
     -webkit-mask-image: url(map_link.svg);
     mask-image: url(map_link.svg);
@@ -134,7 +145,10 @@ a, a:hover, a:visited, a:link, a.active:visited{
     flex: 1 1;
     max-width: 25em;
     min-width: 20em;
-    background-color: var(--dark-color);
+    background: url(bg1.png), radial-gradient(#041a18, #136a61);
+    background-size: 5em, cover;
+    background-attachment: fixed;
+    background-position: center;
     padding-bottom: 1.5em;
 }
 .projectsMenu{
@@ -142,12 +156,22 @@ a, a:hover, a:visited, a:link, a.active:visited{
     top: 0;
 }
 .projectsMenuLogo{
-    background-image: url('logo.png');
+    background-image: url('logo1.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     margin: 1em ;
-    height: 9em;
+    height: 8em;
+}
+
+.projectsMenuLogo2{
+    text-align: center;
+    color: var(--caption-color);
+    font-family: 'logoRegular';
+    font-size: 2em;
+}
+.projectsMenuLogo2Inner{
+    font-size: 2em;
 }
 .projectsMenuItemsRoot{
     position: sticky;
@@ -188,7 +212,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
 }
 
 .projectsMenuItem a{
-    color: var(--dark-color);
+    color: #000;
     text-decoration: none!important;
 }
 .projectsMenuItemActive, .projectsMenuItemActive a{
@@ -302,7 +326,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
 
 .pop_up_win {
 	color: white;
-	background-color: RGBA(0, 0, 0, 0.9);
+	background-color: RGBA(0, 0, 0, 0.95);
 	position: fixed;
 	left: 0;
 	top: 0;
@@ -332,13 +356,17 @@ a, a:hover, a:visited, a:link, a.active:visited{
     min-width: 40%;
     width: max-content;
     margin: 0.5em auto;
-    background-color: var(--light-color);
-    color: var(--dark-color);
+    background: url(bg1_gold.png), var(--light-color);
+    background-size: 5em, cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #000;
     display: flex;
     justify-content: center;
     flex: 1 1 auto;
     position: relative;
     overflow: hidden;
+    border-radius: 0.2em;
 }
 .loginFormWin .pop_up_content_root, .userCardmWin .pop_up_content_root {
     width: 35em;
@@ -378,7 +406,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    background-color: var(--dark-color);
+    background-color: var(--caption-color);
 
     -webkit-mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
     mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
@@ -445,13 +473,19 @@ a, a:hover, a:visited, a:link, a.active:visited{
     overflow: hidden;
 }
 .cardHeader{
-    background-color: var(--caption-color);
+   /* background-color: var(--caption-color);*/
     padding: 0.25em 2em 0.25em 1em;
     font-size: 1.2em;
     min-height: 1.5em;
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
+    
+    background: url(bg1.png), radial-gradient(#041a18, #136a61);
+    background-size: 5em, cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: var(--caption-color);
 }
 
 
@@ -729,7 +763,6 @@ a, a:hover, a:visited, a:link, a.active:visited{
     box-sizing: border-box;
     position: sticky;
     top: 0;
-    background: #222B;
     z-index: 5;
 }
 .projectsMenuLogin .button{

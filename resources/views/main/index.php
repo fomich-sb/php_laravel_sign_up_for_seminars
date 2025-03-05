@@ -19,6 +19,9 @@
         </div>
 
         <div class='projectsMenuLogo'></div>
+        <div class='projectsMenuLogo2'>
+            <div class='projectsMenuLogo2Inner'>Абдалова Феруза</div>
+        </div>
         <?php if($user && $user->admin): ?>
             <div class='projectsMenuItem'>
                 <div class='projectsMenuItemHeader'></div>
@@ -47,7 +50,7 @@
 </div>
 <div class='footerRoot'>
     <div>
-        Что-то
+    © <?=date("Y");?> Абдалова Феруза Кадамовна
     </div>
 </div>
 
