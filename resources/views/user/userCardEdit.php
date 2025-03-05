@@ -136,6 +136,11 @@ use Illuminate\Support\Facades\Auth;
                 </div>
             </div>
         <?php endif; ?>
+
+        <?php if($curUser->id == $user->id): ?>
+            <div class='hr'></div>
+            <div class='button' onclick='logout()'>Выйти из учетной записи</div>
+        <?php endif; ?>
     </div>
     <div class='cardFooter'>
         <div class='button' style='margin:0.5em;' onclick='saveUserCard(<?= $user->id ?>, <?= $projectUser ? $projectUser->project_id : "null" ?>)'>Сохранить</div>

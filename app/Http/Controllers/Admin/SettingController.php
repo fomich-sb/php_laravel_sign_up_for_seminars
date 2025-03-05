@@ -6,6 +6,7 @@ use App\Facades\Utils;
 use App\Models\MailingTemplate;
 use App\Models\Setting;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SettingController extends AdminController
@@ -25,6 +26,15 @@ class SettingController extends AdminController
     public function actionTelegram()
     {
         $dataRender['blockContent'] = view('/admin/settingsTelegram', [
+          //  'userItems' => $userItems,
+        ]);
+
+        return $this->renderAdmin($dataRender);
+    }
+
+    public function actionServices()
+    {
+        $dataRender['blockContent'] = view('/admin/settingsServices', [
           //  'userItems' => $userItems,
         ]);
 
@@ -61,4 +71,15 @@ class SettingController extends AdminController
 
         return $this->successResponseJSON($response);
     }
+
+    public function actionCheckWhatsApp()
+    {
+        $response = Utils::sendMessage(Auth::user(), Utils::prepareText('WhatsApp работает!', []));
+
+        if($response==null || !isset($response['error']))
+            return $this->successResponseJSON($response);
+        else
+            return $this->errorResponseJSON($response['error']);
+    }
+    
 }

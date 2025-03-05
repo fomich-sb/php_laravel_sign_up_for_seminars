@@ -1,5 +1,9 @@
 <div class='cardRoot placeCardRoot placeCardRoot<?=$place->id?>'>
-    <div class='cardHeader'><?=$place->caption?></div>
+    <div class='cardHeader'>
+        <div style='flex:1 1 auto;'></div>
+        <div class='cardHeaderInner'><?=$place->caption?></div>
+        <div style='flex:1 1 auto;'></div>
+    </div>
     <div class='cardContent placeCardContent'>
         <div class='formFieldRoot'>
             <div class='formFieldCaption'>Код</div>

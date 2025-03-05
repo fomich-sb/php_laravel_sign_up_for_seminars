@@ -616,7 +616,7 @@ function openPhotoSlider(photoViewerClass, photoId)
 		.addClass('photoSliderRoot'+photoViewerClass)
 		.show();
 
-	let els = $('.'+photoViewerClass+' img');
+	let els = $('.'+photoViewerClass+' .photoDiv');
 	let curPhoto=1;
 	for(i=0; i<els.length; i++)
 	{
@@ -625,11 +625,11 @@ function openPhotoSlider(photoViewerClass, photoId)
 			.show();
 		if(els[i].dataset && els[i].dataset.id==photoId){
 			curPhoto=i;
-			slide.find('img').prop('src', els[i].src.replace('/thumbs',''));
+			slide.find('img').prop('src', els[i].dataset.img);
 		}
 		else{
 			//slide.find('img').prop('src', els[i].src);
-			slide.find('img')[0].dataset.src = els[i].src.replace('/thumbs','');
+			slide.find('img')[0].dataset.src = els[i].dataset.img;
 		}
 		slider.append(slide);
 	}

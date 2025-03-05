@@ -353,16 +353,16 @@ a, a:hover, a:visited, a:link, a.active:visited{
 
 .pop_up_win_content {
 	width: 90%;
-	max-width: 500px;
+	max-width: 30em;
 	margin: 0 auto;
-	min-height: 200px;
+	min-height: 10em;
 	box-sizing: border-box;
 }
 
 .pop_up_win_close_button{
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 0.5em;
+    top: 0.5em;
     cursor: pointer;
     z-index: 50;
    /* background-color: var(--caption-color);
@@ -370,8 +370,8 @@ a, a:hover, a:visited, a:link, a.active:visited{
     padding: 0.2em;*/
 }
 .pop_up_win_close_button_inner{
-    height: 25px;
-    width: 25px;
+    height: 1.5em;
+    width: 1.5em;
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;  
     -webkit-mask-repeat: no-repeat;
@@ -424,7 +424,20 @@ a, a:hover, a:visited, a:link, a.active:visited{
     position: fixed;
     top:1em;
     left:1em;
-    z-index: 20;
+    z-index: 9;
+    opacity: 0.5;
+}
+.projectsMenuButtonClose{
+    display: none;
+    position: initial;
+    margin: 0 0.2em;
+    flex: 0 0 auto;
+    width: 2em;
+    height: 2em;
+    background-image: url(menu_close.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
 }
 .cardRoot, .loginFormRoot {
     display: flex;
@@ -433,8 +446,12 @@ a, a:hover, a:visited, a:link, a.active:visited{
 }
 .cardHeader{
     background-color: var(--caption-color);
-    padding: 0.5em 1em;
+    padding: 0.25em 2em 0.25em 1em;
     font-size: 1.2em;
+    min-height: 1.5em;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
 }
 
 
@@ -496,12 +513,18 @@ a, a:hover, a:visited, a:link, a.active:visited{
 }
 .photoViewerContent .photoDiv{
     height: 8em;
+    width: 8em;
     margin: 0.3em;
     position: relative;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
-.photoViewerContent .photoDiv img{
-    max-height: 100%;
-}
+/*.photoViewerContent .photoDiv img{
+    min-height: 100%;
+    min-width: 100%;
+}*/
 .photoDeleteButton{
     position: absolute;
     top:0;
@@ -640,7 +663,7 @@ a, a:hover, a:visited, a:link, a.active:visited{
         display: block;
     }
     
-    .projectsMenuButton{
+    .projectsMenuButton, .projectsMenuButtonClose{
         display: block;
     }
     .projectContentSector, .certificateContentSector, .settingContentSector {
@@ -700,11 +723,17 @@ a, a:hover, a:visited, a:link, a.active:visited{
 }
 .projectsMenuLogin{
     display: flex;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
+    padding: 0.5em;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    background: #222B;
+    z-index: 5;
 }
 .projectsMenuLogin .button{
-    margin: 0.5em 0.2em;
+    margin: 0 0.2em;
     min-width: 0;
     flex: 1 1 auto;
 }

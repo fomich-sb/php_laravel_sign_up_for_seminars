@@ -1,5 +1,9 @@
 <div class='cardRoot projectAddUserCardRoot projectAddUserCardRoot<?=$project->id?>'>
-    <div class='cardHeader'>Добавить участников в "<?=$project->caption?>"</div>
+    <div class='cardHeader'>
+        <div style='flex:1 1 auto;'></div>
+        <div class='cardHeaderInner'>Добавить участников в "<?=$project->caption?>"</div>
+        <div style='flex:1 1 auto;'></div>
+    </div>
     <div class='cardContent projectAddUserCardContent'>
         <div class='formFieldRoot'>
             Введите номера телефонов добавляемых участников (через +7). Каждый участник с новой строки.
