@@ -49,7 +49,7 @@
 
     <div class='formFieldRoot'>
         <div class='formFieldCaption'>Цена</div>
-        <div class='formFieldInput'><input type='number' name="price" value="<?=$project->price?>" onchange="onChangeFieldForm(this)"/></div>
+        <div class='formFieldInput'><input name="price" value="<?=$project->price?>" onchange="onChangeFieldForm(this)"/></div>
     </div>
     <div class='formFieldRoot'>
         <div class='formFieldCaption'>Место</div>

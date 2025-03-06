@@ -92,7 +92,7 @@ class ProjectController extends AdminController
         if(request()->get('time') !== null)
             $project->time = request()->get('time');
         if(request()->get('price') !== null)
-            $project->price = intval(request()->get('price'));
+            $project->price = request()->get('price');
         if(request()->get('descr') !== null)
             $project->descr = request()->get('descr');
         if(request()->get('text_for_accepted') !== null)

@@ -9,7 +9,7 @@ $user=Auth::user();
             <div class='photoDiv photoDiv<?= $photo->id ?>' style='background-image: url("<?=config('app.uploadImageFolder')?>/photos/thumbs/<?=$photo->file?>")'onclick='openPhotoSlider("photoViewer<?=$type?><?=$id?>", <?= $photo->id ?>)' data-id='<?=$photo->id?>' data-img='<?=config('app.uploadImageFolder')?>/photos/<?=$photo->file?>'>
 
                 <?php if($user && ($user->admin || $user->id==$photo->creator_id)): ?>
-                    <div class='photoDeleteButton button buttonSmall' onclick='deletePhoto(<?= $photo->id ?>)'><div class='buttonDeleteIcon'></div></div>
+                    <div class='photoDeleteButton button buttonSmall' onclick='event.stopPropagation(); deletePhoto(<?= $photo->id ?>);'><div class='buttonDeleteIcon'></div></div>
                 <?php endif; ?>
             </div>
         <?php endforeach; ?>

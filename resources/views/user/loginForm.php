@@ -12,9 +12,9 @@
         <div class='button buttonDisabled loginFormButtonCheckPhone' onclick='sendLoginCode(this, $(".loginFormPhone"))'>Отправить код</div>
         <div class='loginFormSendMessageError'></div>
         <div class='loginFormSendMessageSuccess'></div>
-        <div style='display:flex;justify-content: center;flex-wrap: wrap;'>
-            <div class='button loginFormButtonCheckPhoneMessager loginFormButtonCheckPhoneMessager0' onclick='sendLoginCode(this, $(".loginFormPhone"), 0, 0)' style=' display:none;'><div class='telegramIcon' style='margin: 0 auto;  width: max-content;'>Отправить в Telegram</div></div>
-            <div class='button loginFormButtonCheckPhoneMessager loginFormButtonCheckPhoneMessager1' onclick='sendLoginCode(this, $(".loginFormPhone"), 0, 1)' style=' display:none;'><div class='whatsappIcon' style='margin: 0 auto;  width: max-content;'>Отправить в WhatsApp</div></div>
+        <div style='display:flex;justify-content: center;flex-wrap: wrap; margin-bottom: 1em;'>
+            <div class='button loginFormButtonCheckPhoneMessager loginFormButtonCheckPhoneMessager0' onclick='sendLoginCode(this, $(".loginFormPhone"), 0, 0)' style=' display:none;'><div class='telegramIcon' style='margin: 0 auto;  width: max-content;    margin: 0.2em auto;'>Отправить в Telegram</div></div>
+            <div class='button loginFormButtonCheckPhoneMessager loginFormButtonCheckPhoneMessager1' onclick='sendLoginCode(this, $(".loginFormPhone"), 0, 1)' style=' display:none;'><div class='whatsappIcon' style='margin: 0 auto;  width: max-content;    margin: 0.2em auto;'>Отправить в WhatsApp</div></div>
         </div>
 
         <div class='loginFormCorrectPhoneRoot' style='display:none;'>
