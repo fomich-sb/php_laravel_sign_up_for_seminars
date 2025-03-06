@@ -7,9 +7,10 @@
         </div>
         <div style='display:inline-block;'>
             <div style='display:inline-block; margin-left:1em;' class='filterStatus'>
-                <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'>Одобрено</div>
-                <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0'>На рассмотрении</div>
-                <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='-1'>Отклонено</div>
+                <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='-2'>Нет заявки</div>
+                <div class='filterSelectField tag filterSelectFieldSelected' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'>Одобрено</div>
+                <div class='filterSelectField tag filterSelectFieldSelected' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0'>На рассмотрении</div>
+                <div class='filterSelectField tag filterSelectFieldSelected' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='-1'>Отклонено</div>
             </div>
             <div style='display:inline-block; margin-left:1em;' class='filterParticipationType'>
                 <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'>Онлайн</div>
@@ -19,6 +20,10 @@
                 <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0'>Жен</div>
                 <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'>Муж</div>
             </div>
+            <div style='display:inline-block; margin-left:1em;' class='filterMessager'>
+                <div class='filterSelectField tag telegramIcon' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0' style='background-position: center;'>&nbsp;</div>
+                <div class='filterSelectField tag whatsappIcon' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1' style='background-position: center;'>&nbsp;</div>
+            </div>
             <div style='display:inline-block; margin-left:1em;' class='filterTags'>
                 <?php foreach($tagItems as $tag): ?>
                     <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'><?=$tag?></div>
@@ -27,11 +32,11 @@
         </div>
     </div>
     
-    <div class='projectSectionCaption'>Выберите участников</div>
+    <div class='projectSectionCaption projectSectionCaptionUserRequirements'>Выберите участников</div>
     <table class='adminTable projectUserTable' cellspacing='0' cellpadding='0'>
         <thead>
             <tr>
-                <th style='cursor:pointer;' onclick='selectAll()'></th>
+                <th class='thSelectAll' onclick='selectAll()'></th>
                 <th>Телефон</th>
                 <th>Заявка</th>
                 <th>Участие</th>
@@ -42,24 +47,23 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($projectUserItems as $projectUser): ?>
-                <tr class='projectUserTr<?=$projectUser->id?>'>
-                    <td><input type='checkbox' class='mailingSelector' onchange='calcSelected()' value='<?=$projectUser->user_id?>'></td>
-                    <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
-                    <td class='userStatus' value='<?=$projectUser->status?>' style='text-align: center;'><?=$projectUser->status>0 ? 'Одобр' : ($projectUser->status<0 ? 'Отклон' : 'На рассм')?></td>
-                    <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
-                    <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
-                    <td class='userName2'><?=$userItems[$projectUser->user_id]->name2?></td>
-                    <td class='userName3'><?=$userItems[$projectUser->user_id]->name3?></td>
-                    <td class='certificateNum certificateNum<?=$projectUser->id?> <?=$projectUser->certificate_active ? '' : 'certificateNumDisactive'?>'>
-                        <?php if(isset($certificateItems[$projectUser->certificate_id])): ?>
-                            <span class='clickableDiv' onclick='getCertificate("<?=$certificateItems[$projectUser->certificate_id]->url?>")'><?=$certificateItems[$projectUser->certificate_id]->num ?></span>
-                        <?php endif; ?>
+            <?php foreach($userItems as $user): ?>
+                <tr class='userTr<?=$user->id?>' data-messager='<?=$user->messager_type?>'>
+                    <td style='text-align: center;'><input type='checkbox' class='mailingSelector' onchange='calcSelected()' value='<?=$user->id?>'></td>
+
+                    <td class='userPhone clickableDiv <?=$user->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=!isset($projectUserItems[$user->id]) ? "" : $projectUserItems[$user->id]->user_id?>, "projectId": <?=!isset($projectUserItems[$user->id]) ? "" : $projectUserItems[$user->id]->project_id?>});'><?=$user->phone?></td>
+                    <td class='userStatus' value='<?=!isset($projectUserItems[$user->id]) ? "-2" : $projectUserItems[$user->id]->status?>' style='text-align: center;'><?=!isset($projectUserItems[$user->id]) ? "-" : ($projectUserItems[$user->id]->status>0 ? 'Одобр' : ($projectUserItems[$user->id]->status<0 ? 'Отклон' : 'На рассм'))?></td>
+                    <td class='userParticipationType' style='text-align: center;' value='<?=!isset($projectUserItems[$user->id]) ? "" : $projectUserItems[$user->id]->participation_type?>'><?=!isset($projectUserItems[$user->id]) ? "" : ($projectUserItems[$user->id]->participation_type ? 'Онлайн' : 'Очно')?></td>
+                    <td class='userName1'><?=$user->name1?></td>
+                    <td class='userName2'><?=$user->name2?></td>
+                    <td class='userName3'><?=$user->name3?></td>
+                    <td class='certificateNum certificateNum<?=!isset($projectUserItems[$user->id]) ? "" : $projectUserItems[$user->id]->id?> ' style='text-align: center;'>
+                        <?=isset($projectUserItems[$user->id]) && $projectUserItems[$user->id]->certificate_active ? '+' : ''?>
                     </td>
-                    <td class='userGender' value='<?=$userItems[$projectUser->user_id]->gender?>' style='text-align: center;'><?=$userItems[$projectUser->user_id]->gender ? 'М' : 'Ж'?></td>
+                    <td class='userGender' value='<?=$user->gender?>' style='text-align: center;'><?=$user->gender ? 'М' : 'Ж'?></td>
                     <td class='tagsRoot'>
-                        <?php if(isset($userTagItems[$projectUser->user_id])) 
-                            foreach($userTagItems[$projectUser->user_id] as $tag): ?>
+                        <?php if(isset($userTagItems[!isset($projectUserItems[$user->id]) ? "" : $projectUserItems[$user->id]->user_id])) 
+                            foreach($userTagItems[!isset($projectUserItems[$user->id]) ? "" : $projectUserItems[$user->id]->user_id] as $tag): ?>
                             <div class='tag'><?=$tag->tag?></div>
                         <?php endforeach; ?>
                     </td>
@@ -68,7 +72,7 @@
         </tbody>
     </table><br>
     <div class='selectedCnt'>Выбрано участников: 0 </div>
-    <div class='projectSectionCaption'>Текст</div>
+    <div class='projectSectionCaption projectContentDocCaption'>Текст</div>
     <div style='display: flex; flex-wrap:wrap;'>
         <div style='flex:1 1;'>
             <textarea class='mailingText' style='width:100%; height:8em;' onchange='updateMailingPreview()'></textarea>
@@ -96,8 +100,8 @@
         }
         if(!confirm('Отправить сообщение '+users.length+' участникам?'))
             return;
-        users2 = [];
-        for(i in users){
+        let users2 = [];
+        for(i=0; i<users.length; i++){
             users2.push(users[i].value);
         }
 
@@ -202,6 +206,21 @@
             }
             filterActive = true;
         }
+        
+        var fields = $('.filterMessager .filterSelectFieldSelected');
+        if(fields.length>0)
+        {
+            var filterValues=[];
+            for(i=0; i<fields.length; i++)
+                filterValues[$(fields[i]).attr('value')] = 1;
+            var els = $('.projectUserTable tbody tr:not(.hiddenByFilter)');
+            for(i=0; i<els.length; i++)
+            {
+                if(!filterValues[$(els[i]).data('messager')])
+                    $(els[i]).addClass('hiddenByFilter');
+            }
+            filterActive = true;
+        }
 
         var fields = $('.filterTags .filterSelectFieldSelected');
         if(fields.length>0)
@@ -248,7 +267,7 @@
             filterActive = true;
         }
     }
-
+    filter();
     function selectAll()
     {
         var trsAll = $('.projectUserTable tbody tr:not(.hiddenByFilter)');

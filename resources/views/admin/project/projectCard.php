@@ -1,8 +1,12 @@
+<link rel="stylesheet" type="text/css" href="/_libs/iconselect/css/lib/control/iconselect.css" >
+<script type="text/javascript" src="/_libs/iconselect/lib/control/iconselect.js"></script>
+<script type="text/javascript" src="/_libs/iconselect/lib/iscroll.js"></script>
+
 <div class='projectContentSector'>
     <div class='projectCaption'><?=$project->caption?></div>
 
 
-    <div class='projectSectionCaption'>Общая информация</div>
+    <div class='projectSectionCaption projectContentDocCaption'>Общая информация</div>
     <div class='formFieldRoot'>
         <div class='formFieldCaption'>Название</div>
         <div class='formFieldInput'><input name="caption" value="<?=$project->caption?>" onchange="onChangeFieldForm(this)"/></div>
@@ -60,6 +64,12 @@
         </div>
     </div>
     <div class='formFieldRoot'>
+        <div class='formFieldCaption'>Для кого</div>
+        <div class='formFieldInput'>
+            <textarea class='textareaHtml' name="user_requirements" id='user_requirements' onchange="onChangeFieldForm(this)"><?=$project->user_requirements?></textarea>
+        </div>
+    </div>
+    <div class='formFieldRoot'>
         <div class='formFieldCaption'>Время</div>
         <div class='formFieldInput'>
             <textarea class='textareaHtml' name="time" id='time' onchange="onChangeFieldForm(this)"><?=$project->time?></textarea>
@@ -74,7 +84,7 @@
 </div>
 
 <div class='projectContentSector'>
-    <div class='projectSectionCaption'>Для согласованных участников</div>
+    <div class='projectSectionCaption projectContentForAcceptCaption'>Для согласованных участников</div>
 
     <div class='formFieldRoot'>
         <div class='formFieldCaption'>Текст</div>
@@ -85,10 +95,11 @@
 </div>
 
 <div class='projectContentSector'>
-    <div class='projectSectionCaption'>Материалы</div>
+    <div class='projectSectionCaption projectContentMaterialsCaption'>Материалы</div>
     <div class='materials'>
         <?php foreach($materialItems as $material): ?>
             <div class='materialDiv materialDiv<?=$material->id?>' data-id='<?=$material->id?>'>
+                <div style='flex:0 0 auto; margin-right:0.5em;' class="materialIconSelector" name='materialIcon' id='materialIconSelector<?=$material->id?>' data-value='<?= $material->icon ?>'></div>
                 <input style='flex:1 1; margin-right:1em;' class='materialCaption' value='<?= $material->caption ?>' onchange="onChangeFieldForm(this)" placeholder="Название">
                 <select class='materialType' onchange="onChangeFieldForm(this)" style='min-width: auto; flex:0 0 auto; margin-right:1em;'>
                     <option value="0" <?=$material->type==0 ? "selected" : "" ?>>Ссылка</option>
@@ -106,6 +117,7 @@
     <div class='button' onclick='addElement("/admin/material/add", "project_id", <?=$project->id?>, 1, false, function(data){addMaterial(data)})'>Добавить</div>
     
             <div class='materialDivTemplate' style='display: none;'>
+                <div style='flex:0 0 auto; margin-right:0.5em;' name='materialIcon' data-value=''></div>
                 <input style='flex:1 1; margin-right:1em;' class='materialCaption' value='' onchange="onChangeFieldForm(this)" placeholder="Название">
                 <select class='materialType' onchange="onChangeFieldForm(this)" style='min-width: auto; flex:0 0 auto; margin-right:1em;'>
                     <option value="0" selected>Ссылка</option>
@@ -137,7 +149,7 @@
 </div>
 
 <div class='projectContentSector'>
-    <div class='projectSectionCaption'>Фотографии</div>
+    <div class='projectSectionCaption projectContentPhotosCaption'>Фотографии</div>
 
     <div class='formFieldRoot'>
         <div class='formFieldCaption' style='max-width: 18em;'>Загрузка фотографий участниками</div>
@@ -156,7 +168,7 @@
 </div>
 
 <div class='projectContentSector'>
-    <div class='projectSectionCaption'>Сертификат участника</div>
+    <div class='projectSectionCaption projectContentCertificateCaption'>Сертификат участника</div>
 
     <div class='formFieldRoot'>
         <div class='formFieldCaption' style='max-width: 18em;'>Доступен участникам</div>
@@ -219,7 +231,10 @@
         el.find('.materialUrl').on('click', function() {materialUrlClick(this, data.ids[0])});
         el.find('.buttonOpen').on('click', function() {openMaterial(data.ids[0])});
         el.find('.buttonDelete').on('click', function() {deleteMaterial(data.ids[0])});
+
+        el.find('[name="materialIcon"]').addClass('materialIconSelector').attr('id', 'materialIconSelector'+data.ids[0]);
         $('.materials').append(el);
+        initMaterialIconSelector('materialIconSelector'+data.ids[0]);
     }
     function deleteMaterial(id)
     {
@@ -295,6 +310,7 @@
             'place_id': $('select[name="place"]').val()==-1 ? null : $('select[name="place"]').val(),
             'time': $('textarea[name="time"]').data('dirty') ? $('textarea[name="time"]').val() : null,
             'descr': $('textarea[name="descr"]').data('dirty') ? $('textarea[name="descr"]').val() : null,
+            'user_requirements': $('textarea[name="user_requirements"]').data('dirty') ? $('textarea[name="user_requirements"]').val() : null,
             'text_for_accepted': $('textarea[name="text_for_accepted"]').data('dirty') ? $('textarea[name="text_for_accepted"]').val() : null,
             'photo_user_upload_allow': $('input[name="photo_user_upload_allow"]').data('dirty') ? ($('input[name="photo_user_upload_allow"]').prop('checked') ? 1 : 0) : null,
             'certificate_enabled': $('input[name="certificate_enabled"]').data('dirty') ? ($('input[name="certificate_enabled"]').prop('checked') ? 1 : 0) : null,
@@ -318,6 +334,7 @@
             }
             if(els[i].dataset && $(els[i]).find('[data-dirty=1]').length>0){
                 data['materials'][els[i].dataset.id]={
+                    'icon': $(els[i]).find('[name="materialIcon').data('value'), 
                     'caption': $(els[i]).find('.materialCaption').val(), 
                     'for_accepted': $(els[i]).find('[name="materialForAccepted"]').prop('checked') ? 1 : 0,
                     'type': $(els[i]).find('.materialType').val(),
@@ -424,6 +441,50 @@
     }
     updateCertificatePreview();
 	nicEditorInit();
+
+    function startInitMaterialIconSelector()
+    {
+        let els = $('.materialIconSelector');
+        for(i=0; i<els.length; i++)
+            initMaterialIconSelector(els[i].id)
+    }
+    function initMaterialIconSelector(id)
+    {
+        let iconSelect = new IconSelect(id, 
+            {'selectedIconWidth':48,
+            'selectedIconHeight':48,
+            'selectedBoxPadding':1,
+            'iconsWidth':23,
+            'iconsHeight':23,
+            'boxIconSpace':1,
+            'vectoralIconNumber':4,
+            'horizontalIconNumber':4});
+
+        var icons = [];
+        icons.push({'iconFilePath':'/uploads/images/icons/icon_default.svg', 'iconValue':'icon_default.svg'});
+        <?php $files = scandir( public_path() . '/uploads/images/icons/');
+            foreach($files as $file)
+                if($file != '.' && $file != '..' && $file != 'icon_default.svg'):?>
+                    icons.push({'iconFilePath':'/uploads/images/icons/<?=$file?>', 'iconValue':'<?=$file?>'});
+        <?php endif; ?>
+        iconSelect.refresh(icons);
+
+        var el = document.getElementById(id);
+        if(el.dataset.value && el.dataset.value.length>0){
+            for(let i=0; i<icons.length;i++)
+                if(icons[i].iconValue == el.dataset.value){
+                    iconSelect.setSelectedIndex(i);
+                    break;
+                }
+        }
+
+        el.addEventListener('changed', function(e){
+            this.dataset.value = iconSelect.getSelectedValue();
+            onChangeFieldForm(this);
+        });
+        
+    }
+    startInitMaterialIconSelector();
 </script>
 
 <style>

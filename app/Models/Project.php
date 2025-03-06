@@ -3,6 +3,7 @@ namespace App\Models;
 
 use App\Models\BaseGameModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Project extends BaseGameModel
 {
@@ -41,5 +42,12 @@ class Project extends BaseGameModel
             if($status['id'] == $statusId)
                 return $status;
         return null;
+    }
+
+    public function save(array $options = [])
+    {
+        if(!$this->creator_id)
+            $this->creator_id = Auth::user()->id;
+        return parent::save($options);
     }
 }

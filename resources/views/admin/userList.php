@@ -14,6 +14,10 @@
                 <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0'>Жен</div>
                 <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'>Муж</div>
             </div>
+            <div style='display:inline-block; margin-left:1em;' class='filterMessager'>
+                <div class='filterSelectField tag telegramIcon' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0' style='background-position: center;'>&nbsp;</div>
+                <div class='filterSelectField tag whatsappIcon' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1' style='background-position: center;'>&nbsp;</div>
+            </div>
             <div style='display:inline-block; margin-left:1em;' class='filterTags'>
                 <?php foreach($tagItems as $tag): ?>
                     <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'><?=$tag?></div>
@@ -35,7 +39,7 @@
         </thead>
         <tbody>
             <?php foreach($userItems as $user): ?>
-                <tr class='userTr<?=$user->id?>'>
+                <tr class='userTr<?=$user->id?>' data-messager='<?=$user->messager_type?>'>
                     <td class='userPhone clickableDiv <?=$user->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$user->id?>});'><?=$user->phone?></td>
                     <td class='userName1'><?=$user->name1?></td>
                     <td class='userName2'><?=$user->name2?></td>
@@ -93,6 +97,21 @@
             filterActive = true;
         }
 
+        var fields = $('.filterMessager .filterSelectFieldSelected');
+        if(fields.length>0)
+        {
+            var filterValues=[];
+            for(i=0; i<fields.length; i++)
+                filterValues[$(fields[i]).attr('value')] = 1;
+            var els = $('.userTable tbody tr:not(.hiddenByFilter)');
+            for(i=0; i<els.length; i++)
+            {
+                if(!filterValues[$(els[i]).data('messager')])
+                    $(els[i]).addClass('hiddenByFilter');
+            }
+            filterActive = true;
+        }
+
         var fields = $('.filterTags .filterSelectFieldSelected');
         if(fields.length>0)
         {
@@ -100,7 +119,6 @@
             for(i=0; i<fields.length; i++)
                 filterValues[fields[i].innerHTML] = 1;
 
-            console.log(filterValues);
             var els = $('.userTable tbody tr:not(.hiddenByFilter)');
             for(i=0; i<els.length; i++)
             {

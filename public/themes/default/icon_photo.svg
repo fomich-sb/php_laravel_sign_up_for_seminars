@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="650"
+   height="583.33331"
+   viewBox="0 0 19.5 17.499999"
+   fill="none"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="icon_photo.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.04"
+     inkscape:cx="319.23077"
+     inkscape:cy="367.78846"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <path
+     d="m 0.75,5.75 c 0,-1.10457 0.89543,-2 2,-2 h 1.5 c 0.62951,0 1.22229,-0.29639 1.6,-0.8 L 6.9,1.55 C 7.27771,1.04639 7.8705,0.75 8.5,0.75 H 11 c 0.6295,0 1.2223,0.29639 1.6,0.8 l 1.05,1.4 c 0.3777,0.50361 0.9705,0.8 1.6,0.8 h 1.5 c 1.1046,0 2,0.89543 2,2 v 9 c 0,1.1046 -0.8954,2 -2,2 h -14 c -1.10457,0 -2,-0.8954 -2,-2 z"
+     stroke="#000000"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="path2"
+     style="stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none" />
+  <circle
+     cx="9.75"
+     cy="9.75"
+     r="4"
+     stroke="#000000"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     id="circle4"
+     style="stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none" />
+</svg>

@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class ProjectUserController extends Controller
 {
@@ -57,6 +58,13 @@ class ProjectUserController extends Controller
         $projectUser->participation_type = intval(request()->get('participationType'));
         $projectUser->autoApprove($user);
         $projectUser->save();
+
+        if($project->creator_id){
+            $creator = App(User::class)->find($project->creator_id);
+            if($creator){
+                Utils::sendMessage($creator, 'Новая заявка в проект "' . $project->caption . '" от '.$user->name1.' '.$user->name2.' '.$user->name3.'. '. Request::root().'/admin/project/user?project_id='.$project->id);
+            }
+        }
         $response['status'] = $projectUser->status;
         return $this->successResponseJSON($response);
     }

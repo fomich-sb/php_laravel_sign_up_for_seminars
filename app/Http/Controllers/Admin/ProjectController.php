@@ -87,6 +87,8 @@ class ProjectController extends AdminController
         if(request()->get('dates') !== null)
             $project->dates = request()->get('dates');
         $project->place_id = intval(request()->get('place_id'));
+        if(request()->get('user_requirements') !== null)
+            $project->user_requirements = request()->get('user_requirements');
         if(request()->get('time') !== null)
             $project->time = request()->get('time');
         if(request()->get('price') !== null)
@@ -134,6 +136,7 @@ class ProjectController extends AdminController
                 $item->for_accepted = $data['for_accepted'];
                 $item->type = $data['type'];
                 $item->url = $data['url'];
+                $item->icon = $data['icon'];
                 $item->save();
             }
         }
@@ -170,8 +173,8 @@ class ProjectController extends AdminController
     {
         $project_id = intval(request()->get('project_id'));
         $project = App(Project::class)->findOrFail($project_id);
-        $projectUserItems = App(ProjectUser::class)->where('project_id', $project->id)->orderBy('created_at')->get();
-        $userItems = App(User::class)->whereIn('id', $projectUserItems->pluck('user_id'))->get()->keyBy('id');
+        $projectUserItems = App(ProjectUser::class)->where('project_id', $project->id)->orderBy('created_at')->get()->keyBy('user_id');
+        $userItems = App(User::class)->all()->keyBy('id');
         $userTagItems = App(UserTag::class)->whereIn('user_id', $userItems->pluck('id'))->orderBy('tag')->get();
         $mailingTemplateItems = App(MailingTemplate::class)->whereNotNull('caption')->where('caption', '<>', '')->get();
 

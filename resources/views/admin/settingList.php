@@ -7,7 +7,7 @@
                     value="<?=isset($setting['authoring_code_text']) ? $setting['authoring_code_text']->value_string : '' ?>" 
                     onchange="onChangeSetting(this)"
                 / -->
-    <div class='settingSectionCaption'>Уведомления</div>
+    <div class='settingSectionCaption projectContentMessageCaption'>Уведомления</div>
     <div>
         <div class='formFieldRoot'>
             <div class='formFieldCaption'>Код авторизации</div>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <div class='settingSectionCaption'>Шаблоны рассылок</div>
+    <div class='settingSectionCaption projectContentMessageCaption'>Шаблоны рассылок</div>
     <div>
         <div class='mailingTemplates' style='display:flex; flex-wrap:wrap;'>
             <?php foreach($mailingTemplateItems as $item): ?>

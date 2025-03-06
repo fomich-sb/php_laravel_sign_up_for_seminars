@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="650"
+   height="636.03632"
+   viewBox="0 0 19.5 19.081089"
+   fill="none"
+   version="1.1"
+   id="svg13"
+   sodipodi:docname="icon_place.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview15"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.73539105"
+     inkscape:cx="197.17401"
+     inkscape:cy="346.07438"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g6" />
+  <g
+     clip-path="url(#clip0_15_3)"
+     id="g6"
+     transform="translate(-2.25,-2.668911)">
+    <path
+       d="M 9,21 H 4 C 3.44772,21 3,20.5523 3,20 V 12.4142 C 3,12.149 3.10536,11.8946 3.29289,11.7071 L 11.2929,3.70711 c 0.3905,-0.39053 1.0237,-0.39053 1.4142,0 l 8,7.99999 C 20.8946,11.8946 21,12.149 21,12.4142 V 20 c 0,0.5523 -0.4477,1 -1,1 h -5 m -6,0 h 6 m -6,0 v -6 c 0,-0.5523 0.44772,-1 1,-1 h 4 c 0.5523,0 1,0.4477 1,1 v 6"
+       stroke="#000000"
+       stroke-linejoin="round"
+       id="path4"
+       style="stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none" />
+  </g>
+  <defs
+     id="defs11">
+    <clipPath
+       id="clip0_15_3">
+      <rect
+         width="24"
+         height="24"
+         fill="#ffffff"
+         id="rect8"
+         x="0"
+         y="0" />
+    </clipPath>
+  </defs>
+</svg>

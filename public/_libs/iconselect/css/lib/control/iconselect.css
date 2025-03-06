@@ -1,0 +1,89 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 28, 2013, 7:09:35 AM
+    Author     : bugraozden
+*/
+
+.icon-select{
+ }
+
+ .icon-select .selected-box {
+     position: relative;
+     margin: 0px;
+     padding: 0px;
+     width:1.5em;
+     height:1.5em;
+     border:0;
+    cursor: pointer;
+ }
+
+ .icon-select .selected-box:hover {
+     /*background-color: #FFFFFF;*/
+
+ }
+
+ .icon-select .selected-icon {
+     width: 100%;
+     height: 100%;
+ }
+ .icon-select .selected-icon img{
+     width: 100%;
+     height: 100%;
+ }
+
+ .icon-select .component-icon{
+     position: absolute;
+     bottom:5px;
+     right:4px;
+ }
+
+ .icon-select .box {
+
+     position: absolute;
+     top:0px;
+     left:1.5em;
+     margin: 0px;
+     padding: 0px;
+     width: 8em;
+     background-color: #EEEEEE;
+     
+     overflow:auto;
+     /*
+     -webkit-overflow-scrolling: touch;
+     */
+
+ }
+
+ .icon-select .icon {
+     position: relative;
+     padding: 0.2em;
+     width:1.5em;
+     height:1.5em;
+     border: 0;
+     background-color: transparent;
+     overflow:hidden;
+     float: left;
+ }
+
+ .icon-select .icon:hover {
+    background-color: #00000033;
+ }
+ .icon-select .icon img{
+     width: 100%;
+     height: 100%;
+ }
+
+ .icon-select .icon.selected {
+     position: relative;
+     padding: 0.2em;
+     width:1.5em;
+     height:1.5em;
+     background-color: #FFF;
+
+     overflow:hidden;
+     float: left;
+ }

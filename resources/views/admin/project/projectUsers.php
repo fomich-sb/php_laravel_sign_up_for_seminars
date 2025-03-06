@@ -14,6 +14,10 @@
                 <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0'>Жен</div>
                 <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'>Муж</div>
             </div>
+            <div style='display:inline-block; margin-left:1em;' class='filterMessager'>
+                <div class='filterSelectField tag telegramIcon' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='0' style='background-position: center;'>&nbsp;</div>
+                <div class='filterSelectField tag whatsappIcon' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1' style='background-position: center;'>&nbsp;</div>
+            </div>
             <div style='display:inline-block; margin-left:1em;' class='filterTags'>
                 <?php foreach($tagItems as $tag): ?>
                     <div class='filterSelectField tag' onclick='$(this).toggleClass("filterSelectFieldSelected"); filter();' value='1'><?=$tag?></div>
@@ -22,7 +26,7 @@
         </div>
     </div>
     
-    <div class='projectSectionCaption'>Участие подтверждено <span class='projectUserCnt1' style='margin-left: 1em;'></span> <span class='projectUserCnt1Filtered' style='margin-left: 1em;'></span></div>
+    <div class='projectSectionCaption projectSectionCaptionUserRequirements'>Участие подтверждено <span class='projectUserCnt1' style='margin-left: 1em;'></span> <span class='projectUserCnt1Filtered' style='margin-left: 1em;'></span></div>
     <table class='adminTable projectUserTable1' cellspacing='0' cellpadding='0'>
         <thead>
             <tr>
@@ -39,7 +43,7 @@
         <tbody>
             <?php foreach($projectUserItems as $projectUser): 
                     if($projectUser->status <= 0) continue;?>
-                <tr class='projectUserTr<?=$projectUser->id?>'>
+                <tr class='projectUserTr<?=$projectUser->id?>' data-messager='<?=$userItems[$projectUser->user_id]->messager_type?>'>
                     <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
                     <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
@@ -69,7 +73,7 @@
         </tbody>
     </table>
 
-    <div class='projectSectionCaption'>Заявка на рассмотрении <span class='projectUserCnt0' style='margin-left: 1em;'></span> <span class='projectUserCnt0Filtered' style='margin-left: 1em;'></span></div>
+    <div class='projectSectionCaption projectSectionCaptionUserRequirements'>Заявка на рассмотрении <span class='projectUserCnt0' style='margin-left: 1em;'></span> <span class='projectUserCnt0Filtered' style='margin-left: 1em;'></span></div>
     <table class='adminTable projectUserTable0' cellspacing='0' cellpadding='0'>
         <thead>
             <tr>
@@ -86,7 +90,7 @@
         <tbody>
             <?php foreach($projectUserItems as $projectUser): 
                     if($projectUser->status != 0) continue;?>
-                <tr class='projectUserTr<?=$projectUser->id?>'>
+                <tr class='projectUserTr<?=$projectUser->id?>' data-messager='<?=$userItems[$projectUser->user_id]->messager_type?>'>
                     <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
                     <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
@@ -117,7 +121,7 @@
     </table>
 
 
-    <div class='projectSectionCaption'>Отклоненные заявки <span class='projectUserCnt-1' style='margin-left: 1em;'></span> <span class='projectUserCnt-1Filtered' style='margin-left: 1em;'></span></div>
+    <div class='projectSectionCaption projectSectionCaptionUserRequirements'>Отклоненные заявки <span class='projectUserCnt-1' style='margin-left: 1em;'></span> <span class='projectUserCnt-1Filtered' style='margin-left: 1em;'></span></div>
     <table class='adminTable projectUserTable-1' cellspacing='0' cellpadding='0'>
         <thead>
             <tr>
@@ -134,7 +138,7 @@
         <tbody>
             <?php foreach($projectUserItems as $projectUser): 
                     if($projectUser->status >= 0) continue;?>
-                <tr class='projectUserTr<?=$projectUser->id?>'>
+                <tr class='projectUserTr<?=$projectUser->id?>' data-messager='<?=$userItems[$projectUser->user_id]->messager_type?>'>
                     <td class='userPhone clickableDiv <?=$userItems[$projectUser->user_id]->messager_type==0 ? 'telegramIcon' : 'whatsappIcon'?>' onclick='openModalWindowAndLoadContent("/user/getCardEditContent", {"userId": <?=$projectUser->user_id?>, "projectId": <?=$projectUser->project_id?>});'><?=$userItems[$projectUser->user_id]->phone?></td>
                     <td class='userParticipationType' style='text-align: center;' value='<?=$projectUser->participation_type?>'><?=$projectUser->participation_type ? 'Онлайн' : 'Очно'?></td>
                     <td class='userName1'><?=$userItems[$projectUser->user_id]->name1?></td>
@@ -291,6 +295,21 @@
             for(i=0; i<els.length; i++)
             {
                 if(!filterValues[$(els[i]).find('.userGender').attr('value')])
+                    $(els[i]).addClass('hiddenByFilter');
+            }
+            filterActive = true;
+        }
+        
+        var fields = $('.filterMessager .filterSelectFieldSelected');
+        if(fields.length>0)
+        {
+            var filterValues=[];
+            for(i=0; i<fields.length; i++)
+                filterValues[$(fields[i]).attr('value')] = 1;
+            var els = $('.projectUserTable1 tbody tr:not(.hiddenByFilter), .projectUserTable0 tbody tr:not(.hiddenByFilter), .projectUserTable-1 tbody tr:not(.hiddenByFilter)');
+            for(i=0; i<els.length; i++)
+            {
+                if(!filterValues[$(els[i]).data('messager')])
                     $(els[i]).addClass('hiddenByFilter');
             }
             filterActive = true;

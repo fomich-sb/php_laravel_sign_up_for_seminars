@@ -171,10 +171,8 @@ a, a:hover, a:visited, a:link, a.active:visited{
     text-align: center;
     color: var(--caption-color);
     font-family: 'logoRegular';
-    font-size: 2em;
-}
-.projectsMenuLogo2Inner{
-    font-size: 2em;
+    font-size: 3.7em;
+    padding: 0.2em;
 }
 .projectsMenuItemsRoot{
     position: sticky;
@@ -250,6 +248,81 @@ a, a:hover, a:visited, a:link, a.active:visited{
     margin-top: 0.5em;
     font-size: 1.5em;
 }
+.projectSectionCaption::before, .settingSectionCaption::before, .projectContentCaption::before{
+    content: " ";
+    -webkit-mask-size: contain;
+    mask-size: contain;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left center;
+    mask-position: left center;
+    background-color: var(--caption-color);
+    width: 1.3em;
+    height: 1em;
+    margin: -0.1em 0.2em -0.1em 0 ;
+    display: inline-block;
+}
+.projectSectionCaptionPlace::before{
+    mask-image: url(icon_place.svg);
+    -webkit-mask-image: url(icon_place.svg);
+}
+.projectSectionCaptionUserRequirements::before{
+    mask-image: url(icon_requirements2.svg);
+    -webkit-mask-image: url(icon_requirements2.svg);
+}
+.projectSectionCaptionTime::before{
+    mask-image: url(icon_time.svg);
+    -webkit-mask-image: url(icon_time.svg);
+}
+.projectSectionCaptionDescr::before{
+    mask-image: url(icon_descr.svg);
+    -webkit-mask-image: url(icon_descr.svg);
+}
+.projectSectionCaptionTime::before{
+    mask-image: url(icon_time.svg);
+    -webkit-mask-image: url(icon_time.svg);
+}
+.projectSectionCaptionTamada::before{
+    mask-image: url(icon_tamada3.svg);
+    -webkit-mask-image: url(icon_tamada3.svg);
+    margin-bottom: -0.4em;
+    padding-top: 0.2em;
+}
+.projectSectionCaptionPrice::before{
+    mask-image: url(icon_price.svg);
+    -webkit-mask-image: url(icon_price.svg);
+}
+.projectContentCertificateCaption::before{
+    mask-image: url(icon_certificate.svg);
+    -webkit-mask-image: url(icon_certificate2.svg);
+    margin-bottom: -0.4em;
+    padding-top: 0.2em;
+}
+.projectContentMaterialsCaption::before{
+    mask-image: url(icon_material2.svg);
+    -webkit-mask-image: url(icon_material2.svg);
+}
+.projectContentPhotosCaption::before{
+    mask-image: url(icon_photo.svg);
+    -webkit-mask-image: url(icon_photo.svg);
+}
+.projectContentRegisterCaption::before{
+    mask-image: url(icon_registration.svg);
+    -webkit-mask-image: url(icon_registration.svg);
+}
+.projectContentForAcceptCaption::before{
+    mask-image: url(icon_private_info.svg);
+    -webkit-mask-image: url(icon_private_info.svg);
+}
+.projectContentDocCaption::before{
+    mask-image: url(icon_doc.svg);
+    -webkit-mask-image: url(icon_doc.svg);
+}
+.projectContentMessageCaption::before{
+    mask-image: url(icon_telegram.svg);
+    -webkit-mask-image: url(icon_telegram.svg);
+}
+
 
 .projectContentRegisterRoot{
     font-size: 1.2em;
@@ -491,6 +564,14 @@ a, a:hover, a:visited, a:link, a.active:visited{
     color: var(--caption-color);
 }
 
+.thSelectAll{
+    background-image: url(icon_selectall.svg);
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
 
 .userCardImageImg, .projectTamadaPhoto, .certificateBgImg{
     width: 7em;
@@ -669,17 +750,26 @@ a, a:hover, a:visited, a:link, a.active:visited{
     body {
         font-size: 19px;
     }
+    .projectsMenuItemFooter {
+        margin: 0.5em -0.45em -1.45em auto;
+    }
 }
 
 @media screen and (max-width: 1500px) {
     body {
         font-size: 18px;
     }
+    .projectsMenuItemFooter {
+        margin: 0.5em -0.5em -1.5em auto;
+    }
 }
 
 @media screen and (max-width: 1200px) {
     body {
         font-size: 17px;
+    }
+    .projectsMenuItemFooter {
+        margin: 0.5em -0.45em -1.42em auto;
     }
 }
 @media screen and (max-width: 1000px) {
@@ -792,4 +882,20 @@ a, a:hover, a:visited, a:link, a.active:visited{
     -webkit-mask-image: url(logout.svg);
     mask-image: url(logout.svg);
 
+}
+.projectContentMaterialIcon{
+    width: 1.3em;
+    height: 1.4em;
+    margin: -0.2em 0.4em -0.3em 0.5em;
+    display: inline-block;
+    -webkit-mask-size: contain;
+    mask-size: contain;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+
+    -webkit-mask-image: url(/uploads/images/icons/icon_default.svg);
+    mask-image: url(/uploads/images/icons/icon_default.svg);
 }
