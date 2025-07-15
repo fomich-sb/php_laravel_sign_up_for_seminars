@@ -10,5 +10,4 @@ class Place extends BaseGameModel
     public $timestamps = false;
     protected $guarded = [];
     use SoftDeletes;
-
 }

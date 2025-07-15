@@ -22,10 +22,6 @@ class Utils
         if(class_exists($tmpControllerClassPath))
             return $tmpControllerClassPath;
 
-       /* $tmpControllerClassPath = 'App\\Http\\Controllers\\Game\\'.ucfirst($controllerName).'Controller';
-        if(class_exists($tmpControllerClassPath))
-            return $tmpControllerClassPath;*/
-
         abort(404, 'Не найден контроллер '.ucfirst($controllerName).'Controller');
     }
     
@@ -42,7 +38,6 @@ class Utils
         abort(404, 'Не найден контроллер '.ucfirst($controllerName).'Controller');
     }
 
-
     function generateCode($length=6) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
         $code = "";
@@ -52,6 +47,7 @@ class Utils
         }
         return $code;
     }
+
     function generateString($length=6) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ";
         $code = "";
@@ -60,15 +56,6 @@ class Utils
                 $code .= $chars[mt_rand(0,$clen)];
         }
         return $code;
-    }
-    function Now($utc0 = false) {
-        
-        if($utc0)
-            $time = new \DateTimeImmutable( "now", new \DateTimeZone('UTC'));
-        else
-            $time = new \DateTimeImmutable();
-            
-        return  $time->format("Y-m-d H:i:s.u");
     }
 
     function isPhone($phone)  
@@ -80,7 +67,6 @@ class Utils
             return false;
         return $phone2;
     }
-
 
     function deleteDirectory($path) {
         if (is_dir($path) === true)
@@ -120,8 +106,6 @@ class Utils
         {
             // Загружаем по одному файлу
             $fileName = $file->getClientOriginalName();
-            // $fileTmpName = $file->path();
-            // $fileType = $file->getClientMimeType();
             $fileSize = $file->getSize();
             $errorCode = $file->getError();
             $newFileName = ($uniqueId ? uniqid() : '') . htmlspecialchars($fileName);
@@ -271,13 +255,11 @@ class Utils
     }
 
     function prepareText($str, $objs) {
-        
         $pattern = '/{{[^}]*}}/';
         preg_match_all($pattern, $str, $matches);
         $tables=['user', 'project', 'certificate'];
         foreach($matches[0] as $var){
             $prop = trim(str_replace('}}', '', str_replace('{{', '', $var)));
-
             if(in_array($prop, ['user_password']))
                 continue;
     

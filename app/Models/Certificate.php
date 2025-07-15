@@ -6,6 +6,7 @@ use App\Models\BaseGameModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Support\Facades\DB;
 
 class Certificate extends BaseGameModel
 {
@@ -15,7 +16,6 @@ class Certificate extends BaseGameModel
     use SoftDeletes;
 
     public function generateContent(&$project, &$user, $projectUser=null, $params=null) {
-        $res = '';
         $certificateBg = isset($params['certificateBg']) ? $params['certificateBg'] : $project->certificate_bg;
         $certificateHtml = isset($params['certificateHtml']) ? $params['certificateHtml'] : $project->certificate_html;
         $certificateOrientation = isset($params['certificateOrientation']) ? $params['certificateOrientation'] : $project->certificate_orientation;
@@ -45,8 +45,6 @@ class Certificate extends BaseGameModel
         $cert->num = App(Certificate::class)->selectRaw('IFNULL(MAX(num),0) as num')->first()->num + 1;
         $cert->save();
         $cert->fresh();
-        $projectUser->certificate_id = $cert->id;
-        $projectUser->save();
         return $cert;
     }
     
@@ -55,8 +53,6 @@ class Certificate extends BaseGameModel
         $projectUser = App(ProjectUser::class)->findOrFail($this->project_user_id);
         $project = App(Project::class)->findOrFail($projectUser->project_id);
         $user = App(User::class)->findOrFail($projectUser->user_id);
-
-        $rootURL = route('root');
 
         $options = new Options();
         $options->set('defaultFont', 'Courier');
@@ -73,12 +69,10 @@ class Certificate extends BaseGameModel
         ])->render();
         $dompdf->loadHtml($content);
         
-        // (Optional) Setup the paper size and orientation
         $dompdf->setPaper('A4', $project->certificate_orientation ? 'portrait' : 'landscape');
 
         ini_set('memory_limit', '8192M');
 
-        // Render the HTML as PDF
         $dompdf->render();
         file_put_contents(public_path("certificates") . '/' . $this->url . ".pdf", $dompdf->output());
 
@@ -89,19 +83,7 @@ class Certificate extends BaseGameModel
 
     public function generateThumb()
     {
-        try{
-        //sudo apt install php-imagick
-        /*     $pdfPath = $request->file('pdf')->path();
-     
-             $imagick = new Imagick();
-             $imagick->readImage($pdfPath . '[0]'); // Convert the first page of the PDF
-     
-             $imagick->setImageFormat('png'); // Set the output format, you can change it as needed
-     
-             $imagePath = public_path('images/') . 'converted_image.png'; // Define the output image path
-             $imagick->writeImage($imagePath);
-             $imagick->clear();*/
-     
+        try{     
              $imagick = new \Imagick();
              $imagick->readImage(public_path("certificates") . '/' . $this->url . ".pdf");
              $imagick->writeImages(public_path("certificates") . '/thumbs/' . $this->url . ".png", false);
@@ -112,12 +94,21 @@ class Certificate extends BaseGameModel
         return;
     }
 
+    public function getAllCertificateList() 
+    {
+        return DB::select('SELECT c.id, c.num, c.url, pu.user_id, pu.project_id, pu.status, pu.certificate_active, p.caption project_caption, u.phone, u.name1, u.name2, u.name3 
+        FROM certificates c
+            LEFT JOIN project_users pu ON pu.id=c.project_user_id
+            LEFT JOIN projects p ON p.id=pu.project_id
+            LEFT JOIN users u ON u.id=pu.user_id
+        WHERE c.deleted_at IS NULL');
+    }
+
     public function recreate()
     {
         if(file_exists(public_path('certificates') . '/' . $this->url . ".pdf"))
             unlink(public_path('certificates') . '/' . $this->url . ".pdf");
         if(file_exists(public_path('certificates') . '/thumbs/' . $this->url . ".png"))
             unlink(public_path('certificates') . '/thumbs/' . $this->url . ".png");
-
     }
 }

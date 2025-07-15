@@ -125,7 +125,6 @@ class UserController extends Controller
         $user->save();
 
         if(request()->get('projectId')){
-            $projectId = intval(request()->get('projectId'));
             $projectUser = App(ProjectUser::class)->where('user_id', $user->id)->where('project_id', intval(request()->get('projectId')))->first();
             if($projectUser){
                 $projectUser->participation_type = intval(request()->get('participationType'));
@@ -155,12 +154,7 @@ class UserController extends Controller
         $res = Utils::loadImage('avatars');
         if(count($res['errors'])>0)
             return $this->errorResponseJSON($res['errors'][0]);
-        
-     /*   $user = App(User::class)->findOrFail($userId);
-        if($user->image)
-            Utils::deleteImage('avatars', $user->image);
-        $user->image = $fileName;
-        $user->save();*/
+
         if(count($res['files'])>0)
             $response = ['image' => $res['files'][0]['fileName']];
         return $this->successResponseJSON($response);
@@ -168,13 +162,7 @@ class UserController extends Controller
     
     public function actionGetLoginForm()
     {
-      //  $phone = request()->get('phone');
-       // $user = App(User::class)->findOrFail($userId);
-
-        $dataRender = [
-     //       'user' => $user,
-        ];
-        $response['blockContent'] = view('user/loginForm', $dataRender)->render();
+        $response['blockContent'] = view('user/loginForm', [])->render();
         return $this->successResponseJSON($response);
     }
     

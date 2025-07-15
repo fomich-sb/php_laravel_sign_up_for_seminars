@@ -5,14 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Facades\Utils;
 use App\Models\MailingTemplate;
 use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class SettingController extends AdminController
 {
-
-
     public function actionIndex()
     {
         $dataRender['blockContent'] = view('/admin/settingList', [
@@ -25,18 +21,14 @@ class SettingController extends AdminController
 
     public function actionTelegram()
     {
-        $dataRender['blockContent'] = view('/admin/settingsTelegram', [
-          //  'userItems' => $userItems,
-        ]);
+        $dataRender['blockContent'] = view('/admin/settingsTelegram', ['user' => Auth::user()]);
 
         return $this->renderAdmin($dataRender);
     }
 
     public function actionServices()
     {
-        $dataRender['blockContent'] = view('/admin/settingsServices', [
-          //  'userItems' => $userItems,
-        ]);
+        $dataRender['blockContent'] = view('/admin/settingsServices', []);
 
         return $this->renderAdmin($dataRender);
     }
@@ -50,7 +42,6 @@ class SettingController extends AdminController
             if(isset($fields[$key]))
                 App(Setting::class)->set($key, $fields[$key]);
         
-
         $mailingTemplatesDeletes = request()->get('mailingTemplatesDeletes');
         foreach($mailingTemplatesDeletes as $mailingTemplateId){
             $item = App(MailingTemplate::class)->find($mailingTemplateId);
@@ -74,7 +65,7 @@ class SettingController extends AdminController
 
     public function actionCheckWhatsApp()
     {
-        $response = Utils::sendMessage(Auth::user(), Utils::prepareText('WhatsApp работает!', []));
+        $response = Utils::sendMessage(Auth::user(), 'WhatsApp работает!');
 
         if($response==null || !isset($response['error']))
             return $this->successResponseJSON($response);

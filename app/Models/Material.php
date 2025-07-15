@@ -2,7 +2,6 @@
 namespace App\Models;
 
 use App\Models\BaseGameModel;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Material extends BaseGameModel
 {

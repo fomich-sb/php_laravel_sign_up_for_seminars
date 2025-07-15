@@ -1,7 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Facades\Utils;
 use App\Models\BaseGameModel;
 
 class MailingTemplate extends BaseGameModel

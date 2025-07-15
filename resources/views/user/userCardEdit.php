@@ -151,6 +151,7 @@ use Illuminate\Support\Facades\Auth;
 <script>
     <?php if($curUser->admin): ?>
         tagifyWhitelistUserTags=['<?= implode("', '", $allTags->pluck('tag')->toArray()) ?>'];
+
         //РЕДАКТОР ТЕГОВ
         inputElm = document.querySelectorAll('.userCardTags')[0];
         tagify = new Tagify(inputElm, {
@@ -158,13 +159,6 @@ use Illuminate\Support\Facades\Auth;
             whitelist: tagifyWhitelistUserTags
         });
 
-        // Chainable event listeners
-        /* tagify.on('add', function onAddTag(e) {
-            tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
-        });*/
-    /*  tagify.on('change', function onTagChange(e) {
-            filterTasks();
-        });*/
         tagify.on('input', function onInput(e) {
             tagify.settings.whitelist.length = 0; // reset current whitelist
             tagify.loading(true).dropdown.hide.call(tagify) // show the loader animation
@@ -215,9 +209,7 @@ use Illuminate\Support\Facades\Auth;
 
     function uploadUserImage(userId) {
         $('.userCardImageForm' + userId).fileupload({
-            // Функция будет вызвана при помещении файла в очередь
             add: function(e, data) {
-                // Автоматически загружаем файл при добавлении в очередь
                 var jqXHR = data.submit();
             },
             success: function(data) {

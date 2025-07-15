@@ -4,6 +4,7 @@ namespace App\Models;
 use App\Models\BaseGameModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Project extends BaseGameModel
 {
@@ -42,6 +43,15 @@ class Project extends BaseGameModel
             if($status['id'] == $statusId)
                 return $status;
         return null;
+    }
+
+    public function getAllProjectList() 
+    {
+        return DB::select('SELECT * 
+            FROM projects p 
+                LEFT JOIN (SELECT project_id, SUM(IF(status=1, 1, 0) ) users_1, SUM(IF(status=0, 1, 0) ) users_0 FROM project_users GROUP BY project_id) pu ON p.id=pu.project_id
+            WHERE p.deleted_at is NULL
+            ORDER BY p.date_start', []);
     }
 
     public function save(array $options = [])

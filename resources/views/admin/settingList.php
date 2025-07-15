@@ -1,12 +1,6 @@
 <div class='settingContentSector' style='flex:1 1 auto;'>
     <div class='settingCaption'>Общие настройки</div>
     
-    
-                <!-- input 
-                    name="authoring_code_text" 
-                    value="<?=isset($setting['authoring_code_text']) ? $setting['authoring_code_text']->value_string : '' ?>" 
-                    onchange="onChangeSetting(this)"
-                / -->
     <div class='settingSectionCaption projectContentMessageCaption'>Уведомления</div>
     <div>
         <div class='formFieldRoot'>

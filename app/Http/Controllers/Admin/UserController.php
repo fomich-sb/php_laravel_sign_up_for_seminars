@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends AdminController
 {
-
-
     public function actionIndex()
     {
         if (request()->get('user_id')) {
@@ -24,10 +22,7 @@ class UserController extends AdminController
 
     public function actionIndexUserList($dataRender = [])
     {
-        $userItems = DB::select('SELECT u.*, pu.projects_1, pu.projects_0
-            FROM users u 
-                LEFT JOIN (SELECT user_id, SUM(IF(status=1, 1, 0) ) projects_1, SUM(IF(status=0, 1, 0) ) projects_0 FROM project_users GROUP BY user_id) pu ON u.id=pu.user_id
-            ORDER BY u.name1', []);
+        $userItems = App(User::class)->getAllUserList(); 
         $userTagItems = App(UserTag::class)->whereIn('user_id', array_column($userItems, 'id'))->orderBy('tag')->get();
         $dataRender['blockContent'] = view('/admin/userList', [
             'userItems' => $userItems,

@@ -135,17 +135,6 @@
         <input type="hidden" name="materialId" />
         <input type="hidden" name="_token" value='<?= csrf_token() ?>' />
     </form>
-
-    <!-- div class='formFieldRoot'>
-        <div class='formFieldCaption'>Группа Telegram</div>
-        <div class='formFieldInput'><input name="telegram_group" value="<?=$project->telegram_group?>" onchange="onChangeFieldForm(this)"/></div>
-    </div>
-
-    <div class='formFieldRoot'>
-        <div class='formFieldCaption'>Ссылка ZOOM</div>
-        <div class='formFieldInput'><input name="zoom_url" value="<?=$project->zoom_url?>" onchange="onChangeFieldForm(this)"/></div>
-    </div -->
-    
 </div>
 
 <div class='projectContentSector'>
@@ -255,9 +244,7 @@
             $(el).prop('readonly', true);
 
             $('.materialFileUploadForm').fileupload({
-                // Функция будет вызвана при помещении файла в очередь
                 add: function(e, data) {
-                    // Автоматически загружаем файл при добавлении в очередь
                     var jqXHR = data.submit();
                 },
                 success: function(data) {
@@ -363,9 +350,7 @@
 
     function uploadCertificateBgImage(projectId) {
         $('.certificateBgForm' + projectId).fileupload({
-            // Функция будет вызвана при помещении файла в очередь
             add: function(e, data) {
-                // Автоматически загружаем файл при добавлении в очередь
                 var jqXHR = data.submit();
             },
             success: function(data) {

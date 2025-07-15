@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Facades\Utils;
 use App\Models\Mailing;
-use App\Models\Photo;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class MailingController extends AdminController
 {

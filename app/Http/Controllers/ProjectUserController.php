@@ -12,21 +12,6 @@ use Illuminate\Support\Facades\Request;
 
 class ProjectUserController extends Controller
 {
-  /*  public function actionFindPhoneForRegister()
-    {
-        $projectId = intval(request()->get('projectId'));
-        $phone = Utils::isPhone(request()->get('phone', ''));
-        if(!$phone)
-            $this->errorResponseJSON("Проверьте номер телефона");
-
-        $response = App(User::class)->sendLoginCode($phone);
-
-        if(!$response)
-            return $this->successResponseJSON($response);
-        else
-            return $this->errorResponseJSON($response);
-    }*/
-
     public function actionRegister()
     {
         $projectId = intval(request()->get('projectId'));
@@ -37,6 +22,7 @@ class ProjectUserController extends Controller
         $project = App(Project::class)->find($projectId);
         if(!$project || $project->status != $project->getStatusId('registration'))
             $this->errorResponseJSON("Регистрация не доступна");
+            
         if(!Auth::user())
             $user = App(User::class)->firstOrCreate(['phone' => $phone]);
         else

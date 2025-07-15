@@ -21,3 +21,4 @@ yarn-error.log
 /.vscode
 /public/madeline/session.madeline*
 /public/madeline/MadelineProto.log
+.log

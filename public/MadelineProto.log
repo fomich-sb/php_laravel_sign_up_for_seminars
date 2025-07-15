@@ -1,6 +1,6 @@
 Server:         	Starting IPC server C:\wamp64\psy-seminar\storage\session.madeline (process)
 Server:         	Error: Could not locate PHP executable binary in C:\wamp64\psy-seminar\vendor\danog\madelineproto\src\Ipc\Runner\ProcessRunner.php:178
-Stack trace:
+Stack trace: 
 #0 C:\wamp64\psy-seminar\vendor\danog\madelineproto\src\Ipc\Runner\ProcessRunner.php(81): danog\MadelineProto\Ipc\Runner\ProcessRunner::locateBinary()
 #1 C:\wamp64\psy-seminar\vendor\danog\madelineproto\src\Ipc\Server.php(108): danog\MadelineProto\Ipc\Runner\ProcessRunner::start('C:\\wamp64\\psy-s...', 1898399206)
 #2 C:\wamp64\psy-seminar\vendor\danog\madelineproto\src\Serialization.php(176): danog\MadelineProto\Ipc\Server::startMe(Object(danog\MadelineProto\SessionPaths))

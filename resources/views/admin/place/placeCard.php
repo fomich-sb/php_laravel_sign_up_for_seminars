@@ -46,10 +46,6 @@
     </div>
 </div>
 <script>
-   /* function onChangeFieldForm(form)
-    {
-        form.find('.buttonSave').removeClass('buttonDisabled');
-    }*/
 
     function savePlaceCard()
     {

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Facades\Utils;
 use App\Models\Photo;
 use App\Models\Place;
-use Illuminate\Support\Facades\Auth;
 
 class PlaceController extends Controller
 {

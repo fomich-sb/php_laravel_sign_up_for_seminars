@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Facades\Utils;
 use App\Models\Photo;
 use App\Models\Place;
-use Illuminate\Support\Facades\DB;
 
 class PlaceController extends AdminController
 {
@@ -24,7 +22,6 @@ class PlaceController extends AdminController
     public function actionIndexPlaceList($dataRender = [])
     {
         $placeItems = App(Place::class)->all();
-
         $dataRender['blockContent'] = view('/admin/place/placeList', [
             'placeItems' => $placeItems,
         ]);
@@ -45,7 +42,6 @@ class PlaceController extends AdminController
         $response['blockContent'] = view('admin/place/placeCard', $dataRender)->render();
         return $this->successResponseJSON($response);
     }
-
     
     public function actionSave()
     {
@@ -56,7 +52,6 @@ class PlaceController extends AdminController
         $place->address = request()->get('address');
         $place->map_link = request()->get('map_link');
         $place->descr = request()->get('descr');
-
         $place->save();
 
         return $this->successResponseJSON();

@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Facades\Utils;
-use App\Models\Photo;
 use App\Models\Material;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class MaterialController extends AdminController
 {
-
     public function actionUploadFile()
     {
         $materialId = intval(request()->get('materialId'));

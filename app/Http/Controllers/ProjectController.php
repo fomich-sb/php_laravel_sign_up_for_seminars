@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Facades\Utils;
 use App\Models\Certificate;
 use App\Models\Material;
 use App\Models\Photo;
@@ -24,7 +23,6 @@ class ProjectController extends Controller
         if(!$currentProjectId && count($projectItems)>0)
             $currentProjectId = $projectItems[0]->id;
 
-
         $dataRender = [
             'bodyClass' => 'bodyMain',
             'projectItems' => $projectItems,
@@ -43,20 +41,6 @@ class ProjectController extends Controller
     public function actionGetContent($projectId = null)
     {
         $projectId = intval(request()->get('projectId'));
-        if(!$projectId){
-            $response = [
-                'content' => view('project/projectNotFound', [])->render(),
-            ];
-            return $this->successResponseJSON($response);
-        }
-        
-        $project = App(Project::class)->find($projectId);
-        if(!$project){
-            $response = [
-                'content' => view('project/projectNotFound', [])->render(),
-            ];
-            return $this->successResponseJSON($response);
-        }
 
         $response = [
             'content' => $this->getContent($projectId),

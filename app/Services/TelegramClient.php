@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
@@ -26,7 +24,7 @@ class TelegramClient
                 $user->telegram_id != $matches[1];
                 $user->save();
             }
-            return ['result' => 'Код отправлен в Telegram.'];;
+            return ['result' => 'Сообщение отправлено в Telegram.'];;
         }
         elseif($user->telegram_id && $try==1) {
             $user->telegram_id = null;
@@ -42,7 +40,7 @@ class TelegramClient
         }
     }
 
-    public function sendMessages($userItems, $message, $try=1)
+  /*  public function sendMessages($userItems, $message, $try=1)
     {        
         $data = [];
         foreach($userItems as $user)
@@ -57,26 +55,5 @@ class TelegramClient
         }
         $response = Http::post(FacadesRequest::root() . "/madeline/sendMessages.php", $data);
         $responseContent = $response->getBody()->getContents();
-
-     /*   if(strpos($responseContent, 'SUCCESS') >= 0){
-            preg_match('/telegramId=([0-9]+)/', $responseContent, $matches);
-            if(count($matches)>1 && $user->telegram_id != $matches[1]){
-                $user->telegram_id != $matches[1];
-                $user->save();
-            }
-            return null;
-        }
-        elseif($user->telegram_id && $try==1) {
-            $user->telegram_id = null;
-            $user->save();
-            $this->sendMessage($user, $message, $try++);
-        }
-        else
-        {
-            if(strpos($responseContent, 'ERROR: NO TELEGRAM')>=0)
-                return ['error' => 'К сожалению, мы не нашли вас в Telegram. Установите Telegram на свой телефон.'];
-
-            return ['error' => 'Ошибка отправки сообщения в Telegram.'];
-        }*/
-    }
+    }*/
 }

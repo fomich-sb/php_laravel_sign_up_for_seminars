@@ -6,13 +6,9 @@ use App\Facades\Utils;
 use App\Models\Project;
 use App\Models\ProjectUser;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class ProjectUserController extends AdminController
 {
-
-
     public function actionSetStatus()
     {
         $projectUserId = intval(request()->get('projectUserId'));
@@ -54,7 +50,7 @@ class ProjectUserController extends AdminController
                 $response['badPhones'][] = $phoneStr;
                 continue;
             }
-            
+
             $user = App(User::class)->where('phone', $phone)->first();
             if(!$user) {
                 if($create){

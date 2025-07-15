@@ -12,7 +12,6 @@ class Mailing extends BaseGameModel
 
     public function generateContent(&$project, &$user, $text) {
         $text = Utils::prepareText($text, ['project' => $project, 'user' => $user, ]);
-
         return $text;
     }
 
