@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class WhatsappClient
 {

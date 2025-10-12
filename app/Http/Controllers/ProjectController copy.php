@@ -19,22 +19,22 @@ class ProjectController extends Controller
     {
         $user = Auth::user();
         $projectItems = App(Project::class)->getActual();
-        
+        $currentProjectId = intval(request()->get('id'));
+        if(!$currentProjectId && count($projectItems)>0)
+            $currentProjectId = $projectItems[0]->id;
+
         $dataRender = [
             'bodyClass' => 'bodyMain',
             'projectItems' => $projectItems,
+            'currentProjectId' => $currentProjectId,
             'user' => $user,
-            'projectContent' => null,
-            'currentProjectId' => null,
         ];
+        if(!$currentProjectId)
+            $dataRender['projectContent'] = view('project/noActiveProjects', []);
+        else 
+            $dataRender['projectContent'] = $this->getContent($currentProjectId);
 
-        $projectId = intval(request()->get('id'));
-        if($projectId){
-            $dataRender['currentProjectId'] = $projectId;
-            $dataRender['projectContent'] = $this->getContent($projectId);
-        }
-
-        $dataRender['mainContent'] = view('main/index', $dataRender);
+        $dataRender['blockContent'] = view('main/index', $dataRender);
         return view('/layouts/main', $dataRender);
     }
     

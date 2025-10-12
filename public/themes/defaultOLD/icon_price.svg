@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   fill="#000000"
+   version="1.1"
+   id="Ebene_1"
+   width="807.9715"
+   height="808"
+   viewBox="0 0 64.637719 64.64"
+   enable-background="new 0 0 64 64"
+   xml:space="preserve"
+   sodipodi:docname="icon_price.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs11" /><sodipodi:namedview
+   id="namedview9"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   showgrid="false"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   inkscape:zoom="0.52"
+   inkscape:cx="275"
+   inkscape:cy="410.57692"
+   inkscape:window-width="1920"
+   inkscape:window-height="1017"
+   inkscape:window-x="-8"
+   inkscape:window-y="-8"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="g6" />
+<g
+   id="g6"
+   transform="translate(0.31772102,0.31999999)">
+	<path
+   d="M 24.586,63.414 C 24.976,63.805 25.488,64 26,64 c 0.512,0 1.024,-0.195 1.414,-0.586 l 36,-36 C 63.789,27.039 64,26.53 64,26 V 2 C 64,0.896 63.104,0 62,0 H 38 c -0.53,0 -1.039,0.211 -1.414,0.586 l -36,36 c -0.781,0.781 -0.781,2.047 0,2.828 z M 38.829,4 H 60 v 21.172 l -34,34 L 4.829,38 Z"
+   id="path2"
+   style="stroke:#000000;stroke-width:0.64;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+	<path
+   d="m 47,25 c 4.411,0 8,-3.589 8,-8 0,-4.411 -3.589,-8 -8,-8 -4.411,0 -8,3.589 -8,8 0,4.411 3.589,8 8,8 z m 0,-12 c 2.206,0 4,1.794 4,4 0,2.206 -1.794,4 -4,4 -2.206,0 -4,-1.794 -4,-4 0,-2.206 1.794,-4 4,-4 z"
+   id="path4"
+   style="stroke:#000000;stroke-width:0.64;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+</g>
+</svg>

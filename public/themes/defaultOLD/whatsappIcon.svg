@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg11"
+   sodipodi:docname="whatsappIcon.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sodipodi:namedview
+     id="namedview13"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.73539105"
+     inkscape:cx="399.10739"
+     inkscape:cy="521.49125"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <title
+     id="title2">Whatsapp-color</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <defs
+     id="defs6" />
+  <metadata
+     id="metadata830">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Whatsapp-color</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2">
+    <ellipse
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.0728678;stroke-linecap:round;stroke-opacity:1;paint-order:markers stroke fill;stop-color:#000000"
+       id="path1413"
+       cx="24.028034"
+       cy="24.762335"
+       rx="15.944264"
+       ry="16.4338" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1">
+    <g
+       id="Icons"
+       stroke="none"
+       stroke-width="1"
+       fill="none"
+       fill-rule="evenodd"
+       transform="matrix(0.87386969,0,0,0.87386969,3.0271348,3.0271348)"
+       style="stroke:#ffffff;stroke-opacity:1;stroke-width:1.02990184;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke">
+      <g
+         id="Color-"
+         transform="translate(-700,-360)"
+         fill="#67c15e"
+         style="stroke:#ffffff;stroke-opacity:1;stroke-width:1.02990184;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke">
+        <path
+           d="M 723.99303,360 C 710.76225,360 700,370.76529 700,383.9998 c 0,5.24865 1.69266,10.11622 4.57003,14.06715 l -2.99042,8.91685 9.22484,-2.94826 C 714.59861,406.54697 719.12643,408 724.00697,408 737.23775,408 748,397.23431 748,384.0002 c 0,-13.23451 -10.76225,-23.9998 -23.99303,-23.9998 h -0.0139 z m -6.70018,12.19084 c -0.46536,-1.11456 -0.81807,-1.15677 -1.52308,-1.18544 -0.24004,-0.0139 -0.50756,-0.0279 -0.80413,-0.0279 -0.91719,0 -1.87618,0.26798 -2.4546,0.8605 -0.70501,0.71955 -2.4542,2.39835 -2.4542,5.84117 0,3.44282 2.51073,6.77256 2.8491,7.23845 0.35271,0.46509 4.89487,7.63266 11.94736,10.55384 5.51508,2.28566 7.15161,2.07382 8.40677,1.80583 1.83359,-0.39501 4.13293,-1.75008 4.71135,-3.38628 0.57842,-1.63699 0.57842,-3.03387 0.40884,-3.33013 -0.16919,-0.29626 -0.63495,-0.46509 -1.33996,-0.8183 -0.70501,-0.3528 -4.13293,-2.04594 -4.78181,-2.27172 -0.63495,-0.23971 -1.24123,-0.1549 -1.72053,0.52244 -0.67714,0.94532 -1.33995,1.90498 -1.87618,2.48316 -0.42316,0.45156 -1.11464,0.50811 -1.69266,0.26799 -0.77587,-0.32413 -2.94782,-1.08668 -5.62813,-3.47109 -2.07363,-1.84804 -3.48405,-4.14763 -3.89289,-4.83891 -0.40923,-0.70521 -0.0422,-1.11495 0.28185,-1.49563 0.3527,-0.43762 0.69108,-0.74781 1.04378,-1.15716 0.3527,-0.40895 0.55015,-0.62079 0.77587,-1.10062 0.24004,-0.4655 0.0705,-0.94532 -0.0987,-1.29813 -0.16918,-0.3528 -1.5796,-3.79562 -2.15802,-5.1921 z"
+           id="Whatsapp"
+           style="stroke:#ffffff;stroke-opacity:1;stroke-width:1.02990184;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke" />
+      </g>
+    </g>
+  </g>
+</svg>

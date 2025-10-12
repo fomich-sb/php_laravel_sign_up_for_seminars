@@ -1,0 +1,909 @@
+:root {
+    --dark-color: #0b403b;
+    --light-color: #f5f5f5;
+    --caption-color: #d5ad3c;
+}
+@font-face {
+    font-family: 'mainRegular';
+    src: url('circe.ttf');
+}
+@font-face {
+    font-family: 'logoRegular';
+    src: url('ds-arabic.ttf');
+}
+
+font[size='1']{    font-size: 0.8em;}
+font[size='2']{    font-size: 0.9em;}
+font[size='3']{    font-size: 1em;}
+font[size='4']{    font-size: 1.2em;}
+font[size='5']{    font-size: 1.4em;}
+font[size='6']{    font-size: 1.7em;}
+font[size='7']{    font-size: 2em;}
+
+html{
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #CCC;
+}
+body {
+    margin: 0 auto;
+    padding: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    background: url(bg1_gold.png), var(--light-color);
+    background-size: 5em, cover;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'mainRegular';
+    width: 100%;
+   /* max-width: 80em;*/
+    font-size: 20px;
+}
+body.bodyHasActiveModalWin{
+    overflow: hidden;
+}
+.mainRoot{
+    flex: 1 1 auto;
+    display: flex;
+}
+.footerRoot{
+    flex: 0 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    padding: 1em 1em;
+    font-size: 0.8em;
+    
+}
+input, select, textarea{
+    font-size: 1em;
+    background: transparent;
+    border: solid var(--caption-color);
+    border-width: 0 0 2px 0;
+    outline-width: 0;
+    font-family: 'mainRegular';    
+    min-width: 10em;
+}
+textarea{
+    border-width: 1px 0 2px 0;
+}
+input:disabled {
+    color: #777;
+}
+input[type="checkbox"], .formFieldInput input[type="checkbox"] {
+    width: auto;
+    min-width: 0;
+    margin-right: 1em;
+}
+.hr{
+    border: 1px dashed var(--caption-color);
+    margin: 2em;
+}
+
+.button{
+    padding: 0.3em;
+    cursor: pointer;
+    width: fit-content;
+    background: var(--caption-color);
+    background-size: cover;
+    min-width: 15em;
+    text-align: center;
+    margin: 1em auto;
+    border-radius: 0.2em;
+}
+.projectContentRegisterButtonCheckPhoneMessager{
+    font-size: 0.8em;
+    margin: 0.2em;
+    min-width: 12em;
+}
+.button:hover{
+    opacity: 0.8;
+}
+.buttonDisabled {
+    opacity: 0.2 !important;
+    cursor: default;
+}
+.buttonSmall{
+    min-width: 0;
+    margin: 0em;
+    padding: 0.1em 0.2em;
+    display: inline-block;
+}
+.clickableDiv{
+    cursor: pointer;
+    text-decoration: underline;
+}
+a, a:hover, a:visited, a:link, a.active:visited{
+    color:#000;
+}
+.mapLink{
+    display: inline-block;
+    width:2em;
+    height: 1.5em;
+    margin: -0.25em 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--caption-color);
+
+    -webkit-mask-image: url(map_link.svg);
+    mask-image: url(map_link.svg);
+}
+
+
+.projectContentRegisterButtonCheckLoginCodeError, .loginFormButtonCheckLoginCodeError, .loginFormSendMessageError, .projectContentRegisterSendMessageError{
+    color: red;
+    font-size: 0.8em;
+}.loginFormSendMessageSuccess, .projectContentRegisterSendMessageSuccess{
+    color: green;
+    font-size: 0.8em;
+}
+
+.projectsMenuRoot{   
+    flex: 1 1;
+    max-width: 25em;
+    min-width: 20em;
+    background: url(bg1.png), radial-gradient(#136a61, #041a18);
+    background-size: 5em, cover;
+    background-attachment: fixed,local;
+    background-position: center, center;
+    padding-bottom: 1.5em;
+}
+.projectsMenu{
+    position: sticky;
+    top: 0;
+}
+.projectsMenuLogo{
+    background-image: url('logo1.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 1em ;
+    height: 8em;
+}
+
+.projectsMenuLogo2{
+    text-align: center;
+    color: var(--caption-color);
+    font-family: 'logoRegular';
+    font-size: 3.7em;
+    padding: 0.2em;
+}
+.projectsMenuItemsRoot{
+    position: sticky;
+    top: 1em;
+}
+.projectsMenuItem{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5em;
+    background-color: var(--caption-color);
+    background-image: url('bg-gold.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 1em -1em 2em -1em;
+    text-align: center;
+    filter: brightness(0.8);
+}
+.projectsMenuItem:hover{
+    filter: brightness(0.9);
+}
+.projectsMenuItemFooter{
+    height: 0;
+    width: 0;
+    border: 0.5em solid;
+    border-color: var(--caption-color) transparent transparent var(--caption-color);
+    filter: brightness(0.6);
+    margin: 0.5em -0.5em -1.5em auto;
+}
+.projectsMenuItemHeader{
+    height: 0;
+    width: 0;
+    border: 0.5em solid;
+    border-color: transparent var(--caption-color) var(--caption-color) transparent;
+    filter: brightness(0.6);
+    margin: -1.5em auto 0.5em -0.5em;
+}
+
+.projectsMenuItem a{
+    color: #000;
+    text-decoration: none!important;
+}
+.projectsMenuItemActive, .projectsMenuItemActive a{
+    filter: brightness(1)!important;
+    cursor: default;
+}
+
+.projectsMenuItemDate{
+    font-size: 1.5em;
+    padding: 0.2em 0;
+}
+
+.projectContentRoot{
+    flex: 3 1;
+}
+.projectContentSector, .certificateContentSector, .settingContentSector{
+    padding: 1.5em 1em 1.5em 2em;
+}
+.projectContentSector:nth-child(even){
+    background-color: #0001;
+}
+
+.projectCaption, .settingCaption{
+    font-size: 2em;
+    line-height: 1em;
+    margin-bottom: 0.5em;
+}
+.projectDate{
+    margin-bottom: 1em;
+}
+.projectSectionCaption, .settingSectionCaption{
+    margin-top: 0.5em;
+    font-size: 1.5em;
+}
+.projectSectionCaption::before, .settingSectionCaption::before, .projectContentCaption::before{
+    content: " ";
+    -webkit-mask-size: contain;
+    mask-size: contain;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: left center;
+    mask-position: left center;
+    background-color: var(--caption-color);
+    width: 1.3em;
+    height: 1em;
+    margin: -0.1em 0.2em -0.1em 0 ;
+    display: inline-block;
+}
+.projectSectionCaptionPlace::before{
+    mask-image: url(icon_place.svg);
+    -webkit-mask-image: url(icon_place.svg);
+}
+.projectSectionCaptionUserRequirements::before{
+    mask-image: url(icon_requirements2.svg);
+    -webkit-mask-image: url(icon_requirements2.svg);
+}
+.projectSectionCaptionTime::before{
+    mask-image: url(icon_time.svg);
+    -webkit-mask-image: url(icon_time.svg);
+}
+.projectSectionCaptionDescr::before{
+    mask-image: url(icon_descr.svg);
+    -webkit-mask-image: url(icon_descr.svg);
+}
+.projectSectionCaptionTime::before{
+    mask-image: url(icon_time.svg);
+    -webkit-mask-image: url(icon_time.svg);
+}
+.projectSectionCaptionTamada::before{
+    mask-image: url(icon_tamada3.svg);
+    -webkit-mask-image: url(icon_tamada3.svg);
+    margin-bottom: -0.4em;
+    padding-top: 0.2em;
+}
+.projectSectionCaptionPrice::before{
+    mask-image: url(icon_price.svg);
+    -webkit-mask-image: url(icon_price.svg);
+}
+.projectContentCertificateCaption::before{
+    mask-image: url(icon_certificate.svg);
+    -webkit-mask-image: url(icon_certificate2.svg);
+    margin-bottom: -0.4em;
+    padding-top: 0.2em;
+}
+.projectContentMaterialsCaption::before{
+    mask-image: url(icon_material2.svg);
+    -webkit-mask-image: url(icon_material2.svg);
+}
+.projectContentPhotosCaption::before{
+    mask-image: url(icon_photo.svg);
+    -webkit-mask-image: url(icon_photo.svg);
+}
+.projectContentRegisterCaption::before{
+    mask-image: url(icon_registration.svg);
+    -webkit-mask-image: url(icon_registration.svg);
+}
+.projectContentForAcceptCaption::before{
+    mask-image: url(icon_private_info.svg);
+    -webkit-mask-image: url(icon_private_info.svg);
+}
+.projectContentDocCaption::before{
+    mask-image: url(icon_doc.svg);
+    -webkit-mask-image: url(icon_doc.svg);
+}
+.projectContentMessageCaption::before{
+    mask-image: url(icon_telegram.svg);
+    -webkit-mask-image: url(icon_telegram.svg);
+}
+
+
+.projectContentRegisterRoot{
+    font-size: 1.2em;
+}
+.projectContentRegisterCaption, .projectContentMaterialsCaption, .projectContentPhotosCaption, .projectContentCertificateCaption, .projectContentForAcceptCaption{
+    font-size: 1.5em;
+    line-height: 1em;
+    margin-bottom: 1em;
+}
+.projectContentRegisterUserExist{
+    font-size: 0.8em;
+}
+.projectContentRegisterStatus{
+    margin-bottom: 1em;
+}
+.projectContentRegisterStatus0{
+    color: #b80;
+}
+.projectContentRegisterStatus-1{
+    color: #900;
+}
+.projectContentRegisterStatus1{
+    color: #090;
+}
+.projectPlaceAddress{
+    color:#0009;
+}
+
+
+.projectContentCertificateImg{
+    max-width: 100%;
+    max-height: 10em;
+    cursor: pointer;
+}
+.projectContentMaterialDiv{
+    margin: 0.5em 0;
+}
+
+.projectRegisterForm{
+    width: 100%;
+    max-width: 25em;
+}
+.formFieldRoot{
+    display: flex;
+    flex-wrap: wrap;    
+    margin: 0.5em 0;
+}
+.formFieldCaption{
+    flex: 1 1;
+    max-width: 15em;
+}
+.formFieldInput{
+    flex: 1 1;
+}
+.formFieldInput input, .formFieldInput textarea{
+    width: 100%;
+}
+.formFieldInput input[type='date'] {
+    width:max-content;
+}
+.cardContent{
+    padding: 1em;
+    overflow: auto;
+}
+.cardFooter{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tag{
+    display: inline-block;
+    border: 1px solid #0002;
+    padding: 0 0.2em;
+    font-size: 0.8em;
+}
+
+.pop_up_win {
+	color: white;
+	background-color: RGBA(0, 0, 0, 0.95);
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 40;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.pop_up_win .pop_up_top {
+	flex: 1 1 auto;
+}
+
+.pop_up_win .pop_up_bottom {
+	flex: 2 1 auto;
+}
+.pop_up_middle {
+	flex: 0 0 auto;
+	max-height: 100%;
+	display: flex;
+    flex-direction: column;
+}
+.pop_up_content_root {
+    max-width: 90%;
+    min-width: 40%;
+    width: max-content;
+    margin: 0.5em auto;
+    background: url(bg1_gold.png), var(--light-color);
+    background-size: 5em, cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    flex: 1 1 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.2em;
+}
+.loginFormWin .pop_up_content_root, .userCardmWin .pop_up_content_root {
+    width: 35em;
+    min-width: auto;
+}
+.pop_up_content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  /*  overflow: auto;*/
+}
+
+.pop_up_win_content {
+	width: 90%;
+	max-width: 30em;
+	margin: 0 auto;
+	min-height: 10em;
+	box-sizing: border-box;
+}
+
+.pop_up_win_close_button{
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+    cursor: pointer;
+    z-index: 50;
+   /* background-color: var(--caption-color);
+    border-radius: 0.3em;
+    padding: 0.2em;*/
+}
+.pop_up_win_close_button_inner{
+    height: 1.5em;
+    width: 1.5em;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--caption-color);
+
+    -webkit-mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
+    mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
+    
+}
+
+.buttonDeleteIcon, .buttonOpenIcon, .buttonAcceptIcon, .buttonDismissIcon{   
+    height: 1.4em;
+    width: 1.4em;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+}
+.buttonDeleteIcon{   
+    -webkit-mask-image: url(delete_icon.svg);
+    mask-image: url(delete_icon.svg);
+}
+.buttonOpenIcon{   
+    -webkit-mask-image: url(open_icon.svg);
+    mask-image: url(open_icon.svg);
+}
+.buttonAcceptIcon{
+    -webkit-mask-image: url(accept_icon.svg);
+    mask-image: url(accept_icon.svg);
+}
+.buttonDismissIcon{
+    -webkit-mask-image: url(dismiss_icon.svg);
+    mask-image: url(dismiss_icon.svg);
+}
+
+.projectsMenuButton{
+    display: none;
+    width: 2em;
+    height: 2em;
+    background-image: url(menu.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: fixed;
+    top:1em;
+    left:1em;
+    z-index: 9;
+    opacity: 0.5;
+}
+.projectsMenuButtonClose{
+    display: none;
+    position: initial;
+    margin: 0 0.2em;
+    flex: 0 0 auto;
+    width: 2em;
+    height: 2em;
+    background-image: url(menu_close.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.cardRoot, .loginFormRoot {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.cardHeader{
+   /* background-color: var(--caption-color);*/
+    padding: 0.25em 2em 0.25em 1em;
+    font-size: 1.2em;
+    min-height: 1.5em;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    
+    background: url(bg1.png), radial-gradient( #136a61, #041a18);
+    background-size: 5em, cover;
+    background-attachment: fixed,local;
+    background-position: center, center;
+    color: var(--caption-color);
+}
+
+.thSelectAll{
+    background-image: url(icon_selectall.svg);
+    background-size: 60% 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
+.userCardImageImg, .projectTamadaPhoto, .certificateBgImg{
+    width: 7em;
+    height: 7em;
+    cursor: pointer;
+    background-image: url(no_photo.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.userCardImageImg, .projectTamadaPhoto{
+    border-radius: 10em;
+}
+.telegramIcon, .adminTable td.telegramIcon{
+    background-image: url(telegramIcon.svg);
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 1.7em;
+}
+.whatsappIcon, .adminTable td.whatsappIcon{
+    background-image: url(whatsappIcon.svg);
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 1.7em;
+}
+.telegramColor{
+    color: #0481bf;
+}
+.whatsappColor{
+    color: #509749;
+}
+
+
+.projectTamadaPhoto{
+    margin: 0 auto;
+    margin-bottom: 0.5em;
+}
+.userCardContent .projectTamadaPhoto{
+    float: left;
+    margin: 0 0.5em 0.5em 0;
+}
+
+.projectTamadas{
+    display: flex;
+}
+.projectTamada{
+    margin: 0 1em 1em 0;
+}
+.projectTamadaCaption{
+    text-align: center;
+}
+.photoViewerContent{
+    display: flex;
+    flex-wrap: wrap;
+}
+.photoViewerContent .photoDiv{
+    height: 8em;
+    width: 8em;
+    margin: 0.3em;
+    position: relative;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+/*.photoViewerContent .photoDiv img{
+    min-height: 100%;
+    min-width: 100%;
+}*/
+.photoDeleteButton{
+    position: absolute;
+    top:0;
+    right: 0%;
+    cursor: pointer;
+}
+.certificateHtml{
+    width: 100%;
+    min-height:15em;
+}
+
+
+.owl-carousel .owl-item img {
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+}
+.no-js .owl-carousel, .owl-carousel.owl-loaded
+{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.owl-carousel, .owl-carousel .owl-stage-outer, .owl-carousel .owl-stage, .owl-carousel.owl-drag .owl-item, .owl-carousel .slide {
+    height: 100%;
+}
+.owl-carousel .slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.photoSliderWin .pop_up_top, .photoSliderWin .pop_up_bottom{
+    display: none;
+}
+.photoSliderWin .pop_up_middle{
+    flex: 1 1 auto;
+}
+.photoSliderWin .pop_up_content_root{
+    max-width: 100%;
+    width: 100%;
+    background-color: transparent;
+    margin: 0;
+    box-sizing: border-box;
+}
+.photoSliderWin .owl-theme .owl-nav{
+    margin-top: 0;
+}
+.photoSliderWin .owl-theme .owl-prev, .photoSliderWin .owl-theme .owl-next {
+    margin-top: 0;
+    position: absolute;
+    height: 40%;
+    min-height: 3em;
+    top: 30%;
+    width: 1.5em;
+ /*   background: #ebc44511!important;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;*/
+
+}
+.owl-theme .owl-prev {
+    left:1%;
+}
+.owl-theme .owl-next {
+    right:1%;
+}
+.owl-theme .owl-prev:hover, .owl-theme .owl-next:hover {
+    background: #ebc44555!important;
+}
+/*.photoSliderWin .owl-theme .owl-prev:hover, .photoSliderWin .owl-theme .owl-next:hover {
+    background: #ebc44555!important;
+}*/
+.owl-theme .owl-dots .owl-dot span {
+    background: #ebc44588;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #ebc445;
+}
+.owl-theme .owl-dots{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+* {
+    scrollbar-color: var(--caption-color) var(--dark-color);
+    scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+    background-color: var(--dark-color);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--caption-color);
+}
+
+
+@media screen and (max-width: 1800px) {
+    body {
+        font-size: 19px;
+    }
+    .projectsMenuItemFooter {
+        margin: 0.5em -0.45em -1.45em auto;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    body {
+        font-size: 18px;
+    }
+    .projectsMenuItemFooter {
+        margin: 0.5em -0.5em -1.5em auto;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+        font-size: 17px;
+    }
+    .projectsMenuItemFooter {
+        margin: 0.5em -0.45em -1.42em auto;
+    }
+}
+@media screen and (max-width: 1000px) {
+    body {
+        font-size: 16px;
+    }
+    .projectsMenuRoot{
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 10;
+    }
+    .projectsMenuRootVisible .projectsMenuRoot{
+        display: block;
+    }
+    body.projectsMenuRootVisible{
+        overflow: hidden;
+    }
+    
+    .projectsMenuButton, .projectsMenuButtonClose{
+        display: block;
+    }
+    .projectContentSector, .certificateContentSector, .settingContentSector {
+        padding: 1.5em 1em 1.5em 1em;
+    }
+    .projectContentRoot{
+        padding-top: 2.5em;
+    }
+}
+
+
+
+
+.toggleControlRoot{
+    display: flex; 
+    justify-content: space-between;
+    text-align:center;
+}
+.toggleControlRoot div{
+    flex: 1 1;
+}
+.toggleControl input[type="checkbox"] {
+    display: none;
+}
+.toggleControl .control{
+    display: block;
+    width: 3em;
+    height: 1.5em;
+    background-color: var(--caption-color);
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    margin: -0.125em 0.25em;
+}
+
+.toggleControl .control::after {
+    content: "";
+    width: 1.1em;
+    height: 1.1em;
+    background-color: var(--caption-color);
+    filter:brightness(0.8);
+    position: absolute;
+    border-radius: 1.5em;
+    top: 0.2em;
+    left: 0.2em;
+    transition: 0.5s;
+}
+.toggleControl input:checked +  .control::after {
+    left: calc(100% - 0.2em);
+    transform: translateX(-100%);
+}
+
+.textareaHtml{
+    width: 100%;
+    min-height: 10em;
+}
+.projectsMenuLogin{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5em;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+.projectsMenuLogin .button{
+    margin: 0 0.2em;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+.projectsMenuLogin .buttonLogout{
+    flex: 0 0 auto;
+    width: 1.5em;
+}
+.buttonLogoutInner{
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+
+    -webkit-mask-image: url(logout.svg);
+    mask-image: url(logout.svg);
+
+}
+.projectContentMaterialIcon{
+    width: 1.3em;
+    height: 1.4em;
+    margin: -0.2em 0.4em -0.3em 0.5em;
+    display: inline-block;
+    -webkit-mask-size: contain;
+    mask-size: contain;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--dark-color);
+
+    -webkit-mask-image: url(/uploads/images/icons/icon_default.svg);
+    mask-image: url(/uploads/images/icons/icon_default.svg);
+}
