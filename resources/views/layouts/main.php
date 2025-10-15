@@ -40,10 +40,10 @@
     <div class='bgRootBlur'></div>
     <div class='bgRoot'></div>
 
-    <div class='mainRoot' <?=$currentProjectId ? "style='display:none;'" : ""?>>
+    <div class='mainRoot' <?=$currentProjectId ? "style='display:none;'" : ""?>  onclick='$("body").removeClass("menuVisibled")'>
         <?= $mainContent ?>
     </div>
-    <div class='projectRoot' <?=!$currentProjectId ? "style='display:none;'" : ""?>>
+    <div class='projectRoot' <?=!$currentProjectId ? "style='display:none;'" : ""?>   onclick='$("body").removeClass("menuVisibled")'>
         <div class='projectContentRoot'>
             <div class="mainButton backButton" onclick="$('.projectRoot').hide();$('.mainRoot').show();">Вернуться</div>
             <div class='projectContent'>
@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <div class='footerRoot'>
+    <div class='footerRoot'   onclick='$("body").removeClass("menuVisibled")'>
         <div class='footerInner'>
         © <?=date("Y");?> Абдалова Феруза Кадамовна
         </div>
@@ -148,6 +148,10 @@
         $("body").removeClass("menuVisibled");
         $(".mainRoot").show();
         $(".projectRoot").hide();
-        $(".mainOnePageSlider").moveTo($(".mainOnePageSlider .section").toArray().indexOf($('#'+sectionId)[0]) + 1);
+        
+        document.getElementById(sectionId).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        })
     }
 </script>
