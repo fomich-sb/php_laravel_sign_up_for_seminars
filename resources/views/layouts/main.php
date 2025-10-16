@@ -4,11 +4,14 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"><!--, initial-scale=1, maximum-scale=1.0, user-scalable=0-->
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/themes/default/favicon.png">
     <link rel="stylesheet" type="text/css" href="/_libs/tagify.css">
     <link rel="stylesheet" type="text/css" href="/_libs/carousel/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="/_libs/carousel/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="/themes/default/style.css?v=<?=date("dmyH")?>">
+    <?php if($subtheme): ?>
+        <link rel="stylesheet" type="text/css" href="/themes/default/subthemes/<?=$subtheme?>/style.css?v=<?=date("dmyH")?>">
+    <?php endif; ?>
 
     <title><?= isset($title) ? $title : "Семинары по психологии" ?></title>
     <script type="text/javascript" src="/_libs/jquery-3.4.1.min.js"></script>
@@ -30,11 +33,31 @@
     <div class='headerRoot'>
         <div class='headerMenu'>
             <div class='headerMenuItemMenu' onclick='$("body").toggleClass("menuVisibled")'><div class='headerMenuItemMenuIcon'></div>Меню</div>
+            <div class='headerMenuItemMobile' onclick='openSection("mainPageProjectsFuture")'>Семинары</div>
+            <?php if($user): ?>
+                <div class='headerMenuItemMobile' onclick="openUserCard()">
+                    +<?=$user->phone?>
+                </div>
+            <?php else: ?>
+                <div class='headerMenuItemMobile' onclick='openLoginForm()'>Войти</div>
+            <?php endif; ?>
+
             <div class='headerMenuItemLogo'></div>
             <div class='headerMenuItem' onclick='openSection("mainPageIndex")'>Главная</div>
             <div class='headerMenuItem' onclick='openSection("mainPageProjectsFuture")'>Предстоящие семинары</div>
             <div class='headerMenuItem' onclick='openSection("mainPageMyProjects")'>Ваши семинары</div>
             <div class='headerMenuItem' onclick='openSection("mainPageAbout")'>Обо мне</div>
+            <?php if($user): ?>
+                <div class='headerMenuItem' onclick="openUserCard()">
+                    +<?=$user->phone?>
+                </div>
+            <?php else: ?>
+                <div class='headerMenuItem' onclick='openLoginForm()'>Войти</div>
+            <?php endif; ?>
+
+            <?php if($user && $user->admin): ?>
+                <div class='headerMenuItem' onclick='window.open("/admin/")'>Админка</div>
+            <?php endif; ?>
         </div>
     </div>
     <div class='bgRootBlur'></div>
@@ -45,7 +68,7 @@
     </div>
     <div class='projectRoot' <?=!$currentProjectId ? "style='display:none;'" : ""?>   onclick='$("body").removeClass("menuVisibled")'>
         <div class='projectContentRoot'>
-            <div class="mainButton backButton" onclick="$('.projectRoot').hide();$('.mainRoot').show();">Вернуться</div>
+            <div class="mainButton backButton" onclick="openPage({'historyCaption': document.title,'historyUrl': '/',});">Вернуться</div>
             <div class='projectContent'>
                 <?= $projectContent ?>
             </div>
@@ -87,23 +110,52 @@
 
 <script>
     var currentProjectId = <?= $currentProjectId ? $currentProjectId : 0 ?>;
-    $('.projectsMenuRoot a').on('click', function(e) {
-        event.preventDefault();
-        openProject(this);
-    });
+    window.addEventListener('popstate', function(event) {
+        if($_GET('id')){
+            loadProject($_GET('id'));
+        } else {
+            $('.projectRoot').hide();
+            $('.mainRoot').show();
+            currentProjectId = 0;
+        }
 
-    function openProject(el)
+       /* if (event.state && event.state.projectId) {
+            loadProject(event.state.projectId);
+        } else {
+            $('.projectRoot').hide();
+            $('.mainRoot').show();
+            currentProjectId = 0;
+        }*/
+    });
+    
+    $('.projectsMenuRoot a').on('click', function(event) {
+        event.preventDefault();
+        openPage({
+            'projectId': this.dataset.projectid,
+            'historyCaption': $(this.parentNode).find('.projectsMenuItemCaption').text(),
+            'historyUrl': this.href,
+        });
+    });
+    
+    function openPage(param)
     {
-        var projectId = el.dataset.projectid;
-        history.pushState({
-            'projectId': projectId
-        }, $(el).find('.projectsMenuItemCaption').text(), $(el).prop('href'));
-        loadProject(projectId);
+        if(param.projectId){
+            history.pushState({
+                'projectId': param.projectId
+            }, param.historyCaption, param.historyUrl);
+            loadProject(param.projectId);
+        }
+        else{
+            history.pushState({ }, param.historyCaption, param.historyUrl);
+            $('.projectRoot').hide();
+            $('.mainRoot').show();
+            currentProjectId = 0;
+        }
     }
     function loadProject(projectId, anchor = null)
     {
         $(".mainRoot").hide();
-        $(".projectRoot").hide();
+    //    $(".projectRoot").hide();
         if(currentProjectId != projectId)
             window.scrollTo({top: 0, behavior: 'smooth'});
 
@@ -145,6 +197,9 @@
     
     function openSection(sectionId)
     {
+        if(currentProjectId)
+            openPage({'historyCaption': document.title,'historyUrl': '/',});
+
         $("body").removeClass("menuVisibled");
         $(".mainRoot").show();
         $(".projectRoot").hide();
@@ -153,5 +208,11 @@
             behavior: 'smooth',
             block: 'start'
         })
+    }
+
+    function $_GET(key) {
+        var p = window.location.search;
+        p = p.match(new RegExp(key + '=([^&=]+)'));
+        return p ? p[1] : false;
     }
 </script>

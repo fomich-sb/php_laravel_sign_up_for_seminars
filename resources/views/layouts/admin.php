@@ -8,11 +8,11 @@ use App\Facades\L;
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!--, initial-scale=1, maximum-scale=1.0, user-scalable=0-->
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="/themes/default/favicon.png">
     <link rel="stylesheet" type="text/css" href="/_libs/carousel/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css" href="/_libs/carousel/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="/themes/default/style.css?v=<?=date("dmyH")?>">
-    <link rel="stylesheet" type="text/css" href="/themes/default/style_admin.css?v=<?=date("dmyH")?>">
+    <link rel="stylesheet" type="text/css" href="/themes/default2/style.css?v=<?=date("dmyH")?>">
+    <link rel="stylesheet" type="text/css" href="/themes/default2/style_admin.css?v=<?=date("dmyH")?>">
     <link rel="stylesheet" type="text/css" href="/_libs/tagify.css">
 
     <title><?= isset($title) ? $title : "Семинары по психологии" ?></title>

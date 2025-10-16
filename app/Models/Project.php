@@ -18,6 +18,12 @@ class Project extends BaseGameModel
         return App(Project::class)->where('status', '<>', $this->getStatusId('created'))->where('status', '<>', $this->getStatusId('closed'))->orderBy('date_start')->get();
     }
 
+    public function getMyList(&$user)
+    {
+        $projectUserItems = App(ProjectUser::class)->where('user_id', $user->id)->where('status', '>', 0)->select('project_id')->get();
+        return App(Project::class)->whereIn('id', $projectUserItems->pluck('project_id'))->orderBy('date_start')->get();
+    }
+
     public function getStatuses()
     {
         return [

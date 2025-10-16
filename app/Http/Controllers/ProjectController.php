@@ -19,13 +19,18 @@ class ProjectController extends Controller
     {
         $user = Auth::user();
         $projectItems = App(Project::class)->getActual();
-        
+        $myProjectItems = null;
+        if($user)
+            $myProjectItems = App(Project::class)->getMyList($user);
+
         $dataRender = [
             'bodyClass' => 'bodyMain',
             'projectItems' => $projectItems,
+            'myProjectItems' => $myProjectItems,
             'user' => $user,
             'projectContent' => null,
             'currentProjectId' => null,
+            'subtheme' => $this->getSubtheme(),
         ];
 
         $projectId = intval(request()->get('id'));
@@ -38,6 +43,22 @@ class ProjectController extends Controller
         return view('/layouts/main', $dataRender);
     }
     
+    public function getSubtheme()
+    {
+        $fullPath = public_path('themes/default/subthemes');
+        if (!is_dir($fullPath)) {
+            return null;
+        }
+        
+        $subfolders = array_filter(glob($fullPath . '/*', GLOB_ONLYDIR), 'is_dir');
+        if (empty($subfolders)) {
+            return null;
+        }
+
+        $randomFolder = $subfolders[array_rand($subfolders)];
+        return basename($randomFolder);
+    }
+
     public function actionGetContent($projectId = null)
     {
         $projectId = intval(request()->get('projectId'));

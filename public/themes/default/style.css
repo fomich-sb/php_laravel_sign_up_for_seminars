@@ -1,13 +1,13 @@
 :root {
-    --background0-color: #161b15;
-    --background0-color-50: #161b1588;
+    --background0-color: #515234;
+    --background0-color-50: #51523488;
     --font0-color: #ebe0d2;
 
-    --background1-color: #FFFD;
-    --background1-color2: #EEED;
-    --font1-color: #161b15;
-    --font1-color-30: #161b1533;
-    --caption1-color: #161b15;
+    --background1-color: #FFFE;
+    --background1-color2: #EEEE;
+    --font1-color: #26261d;
+    --font1-color-30: #26261d33;
+    --caption1-color: #515234;
 
     --main-border-radius: 0.3em;
 }
@@ -62,6 +62,71 @@ body {
     font-size: 20px;
 }
 
+.blockFlex1{
+    flex: 1 1 auto;
+}
+.blockFlex2{
+    flex: 2 1 auto;
+}
+.blockFlex3{
+    flex: 3 1 auto;
+}
+
+a, a:hover, a:visited, a:link, a.active:visited{
+    color: var(--font1-color);
+    text-decoration: none;
+}
+.mapLink{
+    display: inline-block;
+    width:2em;
+    height: 1.5em;
+    margin: -0.25em 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;  
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    background-color: var(--font0-color);
+
+    -webkit-mask-image: url(map_link.svg);
+    mask-image: url(map_link.svg);
+}
+
+
+.projectContentRegisterButtonCheckLoginCodeError, .loginFormButtonCheckLoginCodeError, .loginFormSendMessageError, .projectContentRegisterSendMessageError{
+    color: red;
+    font-size: 0.8em;
+}.loginFormSendMessageSuccess, .projectContentRegisterSendMessageSuccess{
+    color: green;
+    font-size: 0.8em;
+}
+
+input, select, textarea{
+    font-size: 1em;
+    background: transparent;
+    border: solid var(--font1-color);
+    border-width: 0 0 2px 0;
+    outline-width: 0;
+    font-family: 'mainRegular';    
+    min-width: 10em;
+}
+textarea{
+    border-width: 1px 0 2px 0;
+}
+input:disabled {
+    opacity: 0.3;
+}
+input[type="checkbox"], .formFieldInput input[type="checkbox"] {
+    width: auto;
+    min-width: 0;
+    margin-right: 1em;
+}
+
 .bgRoot,
 .bgRootBlur {
     position: fixed;
@@ -69,7 +134,7 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    background: url(bg1.jpeg);
+    background: url(bg.jpeg);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -91,7 +156,7 @@ body {
     background: var(--background0-color);
     color: var(--font0-color);
     z-index: 5;
-    box-shadow: 0 0 0.3em var(--background0-color);
+  /*  box-shadow: 0 0 0.3em var(--background0-color);*/
     display: flex;
 }
 
@@ -109,7 +174,7 @@ body {
 }
 
 .headerMenuItem:hover,
-.headerMenuItemMenu:hover {
+.headerMenuItemMobile:hover {
     background-color: #FFF3;
 }
 
@@ -138,7 +203,7 @@ body {
     margin: -0.35em 0.5em -0.35em 0;
 }
 
-.headerMenuItemMenu {
+.headerMenuItemMobile, .headerMenuItemMenu {
     flex: 0 0 auto;
     padding: 0.5em 1em;
     cursor: pointer;
@@ -146,9 +211,15 @@ body {
     display: none;
 }
 
+.clickableDiv{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .footerInner {
+    font-size: 0.7em;
     flex: 1 1 auto;
-    padding: 0.5em 1em;
+    padding: 0.3em 1em;
     text-align: center;
 }
 
@@ -163,8 +234,9 @@ body {
 .mainPageInner {
     display: flex;
     flex-direction: column;
-    margin: 0 1em;
+    margin: 0 auto;
     max-width: 70em;
+    width: 95%;
     flex: 1 1 auto;
     position: relative;
 }
@@ -193,14 +265,15 @@ body {
     width: fit-content;
 }
 
-.mainButton {
+.button, .mainButton {
     cursor: pointer;
     padding: 0.5em 1em;
     border: 1px solid var(--font1-color);
     color: var(--font1-color);
     border-radius: var(--main-border-radius);
+    text-align: center;
+    width: max-content;
 }
-
 .mainPageProjectsListButton {
     color: var(--font0-color);
     border: 1px solid var(--font0-color);
@@ -218,14 +291,64 @@ body {
     background-color: var(--background1-color2);
     color: var(--font1-color);
 }
+.mainPageMyProjectsContent, .mainPageMyProjectsNotAuth, .mainPageProjectsFutureContent{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+.mainPageMyProjectsNotAuth{
+    text-align: center;
+}
+.mainPageMyProjectsNotAuth .button{
+    margin: 0 auto;
+}
 
 .mainPageSectionCaption {
     font-family: 'mainBold';
     margin: 1em 0;
     font-size: 1.5em;
     color: var(--caption1-color);
-    text-shadow: 0 0 0.3em var(--font1-color-30);
+  /*  text-shadow: 0 0 0.3em var(--font1-color-30);*/
 }
+
+.mainPageAboutContent{
+    flex: 1 1 auto;
+    display: flex;
+}
+.mainPageAboutText{
+    flex: 1 1 auto;
+}
+.mainPageAboutPhoto{
+    width:50%;
+    flex: 0 0 auto;
+    background: url(aboutPhoto.png);
+    background-position: right bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.telegramIcon, .adminTable td.telegramIcon{
+    background-image: url(telegramIcon.svg);
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 1.7em;
+}
+.whatsappIcon, .adminTable td.whatsappIcon{
+    background-image: url(whatsappIcon.svg);
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 1.7em;
+}
+.telegramColor{
+    color: #0481bf;
+}
+.whatsappColor{
+    color: #509749;
+}
+
 
 .projectsMenuRoot {
     display: flex;
@@ -244,11 +367,11 @@ body {
 
 .projectsMenuItem {
     flex: 1 1 auto;
-    border: 1px solid var(--font1-color-30);
+    border: 1px solid var(--caption1-color);
     padding: 1em;
     border-radius: var(--main-border-radius);
-    box-shadow: 0 0 0.3em var(--font1-color-30);
-    background: var(--background1-color);
+/*    box-shadow: 0 0 0.3em var(--font1-color-30);*/
+/*    background: var(--background1-color);*/
 }
 
 .projectsMenuRoot a:hover {
@@ -273,19 +396,24 @@ body {
     overflow: auto;
 }
 
+.projectContent {
+}
 .projectContentRoot {
     display: flex;
     flex-direction: column;
-    margin: 1em;
     max-width: 70em;
     flex: 1 1 auto;
     position: relative;
     flex-direction: column;
 }
 
+.projectContentSector, .certificateContentSector, .settingContentSector{
+    padding: 1em;
+}
+
 .backButton {
     width: fit-content;
-    margin-bottom: 0.5em;
+    margin: 0.5em;
     padding: 0.3em 1em;
 }
 
@@ -300,6 +428,9 @@ body {
     line-height: 1em;
     margin-bottom: 0.5em;
 }
+.projectCaption{
+    color: var(--caption1-color);
+}
 
 .projectDate {
     margin-bottom: 1em;
@@ -307,7 +438,7 @@ body {
 
 .projectSectionCaption,
 .settingSectionCaption {
-    margin-top: 0.5em;
+    margin: 1em 0 0.5em;
     font-size: 1.5em;
 }
 
@@ -525,7 +656,7 @@ body {
 
 .pop_up_win {
     color: white;
-    background-color: RGBA(0, 0, 0, 0.95);
+    background-color: var(--background1-color2);
     position: fixed;
     left: 0;
     top: 0;
@@ -557,11 +688,11 @@ body {
     min-width: 40%;
     width: max-content;
     margin: 0.5em auto;
-    background: url(bg1_gold.png), var(--light-color);
+    background: var(--background1-color);
     background-size: 5em, cover;
     background-attachment: fixed;
     background-position: center;
-    color: #000;
+    color: var(--font1-color);
     display: flex;
     justify-content: center;
     flex: 1 1 auto;
@@ -597,9 +728,6 @@ body {
     top: 0.5em;
     cursor: pointer;
     z-index: 50;
-    /* background-color: var(--caption-color);
-    border-radius: 0.3em;
-    padding: 0.2em;*/
 }
 
 .pop_up_win_close_button_inner {
@@ -611,7 +739,7 @@ body {
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    background-color: var(--caption-color);
+    background-color: var(--font0-color);
 
     -webkit-mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
     mask-image: url('data:image/svg+xml;utf8, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" style="fill:%230077c8;fill-opacity:1;"> <path  d="M 852.60742,50.939453 A 100,100 0 0 0 781.89648,80.228516 L 76.150391,785.97656 a 100,100 0 0 0 0,141.42188 100,100 0 0 0 141.421879,0 L 923.31836,221.65039 a 100,100 0 0 0 0,-141.421874 100,100 0 0 0 -70.71094,-29.289063 z" /> <path  d="m 146.86133,50.939453 a 100,100 0 0 0 -70.710939,29.289063 100,100 0 0 0 0,141.421874 L 781.89648,927.39844 a 100,100 0 0 0 141.42188,0 100,100 0 0 0 0,-141.42188 L 217.57227,80.228516 A 100,100 0 0 0 146.86133,50.939453 Z" /></svg>');
@@ -653,7 +781,7 @@ body {
     mask-image: url(dismiss_icon.svg);
 }
 
-section {
+.mainRoot section {
     min-height: 100%;
     scroll-snap-align: start;
     /* Выравнивание по началу */
@@ -661,23 +789,85 @@ section {
     display: flex;
     flex-direction: column;
 }
+.cardRoot, .loginFormRoot {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.cardHeader{
+    padding: 0.25em 2em 0.25em 1em;
+    font-size: 1.2em;
+    min-height: 1.5em;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    background: var(--background0-color);
+    color: var(--font0-color);
+}
 
 
+
+
+
+.toggleControlRoot{
+    display: flex; 
+    justify-content: space-between;
+    text-align:center;
+}
+.toggleControlRoot div{
+    flex: 1 1;
+}
+.toggleControl input[type="checkbox"] {
+    display: none;
+}
+.toggleControl .control{
+    display: block;
+    width: 3em;
+    height: 1.5em;
+    border: 1px solid var(--caption1-color);
+    border-radius: 100px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    margin: -0.125em 0.25em;
+}
+
+.toggleControl .control::after {
+    content: "";
+    width: 1.1em;
+    height: 1.1em;
+    background-color: var(--caption1-color);
+    filter:brightness(0.8);
+    position: absolute;
+    border-radius: 1.5em;
+    top: 0.2em;
+    left: 0.2em;
+    transition: 0.5s;
+}
+.toggleControl input:checked +  .control::after {
+    left: calc(100% - 0.2em);
+    transform: translateX(-100%);
+}
+
+.textareaHtml{
+    width: 100%;
+    min-height: 10em;
+}
 
 
 
 * {
-    scrollbar-color: var(--background1-color) var(--font1-color);
+    scrollbar-color: var(--background0-color) var(--font0-color);
     scrollbar-width: thin;
 }
 
 *::-webkit-scrollbar {
     width: 5px;
-    background-color: var(--font1-color);
+    background-color: var(--font0-color);
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: var(--background1-color);
+    background-color: var(--background0-color);
 }
 
 
@@ -717,24 +907,39 @@ section {
     }
 
     .headerMenu {
-        justify-content: left;
+        justify-content: space-between;
     }
 
     .headerMenuItemLogo {
         margin-right: 0;
     }
 
-    .headerMenuItemMenu {
+    .headerMenuItemMenu, .headerMenuItemMobile {
         display: flex;
     }
 
     body:not(.menuVisibled) .headerMenuItem,
+    body.menuVisibled .headerMenuItemMobile,
     .headerMenuItemLogo {
         display: none;
     }
 
     body.menuVisibled .headerMenu {
         flex-direction: column;
+    }
+
+    .mainPageAboutContent{
+        flex-direction: column;
+    }
+    .mainPageAboutText{
+        flex: 1 1 auto;
+    }
+    .mainPageAboutPhoto{
+        width:100%;
+        flex: 0 0 auto;
+        background-position: center bottom;
+        aspect-ratio: 1/1;
+        min-height: 10em;
     }
 }
 
