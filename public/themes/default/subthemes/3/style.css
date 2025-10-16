@@ -1,0 +1,16 @@
+:root {
+    --background0-color: #384a58;
+    --background0-color-50: #384a5888;
+    --font0-color: #fbf6e6;
+    --background1-color: #FFFE;
+    --background1-color2: #EEEE;
+    --font1-color: #0f161e;
+    --font1-color-30: #13191933;
+    --caption1-color: #384a58;
+}
+
+
+.bgRoot,
+.bgRootBlur {
+    background-image: url(bg.jpeg);
+}
