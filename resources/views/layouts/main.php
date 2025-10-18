@@ -4,6 +4,15 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1"><!--, initial-scale=1, maximum-scale=1.0, user-scalable=0-->
+    
+    <title><?= isset($title) ? $title : "Семинары по транзактному анализу | Феруза Абдалова | Психолог" ?></title>
+    <meta property="og:url" content="https://firapsy.ru">
+    <meta property="og:title" content="Семинары по транзактному анализу | Феруза Абдалова | Психолог">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://firapsy.ru/themes/default/favicon.png">
+    <link rel="canonical" href="https://firapsy.ru">
+
     <link rel="icon" type="image/png" href="/themes/default/favicon.png">
     <link rel="stylesheet" type="text/css" href="/_libs/tagify.css">
     <link rel="stylesheet" type="text/css" href="/_libs/carousel/owl.carousel.min.css">
@@ -13,7 +22,6 @@
         <link rel="stylesheet" type="text/css" href="/themes/default/subthemes/<?=$subtheme?>/style.css?v=<?=date("dmyH")?>">
     <?php endif; ?>
 
-    <title><?= isset($title) ? $title : "Семинары по психологии" ?></title>
     <script type="text/javascript" src="/_libs/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="/_libs/nicEdit.js"></script>
     <script type="text/javascript" src="/_libs/jquery-ui.js"></script>
@@ -32,27 +40,30 @@
 <body class='<?= (isset($bodyClass) ? $bodyClass : '') ?>'>
     <div class='headerRoot'>
         <div class='headerMenu'>
-            <div class='headerMenuItemMenu' onclick='$("body").toggleClass("menuVisibled")'><div class='headerMenuItemMenuIcon'></div>Меню</div>
-            <div class='headerMenuItemMobile' onclick='openSection("mainPageProjectsFuture")'>Семинары</div>
             <?php if($user): ?>
                 <div class='headerMenuItemMobile' onclick="openUserCard()">
+                    <div class='headerMenuItemUserIcon'></div>
                     +<?=$user->phone?>
                 </div>
             <?php else: ?>
-                <div class='headerMenuItemMobile' onclick='openLoginForm()'>Войти</div>
+                <div class='headerMenuItemMobile' onclick='openLoginForm()'>
+                    <div class='headerMenuItemUserIcon'></div>Войти</div>
             <?php endif; ?>
+            <div class='headerMenuItemMobile' onclick='openSection("mainPageProjectsFuture")'>Семинары</div>
+            <div class='headerMenuItemMenu' onclick='$("body").toggleClass("menuVisibled")'><div class='headerMenuItemMenuIcon'></div>Меню</div>
 
-            <div class='headerMenuItemLogo'></div>
-            <div class='headerMenuItem' onclick='openSection("mainPageIndex")'>Главная</div>
+            <div class='headerMenuItemLogo' onclick='openSection("mainPageIndex")'></div>
             <div class='headerMenuItem' onclick='openSection("mainPageProjectsFuture")'>Предстоящие семинары</div>
             <div class='headerMenuItem' onclick='openSection("mainPageMyProjects")'>Ваши семинары</div>
             <div class='headerMenuItem' onclick='openSection("mainPageAbout")'>Обо мне</div>
             <?php if($user): ?>
-                <div class='headerMenuItem' onclick="openUserCard()">
+                <div class='headerMenuItem ' onclick="openUserCard()">
+                    <div class='headerMenuItemUserIcon'></div>
                     +<?=$user->phone?>
                 </div>
             <?php else: ?>
-                <div class='headerMenuItem' onclick='openLoginForm()'>Войти</div>
+                <div class='headerMenuItem' onclick='openLoginForm()'>
+                    <div class='headerMenuItemUserIcon'></div>Войти</div>
             <?php endif; ?>
 
             <?php if($user && $user->admin): ?>

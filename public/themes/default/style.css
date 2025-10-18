@@ -1,5 +1,6 @@
 :root {
     --background0-color: #515234;
+    --background0-color-90: #515234DD;
     --background0-color-50: #51523488;
     --font0-color: #ebe0d2;
 
@@ -153,7 +154,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 .headerRoot,
 .footerRoot {
     flex: 0 0 auto;
-    background: var(--background0-color);
+    background: var(--background0-color-90);
     color: var(--font0-color);
     z-index: 5;
   /*  box-shadow: 0 0 0.3em var(--background0-color);*/
@@ -163,7 +164,11 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 .headerMenu {
     flex: 1 1 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    margin: 0 auto;
+    max-width: 70em;
+    width: 95%;
+    flex-wrap: wrap;
 }
 
 .headerMenuItem {
@@ -171,6 +176,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     padding: 0.5em 1em;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
 }
 
 .headerMenuItem:hover,
@@ -180,12 +186,13 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 
 .headerMenuItemLogo {
     flex: 0 0 auto;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.9em;
     margin-right: 1em;
 }
 
 .headerMenuItemLogo,
-.headerMenuItemMenuIcon {
+.headerMenuItemMenuIcon,
+.headerMenuItemUserIcon {
     background-color: var(--font0-color);
     -webkit-mask-image: url(logo.svg);
     mask-image: url(logo.svg);
@@ -198,7 +205,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 }
 
 .headerMenuItemMenuIcon {
-    width: 2em;
+    width: 1.8em;
     height: 2em;
     margin: -0.35em 0.5em -0.35em 0;
 }
@@ -209,6 +216,12 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     cursor: pointer;
     transition: all 0.3s ease;
     display: none;
+}
+.headerMenuItemUserIcon{
+    width: 1em;
+    -webkit-mask-image: url(icon_user.svg);
+    mask-image: url(icon_user.svg);
+    margin-right: 0.5em;
 }
 
 .clickableDiv{
@@ -225,7 +238,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
 
 .mainRoot {
     flex: 1 1 auto;
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     /* Обязательная остановка по вертикали */
     overflow: auto;
     z-index: 5;
@@ -454,8 +467,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     mask-position: left center;
     background-color: var(--font1-color);
     width: 1.3em;
-    height: 1em;
-    margin: -0.1em 0.2em -0.1em 0;
+    height: 0.7em;
     display: inline-block;
 }
 
@@ -898,6 +910,9 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
     .projectsMenuRoot a {
         width: 49%;
     }
+    .headerMenuItem {
+        padding: 0.5em;
+    }
 
 }
 
@@ -914,8 +929,9 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
         margin-right: 0;
     }
 
-    .headerMenuItemMenu, .headerMenuItemMobile {
+    .headerMenuItem, .headerMenuItemMenu, .headerMenuItemMobile {
         display: flex;
+        justify-content: end;
     }
 
     body:not(.menuVisibled) .headerMenuItem,
@@ -940,6 +956,7 @@ input[type="checkbox"], .formFieldInput input[type="checkbox"] {
         background-position: center bottom;
         aspect-ratio: 1/1;
         min-height: 10em;
+        max-height: 25em;
     }
 }
 

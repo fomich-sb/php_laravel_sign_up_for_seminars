@@ -1,16 +1,21 @@
 :root {
-    --background0-color: #384a58;
-    --background0-color-50: #384a5888;
-    --font0-color: #fbf6e6;
+    --background0-color: #495d64;
+    --background0-color-90: #495d64DD;
+    --background0-color-50: #495d6488;
+    --font0-color: #fff2f0;
     --background1-color: #FFFE;
     --background1-color2: #EEEE;
-    --font1-color: #0f161e;
-    --font1-color-30: #13191933;
-    --caption1-color: #384a58;
+    --font1-color: #2d363d;
+    --font1-color-30: #2d363d33;
+    --caption1-color: #495d64;
 }
 
 
 .bgRoot,
 .bgRootBlur {
     background-image: url(bg.jpeg);
+}
+.mainPageSloganRoot{
+    bottom: 25%;
+    top: auto;
 }

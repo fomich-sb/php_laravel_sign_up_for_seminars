@@ -1,5 +1,6 @@
 :root {
     --background0-color: #1a3448;
+    --background0-color-90: #1a3448DD;
     --background0-color-50: #1a344888;
     --font0-color: #e9e7e1;
     --background1-color: #FFFE;
@@ -13,4 +14,9 @@
 .bgRoot,
 .bgRootBlur {
     background-image: url(bg.jpeg);
+}
+
+.mainPageSloganRoot{
+    bottom: 25%;
+    top: auto;
 }
