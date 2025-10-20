@@ -22,3 +22,5 @@ yarn-error.log
 /public/madeline/session.madeline*
 /public/madeline/MadelineProto.log
 .log
+/storage/app/madeline/*
+!/storage/app/madeline/.gitkeep

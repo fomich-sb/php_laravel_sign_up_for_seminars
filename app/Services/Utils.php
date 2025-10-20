@@ -249,7 +249,7 @@ class Utils
 
     function sendMessage(&$user, $message) {
         if($user->messager_type==0)
-            return App(TelegramClient::class)->sendMessage($user, $message);
+            return App(TelegramService::class)->sendMessage($user, $message);
         elseif($user->messager_type==1)
             return App(WhatsappClient::class)->sendMessage($user, $message);
     }

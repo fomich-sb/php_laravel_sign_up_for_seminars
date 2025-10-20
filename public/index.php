@@ -1,4 +1,6 @@
 <?php
+// Старт буферизации в САМОМ начале файла
+ob_start();
 
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
@@ -50,6 +52,8 @@ $kernel = $app->make(Kernel::class);
 
 $response = $kernel->handle(
     $request = Request::capture()
-)->send();
+);
+$output = ob_get_clean(); // Очищаем буфер и игнорируем его содержимое
 
+$response->send();
 $kernel->terminate($request, $response);
